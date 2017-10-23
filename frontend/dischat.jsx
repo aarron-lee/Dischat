@@ -1,13 +1,25 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
+import configureStore from './store/store';
+import Root from './components/root';
 
 document.addEventListener("DOMContentLoaded", function(){
 
   const root = document.getElementById('mount-point');
 
-  ReactDOM.render(<h2>React Injection working</h2>, root);
+  let store;
+  if(window.currentUser){
+    const preloadedState = {
+      session: { currentUserId: window.currentUser.id }
+    };
+    store = configureStore(preloadedState);
+    delete window.currentUser;
+  }else{
+    store = configureStore();
+  }
+  window.store = store;
+
+  ReactDOM.render(<Root store={store}/>, root);
 
 });

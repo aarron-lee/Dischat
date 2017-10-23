@@ -36,7 +36,7 @@ export const login = (user) => {
 
 
 // DELETE api/sessions #logout
-export const logout = (user) =>{
+export const logout = () =>{
   return $.ajax(
     {
       method: 'delete',

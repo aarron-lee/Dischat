@@ -49,7 +49,7 @@ export const logout = () => {
 
 export const signup = (user) => {
   return function(dispatch){
-    let success = (user) => dispatch(receiveCurrentUser(null));
+    let success = (user) => dispatch(receiveCurrentUser(user));
     let failure = (errors) => dispatch(receiveSessionErrors(errors));
 
     return APIUtil.signup(user).then(

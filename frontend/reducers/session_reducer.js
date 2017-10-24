@@ -10,7 +10,7 @@ function sessionReducer( state = {}, action){
   switch(action.type){
     case RECEIVE_CURRENT_USER:
       // action.user
-      newState = { currentUserId: action.user.id }
+      newState = { currentUserId: action.user ? action.user.id : null }
       return newState;
     default:
       return state;

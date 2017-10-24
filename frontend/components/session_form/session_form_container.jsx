@@ -24,7 +24,7 @@ class SessionForm extends React.Component{
 
   componentWillReceiveProps(newProps){
     //compare new vs old, if different,
-    
+
   }
 
 
@@ -50,25 +50,46 @@ class SessionForm extends React.Component{
     }
   }
 
+  userInputLabel(){
+    return(
+        <label className="auth-form-label">Username</label>
+      );
+  }
+
+  userInput(){
+    return(
+        <input type="text" onChange={this.handleChange('username')} />
+      );
+  }
+
   render(){
     const signupPage = (this.props.formType === 'signup');
     const errors = this.props.errors.map( (error, idx) =>{
       return <li key={idx}>{error}</li>;
     });
     return (
-      <div>
-        <h3>{ signupPage ? "Sign Up" : "Log In"}</h3>
-        <ul>
-          {errors}
-        </ul>
-        <form onSubmit={this.handleSubmit}>
-          Email: <input type="text" onChange={this.handleChange('email_address')} />
-          {signupPage ? "Username:" : ''}
-          {signupPage ? <input type="text" onChange={this.handleChange('username')} />: ''}
-          Password: <input type="password" onChange={this.handleChange('password')} />
-          <button>{ signupPage ? "Sign Up" : "Log In"}</button>
-        </form>
-        {this.navLink()}
+      <div className="session-flex-container">
+        <div className="auth-form-container">
+          <div className="auth-form-inner-left">
+
+          </div>
+          <div className="auth-form-inner-right">
+            <h3>{ signupPage ? "Create an Account" : "Welcome Back"}</h3>
+            <ul className="auth-form-errors">
+              {errors}
+            </ul>
+            <form className="auth-form" onSubmit={this.handleSubmit}>
+                <label className="auth-form-label">Email</label> <input type="text" onChange={this.handleChange('email_address')} />
+                { signupPage ? this.userInputLabel(): ''}
+                { signupPage ? this.userInput(): ''}
+                <label className="auth-form-label">Password</label> <input type="password" onChange={this.handleChange('password')} />
+              <button>{ signupPage ? "Sign Up" : "Login"}</button>
+            </form>
+            {this.navLink()}
+          </div>
+
+        </div>
+
       </div>
     );
   }

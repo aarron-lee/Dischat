@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { login, signup } from '../../actions/session_actions';
+import { login, signup, clearErrors } from '../../actions/session_actions';
+import { withRouter, Link } from 'react-router-dom';
 
 class SessionForm extends React.Component{
   constructor(props){
@@ -21,6 +22,11 @@ class SessionForm extends React.Component{
     return (event) => this.setState( { [type] : event.target.value  } );
   }
 
+  componentWillReceiveProps(newProps){
+    //compare new vs old, if different,
+    
+  }
+
 
   handleSubmit(event){
     event.preventDefault();
@@ -28,6 +34,20 @@ class SessionForm extends React.Component{
       email_address: this.state.email_address,
       password: this.state.password,
     });
+
+    this.setState({
+      username: '',
+      email_address: '',
+      password: ''
+    });
+
+  }
+  navLink() {
+    if (this.props.formType === 'signup') {
+      return <Link to="/login">Login</Link>;
+    } else {
+      return <Link to="/signup">Register</Link>;
+    }
   }
 
   render(){
@@ -48,8 +68,17 @@ class SessionForm extends React.Component{
           Password: <input type="password" onChange={this.handleChange('password')} />
           <button>{ signupPage ? "Sign Up" : "Log In"}</button>
         </form>
+        {this.navLink()}
       </div>
     );
+  }
+
+
+  componentWillUnmount(){
+    if( this.props.errors.length > 0 ){
+      // dispatch clearError
+      this.props.clearErrors();
+    }
   }
 
 }// end SessionForm
@@ -57,12 +86,11 @@ class SessionForm extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
-  const formType = ownProps.location.pathname === '/login' ? 'login' : 'signup';
   let errors = [];
   if( state.errors.length > 0 ){
     errors = state.errors;
   }
-  return {formType, errors};
+  return {errors};
 }
 
 function mapDispatchToProps(dispatch, ownProps){
@@ -79,11 +107,13 @@ function mapDispatchToProps(dispatch, ownProps){
   }
 
   return {
+    formType: formType,
     formAction: formAction,
+    clearErrors: () => dispatch( clearErrors() )
   };
 }
 
 
-const SessionFormContainer = connect(mapStateToProps, mapDispatchToProps)(SessionForm);
+const SessionFormContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(SessionForm));
 
 export default SessionFormContainer;

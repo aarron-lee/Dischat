@@ -99,3 +99,9 @@
 .session-other-form:hover{
   border-bottom: 2px solid white;
 }
+
+.auth-form-errors li{
+  font-size: 12px;
+  color: red;
+  margin: 4px;
+}

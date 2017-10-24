@@ -61,6 +61,9 @@
     background-color: #697ec4;
     opacity: none;
   }
+  button:hover{
+    background-color: #5674d7;
+  }
 }
 
 .auth-form-inner-right h3{
@@ -104,4 +107,16 @@
   font-size: 12px;
   color: red;
   margin: 4px;
+}
+
+.auth-form-errors{
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.auth-form-on{
+  border: 1px solid red;
+  animation: fadein .5s;
+  -webkit-animation: fadein .5s;
 }

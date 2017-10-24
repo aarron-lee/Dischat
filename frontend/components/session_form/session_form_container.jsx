@@ -81,7 +81,7 @@ class SessionForm extends React.Component{
           </div>
           <section className="auth-form-inner-right">
             <h3>{ signupPage ? "Create an Account" : "Welcome Back"}</h3>
-            <ul className="auth-form-errors">
+            <ul className={`auth-form-errors ${errors.length ? 'auth-form-on' : ''}`}>
               {errors}
             </ul>
             <form className="auth-form" onSubmit={this.handleSubmit}>

@@ -1,0 +1,75 @@
+
+.session-flex-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image: image-url('tokyo-background.jpg');
+}
+
+.auth-form-container{
+  max-width: 50%;
+  min-width: 600px;
+  min-height: 400px;
+  padding: 0;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  // opacity: 0.92;
+  color: white;
+  border-radius: 4px;
+}
+
+.auth-form-inner-left{
+  min-width: 40%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.auth-form-inner-right{
+  background-color: black;
+  padding: 20px;
+  min-width: 60%;
+  box-sizing: border-box;
+  border-radius: 0 4px 4px 0;
+}
+
+.auth-form-inner-right .auth-form{
+  display: flex;
+  flex-direction: column;
+  input{
+    margin: 10px;
+  }
+  button{
+    margin: 10px 0;
+    height: 50px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #697ec4;
+    opacity: none;
+  }
+}
+
+.auth-form-inner-right h3{
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.auth-form-inner-right .auth-form input{
+  border-bottom: 1px solid rgb(96, 100, 108);
+  padding: 5px;
+}
+.auth-form-inner-right .auth-form input:focus{
+    border-bottom: 1px solid white;
+}
+
+
+.auth-form-label{
+  font-size: 11px;
+  text-transform: uppercase;
+  color: rgb(96, 100, 108);
+  font-weight: bold;
+}

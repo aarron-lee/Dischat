@@ -9,7 +9,7 @@ class Api::SessionsController < ApplicationController
     if( @user )
       # User exists, credentials work!
       # login user
-      session[:session_token] = @user.reset_session_token
+      login(@user)
       render :show, status: 200
     else
       render json: "Invalid Login Credentials", status: 401

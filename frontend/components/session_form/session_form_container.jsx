@@ -32,9 +32,15 @@ class SessionForm extends React.Component{
 
   render(){
     const signupPage = (this.props.formType === 'signup');
+    const errors = this.props.errors.map( (error, idx) =>{
+      return <li key={idx}>{error}</li>;
+    });
     return (
       <div>
         <h3>{ signupPage ? "Sign Up" : "Log In"}</h3>
+        <ul>
+          {errors}
+        </ul>
         <form onSubmit={this.handleSubmit}>
           Email: <input type="text" onChange={this.handleChange('email_address')} />
           {signupPage ? "Username:" : ''}
@@ -52,8 +58,11 @@ class SessionForm extends React.Component{
 
 function mapStateToProps(state, ownProps){
   const formType = ownProps.location.pathname === '/login' ? 'login' : 'signup';
-
-  return {formType};
+  let errors = [];
+  if( state.errors.length > 0 ){
+    errors = state.errors;
+  }
+  return {formType, errors};
 }
 
 function mapDispatchToProps(dispatch, ownProps){

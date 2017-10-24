@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
   background-color: white;
-  // opacity: 0.92;
+  opacity: 0.92;
   color: white;
   border-radius: 4px;
 }
@@ -26,6 +26,17 @@
   min-width: 40%;
   padding: 20px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-lg{
+  background-image: asset-url('discord-logo.svg');
+  background-repeat: no-repeat;
+  vertical-align: bottom;
+  width: 70%;
+  height: 70%;
 }
 
 .auth-form-inner-right{
@@ -73,4 +84,18 @@
   text-transform: uppercase;
   color: rgb(96, 100, 108);
   font-weight: 700;
+}
+.auth-form-label-sm{
+  font-size: 12px;
+  text-transform: capitalize;
+  color: rgb(96, 100, 108);
+}
+
+
+.session-other-form{
+  font-size: 12px;
+}
+
+.session-other-form:hover{
+  border-bottom: 2px solid white;
 }

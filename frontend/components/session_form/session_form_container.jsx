@@ -44,9 +44,15 @@ class SessionForm extends React.Component{
   }
   navLink() {
     if (this.props.formType === 'signup') {
-      return <Link to="/login">Login</Link>;
+      return <div>
+                <label className="auth-form-label-sm">Already have an account? </label>
+                <Link className="session-other-form" to="/login">Login</Link>
+              </div>
     } else {
-      return <Link to="/signup">Register</Link>;
+      return <div>
+                <label className="auth-form-label-sm">Need an account? </label>
+                <Link className="session-other-form" to="/signup">Register</Link>
+              </div>
     }
   }
 
@@ -71,9 +77,9 @@ class SessionForm extends React.Component{
       <div className="session-flex-container">
         <div className="auth-form-container">
           <div className="auth-form-inner-left">
-
+            <div className="icon-lg"></div>
           </div>
-          <div className="auth-form-inner-right">
+          <section className="auth-form-inner-right">
             <h3>{ signupPage ? "Create an Account" : "Welcome Back"}</h3>
             <ul className="auth-form-errors">
               {errors}
@@ -86,7 +92,7 @@ class SessionForm extends React.Component{
               <button>{ signupPage ? "Sign Up" : "Login"}</button>
             </form>
             {this.navLink()}
-          </div>
+          </section>
 
         </div>
 

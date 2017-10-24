@@ -9,7 +9,8 @@ function errorsReducer( state = [], action){
   let newState;
   switch(action.type){
     case RECEIVE_SESSION_ERRORS:
-      return newState = action.errors.responseJSON;
+      return action.errors.responseJSON ?
+      action.errors.responseJSON : [action.errors.responseText];
     case RECEIVE_CURRENT_USER:
       return [];
     default:

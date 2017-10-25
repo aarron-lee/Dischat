@@ -24,14 +24,17 @@ class ApplicationController < ActionController::Base
     session[:session_token] = user.reset_session_token
   end
 
+  def ensure_logged_in
+    if !logged_in?
+      return render json: "Not logged in, cannot perform action", status: 403
+    end
+  end
+
 
   def ensure_correct_owner(id)
-    if !logged_in?
-      return render json: "Not logged in, cannot perform action", status: 422
-    end
     user = User.find(id)
     if current_user.id != user.id
-      return render json: "Invalid user, cannot perform action", status: 422
+      return render json: "Invalid user, cannot perform action", status: 401
     end
   end
 

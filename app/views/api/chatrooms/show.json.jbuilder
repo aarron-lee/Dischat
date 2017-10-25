@@ -1,1 +1,1 @@
-json.extract! @chatroom, :owner_id, :id, :title
+json.partial! 'api/chatrooms/chatroom', chatroom: @chatroom

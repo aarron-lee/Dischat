@@ -1,6 +1,6 @@
 class Api::ChatroomsController < ApplicationController
 
-  before_action :ensure_logged_in, only: [:create, :update, :index, :show]
+  before_action :ensure_logged_in, only: [:create, :update, :index, :show, :join]
 
   before_action only: [:update, :index] do
     ensure_correct_owner(params[:chatroom][:owner_id])
@@ -54,6 +54,21 @@ class Api::ChatroomsController < ApplicationController
     if(@chatroom)
       @users = @chatroom.memberships
       render "/api/users/index"
+    else
+      render json: "Chatroom does not exist", status: 400
+    end
+  end
+
+  def join
+    @chatroom = Chatroom.find(params[:id])
+
+    if(@chatroom)
+      @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
+      if(@member.save)
+        render "/members/_member.json"
+      else
+        render json: @member.errors.full_messages, status: 400
+      end
     else
       render json: "Chatroom does not exist", status: 400
     end

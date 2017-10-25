@@ -16,7 +16,7 @@ class Api::ChatroomsController < ApplicationController
 
     if (@chatroom )
       # chatroom exists
-      if (@chatroom.owner_id != chatroom_params[:owner_id])
+      if (@chatroom.owner_id != chatroom_params[:owner_id].to_i)
         return render json: "You do not own this chatroom", status: 401
       end
       @chatroom.update_attributes(chatroom_params)

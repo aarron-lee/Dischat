@@ -6,4 +6,8 @@ class Member < ApplicationRecord
   foreign_key: :chatroom_id,
   class_name: :Chatroom
 
+  belongs_to :user,
+  foreign_key: :user_id,
+  class_name: :User
+
 end

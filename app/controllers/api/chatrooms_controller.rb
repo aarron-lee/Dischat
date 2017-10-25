@@ -2,12 +2,20 @@ class Api::ChatroomsController < ApplicationController
 
   before_action :ensure_logged_in, only: [:create, :update, :index]
 
-  before_action only: [:update, :index, :create] do
+  before_action only: [:update, :index] do
     ensure_correct_owner(params[:chatroom][:owner_id])
   end
 
 
   def create
+    @chatroom = Chatroom.new(chatroom_params)
+    @chatroom[:owner_id] = current_user.id
+
+    if(@chatroom.save)
+      render :show, status: 200
+    else
+      render json: @chatroom.errors.full_messages, status: 400
+    end
 
   end
 

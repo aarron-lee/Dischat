@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :logout_current_user, :logged_in?, :login
+  helper_method :current_user, :logout_current_user, :logged_in?, :login, :ensure_correct_owner
 
   def current_user
     @current_user ||= User.find_by( session_token: session[:session_token] )
@@ -22,6 +22,17 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     session[:session_token] = user.reset_session_token
+  end
+
+
+  def ensure_correct_owner(id)
+    if !logged_in?
+      return render json: "Not logged in, cannot perform action", status: 422
+    end
+    user = User.find(id)
+    if current_user.id != user.id
+      return render json: "Invalid user, cannot perform action", status: 422
+    end
   end
 
 

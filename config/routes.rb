@@ -7,11 +7,9 @@ Rails.application.routes.draw do
       get 'chatrooms', on: :collection
     end
     resource :sessions, only: [:create, :destroy]
-    resources :chatrooms, only: [:create, :update, :show, :index] # do
-    #   member do
-    #     get :users
-    #   end
-    # end
+    resources :chatrooms, only: [:create, :update, :show] do
+      get 'members', on: :member
+    end
 
   end
 

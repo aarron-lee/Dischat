@@ -48,9 +48,16 @@ class Api::ChatroomsController < ApplicationController
     end
   end
 
+  def members
+    @chatroom = Chatroom.includes(:memberships).find(params[:id])
 
-  def index
-    
+    if(@chatroom)
+      @users = @chatroom.memberships
+      render "/api/users/index"
+    else
+      render json: "Chatroom does not exist", status: 400
+    end
+
   end
 
   private

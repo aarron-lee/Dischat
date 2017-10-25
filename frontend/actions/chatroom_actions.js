@@ -65,7 +65,7 @@ export const receiveErrors = errors =>{
 // thunks ----------------------
 
 // gets members for given chatroomId
-export const getMembers => (chatroomId) {
+export const getMembers = (chatroomId) =>{
 
   return (dispatch) => {
     const success = (members) => dispatch( receiveChatroomMembers(members)  );
@@ -78,7 +78,7 @@ export const getMembers => (chatroomId) {
 };
 
 // gets chatrooms based on current_user.id
-export const getChatrooms => () {
+export const getChatrooms = () =>{
 
   return (dispatch) => {
     const success = (chatrooms) => dispatch( receiveChatrooms(chatrooms)  );
@@ -91,7 +91,7 @@ export const getChatrooms => () {
 };
 
 // gets chatroom based on chatroomId
-export const getChatroom => (chatroomId) {
+export const getChatroom = (chatroomId) =>{
 
   return (dispatch) => {
     const success = (chatroom) => dispatch( receiveChatroom(chatroom)  );
@@ -105,10 +105,10 @@ export const getChatroom => (chatroomId) {
 
 
 // creates chatroom based on current_user
-export const createChatroom => (chatroom) {
+export const createChatroom = (chatroom) =>{
 
   return (dispatch) => {
-    const success = (c) => dispatch( receiveChatroom(c)  );
+    const success = (c) => dispatch( receiveCreateChatroom(c)  );
     const failure = (errors) => dispatch( receiveErrors(errors) ) ;
 
     return ChatroomAPIUtil.createChatroom(chatroom).then(
@@ -120,7 +120,7 @@ export const createChatroom => (chatroom) {
 
 
 // joins chatroom based on current_user
-export const joinChatroom => (chatroomId) {
+export const joinChatroom = (chatroomId) =>{
 
   return (dispatch) => {
     const success = (chatroom) => dispatch( receiveJoinChatroom(chatroom)  );
@@ -134,7 +134,7 @@ export const joinChatroom => (chatroomId) {
 
 
 // joins chatroom based on current_user
-export const updateChatroom => (chatroom) {
+export const updateChatroom = (chatroom) =>{
 
   return (dispatch) => {
     const success = (c) => dispatch( receiveChatroom(c)  );

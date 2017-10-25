@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'static_pages#root'
 
   namespace :api, defaults: {format: :json} do
-    resources :users, only: [:create]
+    resources :users, only: [:create] do
+      get 'chatrooms', on: :collection
+    end
     resource :sessions, only: [:create, :destroy]
     resources :chatrooms, only: [:create, :update, :show, :index] # do
     #   member do

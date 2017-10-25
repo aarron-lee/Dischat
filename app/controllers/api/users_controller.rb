@@ -11,6 +11,15 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def chatrooms
+    if (current_user)
+      @chatrooms = current_user.chatroom_memberships
+      render "/api/chatrooms/index"
+    else
+      render json: "Must be logged in", status: 401
+    end
+  end
+
   private
   def user_params
     params.require(:user).permit(:email_address, :username, :password)

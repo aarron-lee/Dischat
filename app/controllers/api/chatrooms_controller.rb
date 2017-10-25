@@ -11,9 +11,15 @@ class Api::ChatroomsController < ApplicationController
     @chatroom = Chatroom.new(chatroom_params)
     @chatroom[:owner_id] = current_user.id
 
-    if(@chatroom.save)
+
+    begin
+      ActiveRecord::Base.transaction do
+        @chatroom.save!
+        @member = Member.new( user_id: current_user.id, chatroom_id: @chatroom.id )
+        @member.save!
+      end
       render :show, status: 200
-    else
+    rescue ActiveRecord::RecordInvalid => _invalid
       render json: @chatroom.errors.full_messages, status: 400
     end
 

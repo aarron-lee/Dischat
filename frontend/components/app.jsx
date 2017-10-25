@@ -9,7 +9,7 @@ const App = () =>{
 
   return (
     <div className="app-container">
-      <GreetingContainer />
+      <Route exact path="/" component={GreetingContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
     </div>

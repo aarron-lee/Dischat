@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 class Greeting extends React.Component{
@@ -19,11 +19,12 @@ class Greeting extends React.Component{
 
     return(
       <div>
+        <Redirect to="/login"/>
       </div>
     )
+
     // <Link to="/login">Login</Link>
     // <Link to="/signup">Sign Up</Link>
-
 
   }
 

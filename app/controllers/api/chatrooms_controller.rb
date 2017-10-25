@@ -71,7 +71,7 @@ class Api::ChatroomsController < ApplicationController
     if(@chatroom)
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
-        render "/members/_member.json"
+        render "/api/chatrooms/show"
       else
         render json: @member.errors.full_messages, status: 400
       end

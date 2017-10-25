@@ -56,4 +56,6 @@ export const joinChatroom = (chatroomId) => {
   return $.ajax({
     method: 'post',
     url: '/api/chatrooms/' + chatroomId + '/join',
-})
+  });
+
+};

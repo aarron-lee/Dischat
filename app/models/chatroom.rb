@@ -5,4 +5,8 @@ class Chatroom < ApplicationRecord
   foreign_key: :owner_id,
   class_name: :User
 
+  has_many :members,
+  foreign_key: :chatroom_id,
+  class_name: :Member
+
 end

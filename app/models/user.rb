@@ -8,7 +8,13 @@ class User < ApplicationRecord
   foreign_key: :owner_id,
   class_name: :Chatroom
 
+  has_many :members,
+  foreign_key: :user_id,
+  class_name: :Member
 
+  has_many :chatroom_memberships,
+  through: :members,
+  source: :chatroom
 
 
 #--------------

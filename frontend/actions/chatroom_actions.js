@@ -122,7 +122,7 @@ export const createChatroom = (chatroom) =>{
 
 
 // joins chatroom based on current_user
-export const joinChatroom = (chatroomId) =>{
+export const joinChatroom = (chatroomId=0) =>{
 
   return (dispatch) => {
     const success = (payload) => dispatch( receiveJoinChatroom(payload)  );

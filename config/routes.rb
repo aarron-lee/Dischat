@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :chatrooms, only: [:create, :update, :show] do
       get 'members', on: :member
       post 'join', on: :member
+      post 'join', on: :collection
     end
 
   end

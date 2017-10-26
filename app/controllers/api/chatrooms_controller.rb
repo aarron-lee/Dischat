@@ -66,9 +66,19 @@ class Api::ChatroomsController < ApplicationController
   end
 
   def join
-    @chatroom = Chatroom.find(params[:id])
+    if( params[:id].nil? )
+      return render json: "Invalid Chatroom", status: 400
+    end
+
+    @chatroom
+    begin
+      @chatroom = Chatroom.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => _invalid
+      return render json: "Chatroom does not exist", status: 400
+    end
 
     if(@chatroom)
+
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
         @chatroom = Chatroom.includes(:members).find(params[:id])
@@ -77,6 +87,7 @@ class Api::ChatroomsController < ApplicationController
         render json: @member.errors.full_messages, status: 400
       end
     else
+
       render json: "Chatroom does not exist", status: 400
     end
 

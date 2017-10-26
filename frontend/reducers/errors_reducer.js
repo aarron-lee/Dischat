@@ -20,8 +20,10 @@ function errorsReducer( state = [], action){
     case RECEIVE_ERRORS:
       if(action.errors.responseJSON){
         return action.errors.responseJSON;
+      }else if (action.errors.responseText){
+        return [action.errors.responseText]
       }else{
-        return action.errors.statusText
+        return [action.errors.statusText]
       }
     case CLOSE_MODAL:
       return [];

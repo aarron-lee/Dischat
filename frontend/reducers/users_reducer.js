@@ -19,18 +19,17 @@ function usersReducer(state = {}, action){
     case RECEIVE_CREATE_CHATROOM:
       newState = merge({}, state)
       user = newState[action.chatroom.owner_id];
-       if (user && user.chatrooms){
-         user.chatrooms.push(action.chatroom.id);
-       }else{
-         user.chatrooms = [action.chatroom.id];
-       }
+       user.chatrooms ?
+        user.chatrooms.push(action.chatroom.id) :
+        user.chatrooms = [action.chatroom.id];
       return newState;
     case RECEIVE_JOIN_CHATROOM:
       newState = merge({}, state);
-      user = newState[action.current_user_id];
-       if (user && user.chatrooms){
-         user.chatrooms.push(action.chatroom.id);
-       }else{
+      user = newState[action.currentUserId];
+      debugger
+       if (user){
+         user.chatrooms ?
+         user.chatrooms.push(action.chatroom.id) :
          user.chatrooms = [action.chatroom.id];
        }
       return newState;

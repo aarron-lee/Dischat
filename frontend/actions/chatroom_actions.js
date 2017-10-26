@@ -45,11 +45,11 @@ export const receiveCreateChatroom = (chatroom) =>{
 
 
 // joined chatroom
-export const receiveJoinChatroom = ({chatroom, current_user}) =>{
+export const receiveJoinChatroom = ({chatroom, current_user_id}) =>{
   return {
     type: RECEIVE_JOIN_CHATROOM,
-    chatroom: chatroom,
-    current_user_id: current_user.id
+    chatroom,
+    currentUserId: current_user_id
   };
 };
 

@@ -19,7 +19,7 @@
 
 
 .channel-list-items{
-  color: #f3f3f3;
+  color: rgb(150,150,150);
   margin: 10px 10px;
   li{
     padding: 10px;
@@ -28,6 +28,5 @@
   li:hover{
     background-color: #1e2124;
     color: white;
-    opacity: 0.8;
   }
 }

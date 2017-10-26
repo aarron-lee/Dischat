@@ -67,11 +67,12 @@ class Api::ChatroomsController < ApplicationController
 
   def join
     @chatroom = Chatroom.find(params[:id])
+    @current_user = current_user
 
     if(@chatroom)
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
-        render "/api/chatrooms/show"
+        render "/api/chatrooms/join"
       else
         render json: @member.errors.full_messages, status: 400
       end

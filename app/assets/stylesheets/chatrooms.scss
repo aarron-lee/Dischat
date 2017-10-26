@@ -5,6 +5,7 @@
   align-items: center;
   a:hover{
     border-radius: 30%;
+    background-color: #2e3195;
   }
 }
 
@@ -15,6 +16,7 @@
   width:75px;
   height: 100%;
 }
+
 
 
 .chatroom-list-item{
@@ -28,8 +30,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  -webkit-transition: background-color 0.5s ease;
+  -webkit-transition: border-radius 0.5s ease;
 }
+
+
 
 .chatroom-title-label{
   display: none;
@@ -43,6 +48,7 @@
   color: white;
   background-color: black;
   border-radius: 4px;
+  -webkit-animation: fadeOut 1.0s;
 }
 
 .chatroom-list-item-container{
@@ -52,6 +58,7 @@
 .chatroom-list-item-container:hover{
   .chatroom-title-label{
     display: block;
+    -webkit-animation: fadeIn 0.7s;
   }
 }
 
@@ -87,6 +94,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  -webkit-animation: fadeIn 1.0s;
 }
 
 .chatroom-forms-container{

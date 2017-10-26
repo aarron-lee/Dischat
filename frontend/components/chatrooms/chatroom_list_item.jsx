@@ -10,7 +10,11 @@ class ChatroomListItem extends React.Component{
 
   render(){
     return (
-      <div>{this.props.chatroom.title}</div>
+      <Link className="chatroom-list-item" to={`/chatrooms/${this.props.chatroom.id}`}>
+        <span >
+          {this.props.chatroom.title[0].toUpperCase()}
+        </span>
+      </Link>
     )
   }
 

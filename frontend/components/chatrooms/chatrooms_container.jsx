@@ -12,8 +12,10 @@ class ChatroomList extends React.Component{
       return <ChatroomListItem chatroom={chatroom} key={chatroom.id}/>
     });
     return (
-      <section>
-        {chatroomEls}
+      <section className="chatroom-container">
+          <div className="chatroom-list">
+            {chatroomEls}
+          </div>
       </section>
     );
   }// end render

@@ -1,0 +1,30 @@
+
+.chatroom-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .chatroom-list-item:hover{
+    border-radius: 30%;
+  }
+}
+
+.chatroom-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #1e2124;
+  width:75px;
+  height: 100%;
+}
+
+.chatroom-list-item{
+  color: #c3c4c5;
+  background-color: #2e3140;
+  border: 1px solid lightgray;
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

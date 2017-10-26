@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChatrooms } from '../../actions/chatroom_actions';
+import { getChatrooms, joinChatroom, createChatroom } from '../../actions/chatroom_actions';
 import { Link, Redirect } from 'react-router-dom';
 import ChatroomListItem from './chatroom_list_item';
 import AddChatroomButton from './add_chatroom_button';
@@ -39,6 +39,8 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch, ownProps){
   return {
     fetchChatrooms: () => dispatch( getChatrooms() ),
+    joinChatroom: (chatroomId) => dispatch( joinChatroom(chatroomId) ),
+    createChatroom: (chatroom) => dispatch( createChatroom(chatroom) ),
   };
 }
 

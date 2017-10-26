@@ -27,8 +27,6 @@ function usersReducer(state = {}, action){
       return newState;
     case RECEIVE_JOIN_CHATROOM:
       newState = merge({}, state);
-      // action.chatroom
-      debugger
       user = newState[action.current_user_id];
        if (user && user.chatrooms){
          user.chatrooms.push(action.chatroom.id);

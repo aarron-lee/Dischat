@@ -45,10 +45,11 @@ export const receiveCreateChatroom = (chatroom) =>{
 
 
 // joined chatroom
-export const receiveJoinChatroom = (chatroom) =>{
+export const receiveJoinChatroom = ({chatroom, current_user}) =>{
   return {
     type: RECEIVE_JOIN_CHATROOM,
-    chatroom: chatroom
+    chatroom: chatroom,
+    current_user_id: current_user.id
   };
 };
 
@@ -123,7 +124,7 @@ export const createChatroom = (chatroom) =>{
 export const joinChatroom = (chatroomId) =>{
 
   return (dispatch) => {
-    const success = (chatroom) => dispatch( receiveJoinChatroom(chatroom)  );
+    const success = (payload) => dispatch( receiveJoinChatroom(payload)  );
     const failure = (errors) => dispatch( receiveErrors(errors) ) ;
 
     return ChatroomAPIUtil.joinChatroom(chatroomId).then(

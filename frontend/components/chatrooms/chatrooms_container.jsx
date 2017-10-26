@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getChatrooms } from '../../actions/chatroom_actions';
 import { Link, Redirect } from 'react-router-dom';
 import ChatroomListItem from './chatroom_list_item';
+import AddChatroomButton from './add_chatroom_button';
 
 class ChatroomList extends React.Component{
 
@@ -16,6 +17,7 @@ class ChatroomList extends React.Component{
           <div className="chatroom-list">
             {chatroomEls}
           </div>
+          <AddChatroomButton />
       </section>
     );
   }// end render

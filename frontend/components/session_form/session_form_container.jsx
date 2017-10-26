@@ -16,6 +16,7 @@ class SessionForm extends React.Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGuest = this.handleGuest.bind(this);
   }
 
   handleChange(type){
@@ -25,6 +26,14 @@ class SessionForm extends React.Component{
   componentWillReceiveProps(newProps){
     //compare new vs old, if different,
 
+  }
+
+  handleGuest(event){
+    event.preventDefault();
+    const tmpUsername = "Guest".concat(Math.round(10000* Math.random(0,1)) )
+    this.props.loginGuest( { username: tmpUsername,
+                            email_address: tmpUsername,
+                            password: "password123"} );
   }
 
 
@@ -47,11 +56,15 @@ class SessionForm extends React.Component{
       return <div>
                 <label className="auth-form-label-sm">Already have an account? </label>
                 <Link className="session-other-form" to="/login">Login</Link>
+                <label className="auth-form-label-sm"> or login as a guest </label>
+                <button className="session-other-form" onClick={this.handleGuest}>Here</button>
               </div>
     } else {
       return <div>
                 <label className="auth-form-label-sm">Need an account? </label>
                 <Link className="session-other-form" to="/signup">Register</Link>
+                <label className="auth-form-label-sm"> or login as a guest </label>
+                <button className="session-other-form" onClick={this.handleGuest}>Here</button>
               </div>
     }
   }
@@ -64,7 +77,7 @@ class SessionForm extends React.Component{
 
   userInput(){
     return(
-        <input type="text" onChange={this.handleChange('username')} />
+        <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
       );
   }
 
@@ -85,10 +98,10 @@ class SessionForm extends React.Component{
               {errors}
             </ul>
             <form className="auth-form" onSubmit={this.handleSubmit}>
-                <label className="auth-form-label">Email</label> <input type="text" onChange={this.handleChange('email_address')} />
+                <label className="auth-form-label">Email</label> <input type="text" onChange={this.handleChange('email_address')} value={this.state.email_address}/>
                 { signupPage ? this.userInputLabel(): ''}
                 { signupPage ? this.userInput(): ''}
-                <label className="auth-form-label">Password</label> <input type="password" onChange={this.handleChange('password')} />
+                <label className="auth-form-label">Password</label> <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
               <button>{ signupPage ? "Sign Up" : "Login"}</button>
             </form>
             {this.navLink()}
@@ -136,6 +149,7 @@ function mapDispatchToProps(dispatch, ownProps){
   return {
     formType: formType,
     formAction: formAction,
+    loginGuest: (user) => { dispatch( signup(user) ) },
     clearErrors: () => dispatch( clearErrors() )
   };
 }

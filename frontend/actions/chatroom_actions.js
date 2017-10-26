@@ -129,8 +129,8 @@ export const joinChatroom = (chatroomId) =>{
     const failure = (errors) => dispatch( receiveErrors(errors) ) ;
 
     return ChatroomAPIUtil.joinChatroom(chatroomId).then(
-      success, failure
-    );
+      success
+    ).fail(failure);
   }// end return dispatch
 };
 

@@ -26,12 +26,11 @@ function usersReducer(state = {}, action){
     case RECEIVE_JOIN_CHATROOM:
       newState = merge({}, state);
       user = newState[action.currentUserId];
-      debugger
-       if (user){
+      if (user){
          user.chatrooms ?
          user.chatrooms.push(action.chatroom.id) :
          user.chatrooms = [action.chatroom.id];
-       }
+      }
       return newState;
     default:
       return state;

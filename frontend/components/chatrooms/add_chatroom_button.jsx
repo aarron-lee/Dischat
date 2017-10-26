@@ -14,6 +14,9 @@ class AddChatroomButton extends React.Component{
 
   handleClick(event){
     event.preventDefault();
+
+    this.props.openModal("addChatroomButton");
+
   }
 
   render(){

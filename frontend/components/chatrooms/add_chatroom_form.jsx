@@ -48,10 +48,14 @@ class AddChatroomForm extends React.Component{
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
-        <div className="chat-form chat-right-divider" >
-          <h3>Create a Chatroom</h3>
-          <form className="chat-form" onSubmit={this.handleCreate}>
-            <label className="auth-form-label">Title: <br/>
+        <div className="chat-form-errors">
+          {this.props.errors}
+        </div>
+        <div className="chatroom-forms-container">
+          <div className="chat-form chat-right-divider" >
+            <h3>Create a Chatroom</h3>
+            <form className="chat-form" onSubmit={this.handleCreate}>
+              <label className="auth-form-label">Title: <br/>
               <input type="text" onChange={this.handleChange('title')} value={this.state.title}/>
             </label>
             <button>Create</button>
@@ -61,10 +65,11 @@ class AddChatroomForm extends React.Component{
           <h3>Join a Chatroom</h3>
           <form className="chat-form" onSubmit={this.handleJoin}>
             <label className="auth-form-label">Chatroom ID: <br/>
-              <input type="text" onChange={this.handleChange('id')} value={this.state.id}/>
-            </label>
-            <button>Join</button>
-          </form>
+            <input type="number" onChange={this.handleChange('id')} value={this.state.id}/>
+          </label>
+          <button>Join</button>
+        </form>
+      </div>
         </div>
       </div>
     );

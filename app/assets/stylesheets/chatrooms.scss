@@ -84,8 +84,18 @@
   min-width: 400px;
   min-height: 20px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+.chatroom-forms-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.chat-form-errors{
+  color: red;
 }
 
 .chat-form{

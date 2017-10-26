@@ -18,6 +18,7 @@ class ChatroomList extends React.Component{
           <AddChatroomForm
             joinChatroom={this.props.joinChatroom}
             createChatroom={this.props.createChatroom}
+            errors={this.props.errors}
             />
         </div>)
     ;
@@ -51,6 +52,7 @@ function mapStateToProps(state, ownProps){
   return {
     chatrooms: Object.values(state.entities.chatrooms),
     modal: state.ui.modal,
+    errors: state.errors,
   };
 }
 

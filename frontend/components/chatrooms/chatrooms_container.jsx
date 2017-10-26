@@ -3,10 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getChatrooms, joinChatroom, createChatroom } from '../../actions/chatroom_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import ChatroomListItem from './chatroom_list_item';
 import AddChatroomButton from './add_chatroom_button';
 import AddChatroomForm from './add_chatroom_form';
+import difference from 'lodash/difference';
 
 class ChatroomList extends React.Component{
 
@@ -22,6 +23,26 @@ class ChatroomList extends React.Component{
             />
         </div>)
     ;
+  }
+
+  componentWillReceiveProps(nextProps){
+    // debugger
+    if( this.props.chatrooms.length < nextProps.chatrooms.length ){
+      // new or join
+      let nextChatroom = {};
+      nextProps.chatrooms.forEach( (chatroom) =>{
+        this.props.chatrooms.forEach( (c2)=>{
+          if( c2.id !== chatroom.id){
+            nextChatroom = chatroom;
+          }
+        });
+      });
+      if( nextChatroom.id !== undefined ){
+        this.props.history.push("/chatrooms/"+nextChatroom.id);
+      }else{
+        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id);
+      }
+    }
   }
 
   render(){
@@ -67,7 +88,7 @@ function mapDispatchToProps(dispatch, ownProps){
 }
 
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(ChatroomList);
+)(ChatroomList));

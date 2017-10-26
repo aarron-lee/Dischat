@@ -6,12 +6,12 @@ import {connect} from 'react-redux';
 
 
 
-const Auth = ( {path, component: Component, loggedIn} ) => {
-  if( loggedIn ){
+const Protected = ( {path, component: Component, loggedIn} ) => {
+  if( !loggedIn ){
     return (
       <Route path={path} render={
         (props) =>
-          <Redirect to="/chatrooms"/>
+          <Redirect to="/"/>
         }
         />
     );
@@ -24,7 +24,7 @@ const Auth = ( {path, component: Component, loggedIn} ) => {
       />
     );
   }//end else
-}// end Auth
+}// end Protected
 
 
 function mapStateToProps(state, ownProps){
@@ -35,8 +35,8 @@ function mapStateToProps(state, ownProps){
 }
 
 
-const AuthRoute = withRouter(
-  connect(mapStateToProps, null)(Auth)
+const ProtectedRoute = withRouter(
+  connect(mapStateToProps, null)(Protected)
 );
 
-export default AuthRoute;
+export default ProtectedRoute;

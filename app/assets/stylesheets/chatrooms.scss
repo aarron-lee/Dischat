@@ -73,9 +73,59 @@
   border: 1px dashed lightgray;
 }
 
-.chatroom-modal-form{
+
+//modal form---------------------
+.chatroom-modal-form-container{
   padding: 20px;
   background-color: white;
   border-radius: 10px;
   z-index: 20;
+  max-width: 50%;
+  min-width: 400px;
+  min-height: 20px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.chat-form{
+  margin: 10px;
+  opacity: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input{
+    margin: 10px;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+  }
+  input:focus{
+    border-bottom: 1px solid black;
+  }
+  button{
+    margin: 10px 0;
+    height: 40px;
+    width: 100%;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #697ec4;
+    opacity: none;
+    color: white;
+  }
+  button:hover{
+    background-color: #5674d7;
+  }
+}
+
+.chat-form h3{
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+.chat-right-divider{
+  border-right: 2px solid lightgray;
+  padding-right: 20px;
 }

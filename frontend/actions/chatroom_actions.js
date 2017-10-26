@@ -17,10 +17,11 @@ export const receiveChatroomMembers = (members) =>{
 };
 
 // chatrooms for current_user
-export const receiveChatrooms = (chatrooms) =>{
+export const receiveChatrooms = ({chatrooms, currentUserId}) =>{
   return {
     type: RECEIVE_CHATROOMS,
-    chatrooms
+    chatrooms,
+    currentUserId,
   };
 };
 

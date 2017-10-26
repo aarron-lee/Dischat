@@ -2,7 +2,8 @@
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 import merge from 'lodash/merge';
 import {RECEIVE_CREATE_CHATROOM,
-        RECEIVE_JOIN_CHATROOM} from '../actions/chatroom_actions';
+        RECEIVE_JOIN_CHATROOM,
+        RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
 
 
 
@@ -30,6 +31,15 @@ function usersReducer(state = {}, action){
          user.chatrooms ?
          user.chatrooms.push(action.chatroom.id) :
          user.chatrooms = [action.chatroom.id];
+      }
+      return newState;
+    case RECEIVE_CHATROOMS:
+      newState = merge({}, state);
+      user = newState[action.currentUserId];
+      if (user){
+        user.chatrooms = action.chatrooms.map( (chatroom) => {
+          return chatroom.id;
+        });
       }
       return newState;
     default:

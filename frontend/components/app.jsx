@@ -12,12 +12,12 @@ const App = () =>{
     <div className="app-container">
       <Route exact path="/" component={GreetingContainer} />
       <Route path="/chatrooms/" component={ChatroomsContainer} />
-      <Route path="/chatrooms/:chatroom_id" component={ChatroomsContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
     </div>
 
   );
+  // TODO:  <Route path="/chatrooms/:chatroom_id" component={<ul><li>Channel List</li></ul>} />
 
 }
 

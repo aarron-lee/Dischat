@@ -10,6 +10,7 @@ class Api::SessionsController < ApplicationController
       # User exists, credentials work!
       # login user
       login(@user)
+      @chatroom_memberships = @user.chatroom_memberships
       render :show, status: 200
     else
       render json: "Invalid Login Credentials", status: 401

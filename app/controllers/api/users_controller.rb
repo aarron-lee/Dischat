@@ -5,6 +5,7 @@ class Api::UsersController < ApplicationController
     if( @user.save )
       # success! login the new user
       login(@user)
+      @chatroom_memberships = @user.chatroom_memberships
       render :show
     else
       render json: @user.errors.full_messages, status: 422

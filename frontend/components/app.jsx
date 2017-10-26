@@ -6,6 +6,7 @@ import GreetingContainer from './greeting/greeting_container';
 import AuthRoute from '../util/auth_route';
 import ProtectedRoute from '../util/protected_route';
 import ChatroomsContainer from './chatrooms/chatrooms_container';
+import ChannelsContainer from './channels/channels_container';
 
 const App = () =>{
 
@@ -13,12 +14,12 @@ const App = () =>{
     <div className="app-container">
       <Route exact path="/" component={GreetingContainer} />
       <ProtectedRoute path="/chatrooms/" component={ChatroomsContainer} />
+      <ProtectedRoute path="/chatrooms/:chatroom_id/channels" component={ChannelsContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
     </div>
 
   );
-  // TODO:  <Route path="/chatrooms/:chatroom_id" component={<ul><li>Channel List</li></ul>} />
 
 }
 

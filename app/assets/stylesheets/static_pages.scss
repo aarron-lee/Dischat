@@ -47,3 +47,8 @@ html, body{
   align-items: center;
   -webkit-animation: fadeIn 0.7s;
 }
+
+.app-container{
+  display: flex;
+  flex-direction: row;
+}

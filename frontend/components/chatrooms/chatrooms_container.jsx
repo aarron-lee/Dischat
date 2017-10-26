@@ -38,9 +38,9 @@ class ChatroomList extends React.Component{
         });
       });
       if( nextChatroom.id !== undefined ){
-        this.props.history.push("/chatrooms/"+nextChatroom.id);
+        this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels");
       }else{
-        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id);
+        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id+"/channels");
       }
     }
   }

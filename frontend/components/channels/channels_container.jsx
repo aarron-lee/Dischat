@@ -28,7 +28,7 @@ class ChannelList extends React.Component{
 
     return (
       <div className="channels-container">
-        <div className="chatroom-title">Chatroom Title Goes Here</div>
+        <div className="chatroom-title">{this.props.chatroom.title}</div>
 
         <ul className="channel-list-items">
           <li>
@@ -52,7 +52,11 @@ class ChannelList extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
-  return {};
+  let chatroom = {title: '', id: ''};
+  if(ownProps.match && state.entities.chatrooms[ownProps.match.params.chatroom_id]){
+    chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id];
+  }
+  return { chatroom };
 }
 
 function mapDispatchToProps(dispatch, ownProps){

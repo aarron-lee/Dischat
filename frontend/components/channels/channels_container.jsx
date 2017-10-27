@@ -70,7 +70,6 @@ class ChannelList extends React.Component{
   }// end render
 
   componentWillReceiveProps(newProps){
-    // debugger
     if(this.props.chatroom.id != newProps.chatroom.id){
       this.props.fetchChannels(newProps.chatroom.id)
     }

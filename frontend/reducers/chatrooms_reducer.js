@@ -58,7 +58,7 @@ function chatroomsReducer(state = {}, action){
       chatroomId = action.channel.chatroom_id;
       if( newState[chatroomId] ){
         if( newState[chatroomId].channels ){
-          newState[chatroomId].channels = merge(newState[chatroomId].channels ,action.channel.id);
+          newState[chatroomId].channels.push(action.channel.id);
         }else{
           newState[chatroomId].channels = [action.channel.id]
         }

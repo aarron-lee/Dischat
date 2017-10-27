@@ -3,7 +3,8 @@ import {OPEN_MODAL,
 CLOSE_MODAL} from '../actions/modal_actions';
 import { RECEIVE_CREATE_CHATROOM,
 RECEIVE_JOIN_CHATROOM } from '../actions/chatroom_actions';
-
+import {RECEIVE_CHANNELS,
+RECEIVE_CHANNEL} from '../actions/channel_actions';
 
 const modalsReducer = ( state = null, action) =>{
   switch(action.type){
@@ -15,6 +16,11 @@ const modalsReducer = ( state = null, action) =>{
       return null;
     case RECEIVE_JOIN_CHATROOM:
       return null;
+    case RECEIVE_CHANNEL:
+      if(state){
+        return null;
+      }
+      return state;
     default:
       return state;
   }

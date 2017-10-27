@@ -21,6 +21,9 @@
   justify-content: space-between;
 }
 
+.edit-channel-button{
+  display: none;
+}
 
 .channel-list-items{
   color: rgb(150,150,150);
@@ -32,6 +35,9 @@
   li:hover{
     background-color: #1e2124;
     color: white;
+    .edit-channel-button{
+      display: block;
+    }
   }
 }
 
@@ -42,6 +48,12 @@
   box-sizing: border-box;
   padding: 15px;
   border-top: 2px solid #1e2124;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.channel-list-item{
   display: flex;
   flex-direction: row;
   justify-content: space-between;

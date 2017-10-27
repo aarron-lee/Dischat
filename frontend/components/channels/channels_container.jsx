@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChannels, createChannel } from '../../actions/channel_actions';
+import { getChannels, createChannel, updateChannel } from '../../actions/channel_actions';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import AddChannelForm from './add_channel_form';
+import EditChannelForm from './edit_channel_form';
 
 
 class ChannelList extends React.Component{
@@ -14,6 +15,7 @@ class ChannelList extends React.Component{
     super(props);
 
     this.handleAddChannel =  this.handleAddChannel.bind(this)
+    this.handleEditChannel = this.handleEditChannel.bind(this)
   }
 
 
@@ -28,10 +30,27 @@ class ChannelList extends React.Component{
         </div>);
 
   }
+  editChannelModal(channelId){
+    // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
+    return(
+        <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
+          <EditChannelForm
+            channelId={channelId}
+            chatroom={this.props.chatroom}
+            updateChannel={this.props.updateChannel}
+            errors={this.props.errors} />
+        </div>);
+
+  }
 
   handleAddChannel(event){
     event.preventDefault();
     this.props.openModal("addChannelModal");
+  }
+
+  handleEditChannel(event, channel){
+    event.preventDefault()
+    this.props.openModal("editChannelModal_" + channel.id);
   }
 
 
@@ -41,17 +60,30 @@ class ChannelList extends React.Component{
 
     if (this.props.channels){
       channelComponents = this.props.channels.map( (channel) =>{
-        return <Link key={channel.id} to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
-          <li>
-            # {channel.name}
+        return <li key={channel.id} className="channel-list-item">
+            <Link to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
+                # {channel.name}
+            </Link>
+            <button className="edit-channel-button" onClick={(event) =>{ this.handleEditChannel(event, channel)} }>edit</button>
           </li>
-        </Link>
       });
+    }
+
+    let editChannelTxt = '';
+    let editChannelId = undefined;
+
+    if(this.props.modal){
+      let tmp = this.props.modal.split("_");
+      if(tmp.length ==2 && tmp[0] === "editChannelModal"){
+        editChannelTxt = tmp[0];
+        editChannelId = tmp[1];
+      }
     }
 
     return (
       <div className="channels-container">
         {this.props.modal === "addChannelModal" ? this.formModal() : ''}
+        {editChannelTxt === "editChannelModal" ? this.editChannelModal(editChannelId) : ''}
         <div className="chatroom-title">
           <div>
             {this.props.chatroom.title}
@@ -117,6 +149,7 @@ function mapDispatchToProps(dispatch, ownProps){
     logout: () => dispatch( logout() ),
     fetchChannels: (chatroomId) => dispatch( getChannels(chatroomId) ),
     addChannel: (channel) => dispatch( createChannel(channel) ),
+    updateChannel: (channel) => dispatch( updateChannel(channel)),
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
   };

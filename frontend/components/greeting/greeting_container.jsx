@@ -10,10 +10,7 @@ class Greeting extends React.Component{
   render(){
     if( this.props.currentUser ){
       return (
-        <div>
-          <h2> Hi, {this.props.currentUser.username }</h2>
-          <button onClick={() => this.props.logout()}>Logout</button>
-        </div>
+        <Redirect to="/chatrooms/"/>
       )
     }
 

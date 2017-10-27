@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getChatrooms, joinChatroom, createChatroom } from '../../actions/chatroom_actions';
+import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 
@@ -42,6 +43,11 @@ class ChannelList extends React.Component{
           </li>
         </ul>
 
+        <div className="channel-user-info">
+          <div>{this.props.currentUser ?
+            this.props.currentUser.username : ''}</div>
+          <button onClick={() => this.props.logout()}>Logout</button>
+        </div>
 
       </div>
     );
@@ -56,11 +62,20 @@ function mapStateToProps(state, ownProps){
   if(ownProps.match && state.entities.chatrooms[ownProps.match.params.chatroom_id]){
     chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id];
   }
-  return { chatroom };
+  let currentUser =  undefined ;
+  if( state.session.currentUserId ){
+    // logged in, pass on currentUser
+      currentUser= state.entities.users[state.session.currentUserId];
+  }
+
+  return { chatroom,
+        currentUser };
 }
 
 function mapDispatchToProps(dispatch, ownProps){
-  return {};
+  return {
+    logout: () => dispatch( logout() ),
+  };
 }
 
 

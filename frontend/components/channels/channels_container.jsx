@@ -5,23 +5,33 @@ import { getChannels, createChannel } from '../../actions/channel_actions';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
+import AddChannelForm from './add_channel_form';
 
 
 class ChannelList extends React.Component{
+
+  constructor(props){
+    super(props);
+
+    this.handleAddChannel =  this.handleAddChannel.bind(this)
+  }
 
 
   formModal(){
     // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
     return(
-        <div className="modal-backdrop" onClick={() => this.props.closeModal()}>
-        </div>)
-    ;
+        <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
+          <AddChannelForm
+            chatroom={this.props.chatroom}
+            addChannel={this.props.addChannel}
+            errors={this.props.errors} />
+        </div>);
 
   }
 
   handleAddChannel(event){
     event.preventDefault();
-
+    this.props.openModal("addChannelModal");
   }
 
 
@@ -37,6 +47,7 @@ class ChannelList extends React.Component{
 
     return (
       <div className="channels-container">
+        {this.props.modal === "addChannelModal" ? this.formModal() : ''}
         <div className="chatroom-title">
           <div>
             {this.props.chatroom.title}
@@ -86,10 +97,12 @@ function mapStateToProps(state, ownProps){
     // logged in, pass on currentUser
       currentUser= state.entities.users[state.session.currentUserId];
   }
+  let modal = state.ui.modal;
 
   return { chatroom,
         currentUser,
-        channels };
+        channels,
+        modal };
 }
 
 function mapDispatchToProps(dispatch, ownProps){
@@ -97,6 +110,8 @@ function mapDispatchToProps(dispatch, ownProps){
     logout: () => dispatch( logout() ),
     fetchChannels: (chatroomId) => dispatch( getChannels(chatroomId) ),
     addChannel: (channel) => dispatch( createChannel(channel) ),
+    openModal: (modal) => dispatch( openModal(modal) ),
+    closeModal: () => dispatch( closeModal() ),
   };
 }
 

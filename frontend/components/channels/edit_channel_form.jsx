@@ -8,8 +8,8 @@ class EditChannelModal extends React.Component{
     super(props);
 
     this.state={
-      name: '',
-      description: '',
+      name: this.props.channel.name,
+      description: this.props.channel.description,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,7 +31,7 @@ class EditChannelModal extends React.Component{
 
   handleEdit(event){
     event.preventDefault();
-    let newChannel = { id: this.props.channelId,
+    let newChannel = { id: this.props.channel.id,
       name: this.state.name,
       description: this.state.description }
     this.props.updateChannel(newChannel);

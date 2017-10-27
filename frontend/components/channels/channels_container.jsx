@@ -32,10 +32,11 @@ class ChannelList extends React.Component{
   }
   editChannelModal(channelId){
     // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
+    let channel = this.props.channels.find( (channel) => channel.id == channelId );
     return(
         <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
           <EditChannelForm
-            channelId={channelId}
+            channel={channel}
             chatroom={this.props.chatroom}
             updateChannel={this.props.updateChannel}
             errors={this.props.errors} />

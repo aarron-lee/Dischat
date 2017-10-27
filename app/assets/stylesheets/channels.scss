@@ -16,6 +16,9 @@
   border-bottom: 2px solid black;
   box-sizing: border-box;
   max-width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 

@@ -41,7 +41,11 @@ class ChannelList extends React.Component{
 
     if (this.props.channels){
       channelComponents = this.props.channels.map( (channel) =>{
-        return <li key={channel.id}># {channel.name}</li>
+        return <Link key={channel.id} to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
+          <li>
+            # {channel.name}
+          </li>
+        </Link>
       });
     }
 

@@ -45,6 +45,9 @@ class Api::ChatroomsController < ApplicationController
   end
 
   def show
+    if params[:id].nil?
+      return render json: "Chatroom doesn't exist", status: 400
+    end
     @chatroom = Chatroom.find(params[:id])
 
     if(@chatroom)
@@ -91,6 +94,26 @@ class Api::ChatroomsController < ApplicationController
       render json: "Chatroom does not exist", status: 400
     end
 
+  end
+
+  def channels
+    if( params[:id].nil? )
+      return render json: "Invalid Chatroom", status: 400
+    end
+
+    @chatroom
+    begin
+      @chatroom = Chatroom.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => _invalid
+      return render json: "Chatroom does not exist", status: 400
+    end
+
+    if @chatroom
+      @channels = @chatroom.channels
+      render "/api/channels/index"
+    else
+      render json: "Chatroom does not exist", status: 400
+    end
   end
 
   private

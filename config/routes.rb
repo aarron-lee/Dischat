@@ -11,7 +11,12 @@ Rails.application.routes.draw do
       get 'members', on: :member
       post 'join', on: :member
       post 'join', on: :collection
+
+      get 'channels', on: :member
     end
+
+    resources :channels, only: [:create, :update]
+
 
   end
 

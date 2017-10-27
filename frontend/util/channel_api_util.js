@@ -15,12 +15,7 @@ export const createChannel = (channel) =>{
   return $.ajax({
       method: 'post',
       url: '/api/channels',
-      data: { channel:
-  			{ name: channel.name,
-  			  chatroom_id: channel.chatroom_id,
-  			  description: channel.description
-        }
-      }
+      data: { channel: channel }
     });//end ajax
 }
 
@@ -31,11 +26,6 @@ export const updateChannel = (channel) =>{
   return $.ajax({
       method: 'patch',
       url: '/api/channels/' + channel.id,
-      data: { channel:
-  			{ name: channel.name,
-          description: channel.description,
-          chatroom_id: channel.chatroom_id
-        }
-      }
+      data: { channel: channel }
     });// end ajax
 }

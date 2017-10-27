@@ -36,6 +36,9 @@ function chatroomsReducer(state = {}, action){
 
 
     case RECEIVE_CHANNELS:
+      if(action.channels.length <= 0){
+        return state;
+      }
       newState = merge({}, state);
       chatroomId = action.channels[0].chatroom_id;
       let newChannelIds = action.channels.map( (channel) =>{

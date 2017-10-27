@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChannels } from '../../actions/channel_actions';
+import { getChannels, createChannel } from '../../actions/channel_actions';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
@@ -19,6 +19,11 @@ class ChannelList extends React.Component{
 
   }
 
+  handleAddChannel(event){
+    event.preventDefault();
+
+  }
+
 
 
   render(){
@@ -32,7 +37,12 @@ class ChannelList extends React.Component{
 
     return (
       <div className="channels-container">
-        <div className="chatroom-title">{this.props.chatroom.title}</div>
+        <div className="chatroom-title">
+          <div>
+            {this.props.chatroom.title}
+          </div>
+          <button onClick={this.handleAddChannel}>+</button>
+        </div>
 
         <ul className="channel-list-items">
           {channelComponents}
@@ -86,6 +96,7 @@ function mapDispatchToProps(dispatch, ownProps){
   return {
     logout: () => dispatch( logout() ),
     fetchChannels: (chatroomId) => dispatch( getChannels(chatroomId) ),
+    addChannel: (channel) => dispatch( createChannel(channel) ),
   };
 }
 

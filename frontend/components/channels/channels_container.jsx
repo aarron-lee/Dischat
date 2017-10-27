@@ -79,6 +79,10 @@ class ChannelList extends React.Component{
     }
   }
 
+  componentDidMount(){
+    this.props.fetchChannels(this.props.match.params.chatroom_id)
+  }
+
 }
 
 

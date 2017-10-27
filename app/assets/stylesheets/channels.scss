@@ -41,6 +41,7 @@
   }
 }
 
+
 .channel-user-info{
   position: absolute;
   bottom: 0;
@@ -57,4 +58,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  a{
+    width: 75%;
+    height: 100%;
+  }
 }

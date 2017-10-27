@@ -13,4 +13,8 @@ class Chatroom < ApplicationRecord
   through: :members,
   source: :user
 
+  has_many :channels,
+  foreign_key: :chatroom_id,
+  class_name: :Channel
+
 end

@@ -109,8 +109,23 @@ class ChannelList extends React.Component{
   componentWillReceiveProps(newProps){
     if(this.props.chatroom.id != newProps.chatroom.id){
       this.props.fetchChannels(newProps.chatroom.id)
+    }else{
+      let nextChannel = undefined;
+      if( this.props.chatroom.channels && this.props.chatroom.channels.length < newProps.chatroom.channels.length){
+        newProps.channels.forEach( (channel) =>{
+          this.props.channels.forEach( (c2)=>{
+            if( c2.id !== channel.id){
+              nextChannel = channel;
+            }
+          });
+        });
+      }
+      if(nextChannel){
+        let newPath = this.props.history.location.pathname + nextChannel.id
+        this.props.history.push(newPath)
+      }
     }
-  }
+  }// end componentWillReceiveProps
 
   componentDidMount(){
     this.props.fetchChannels(this.props.match.params.chatroom_id)

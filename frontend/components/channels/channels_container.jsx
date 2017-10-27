@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChatrooms, joinChatroom, createChatroom } from '../../actions/chatroom_actions';
+import { getChannels } from '../../actions/channel_actions';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
@@ -16,31 +16,26 @@ class ChannelList extends React.Component{
         <div className="modal-backdrop" onClick={() => this.props.closeModal()}>
         </div>)
     ;
-    // <AddChatroomForm
-    //   joinChatroom={this.props.joinChatroom}
-    //   createChatroom={this.props.createChatroom}
-    //   errors={this.props.errors}
-    //   />
+
   }
 
 
 
   render(){
+    let channelComponents = [];
+
+    if (this.props.channels){
+      channelComponents = this.props.channels.map( (channel) =>{
+        return <li key={channel.id}># {channel.name}</li>
+      });
+    }
 
     return (
       <div className="channels-container">
         <div className="chatroom-title">{this.props.chatroom.title}</div>
 
         <ul className="channel-list-items">
-          <li>
-            # channel 1
-          </li>
-          <li>
-            # channel 2
-          </li>
-          <li>
-            # channel 3
-          </li>
+          {channelComponents}
         </ul>
 
         <div className="channel-user-info">
@@ -53,15 +48,29 @@ class ChannelList extends React.Component{
     );
   }// end render
 
+  componentWillReceiveProps(newProps){
+    // debugger
+    if(this.props.chatroom.id != newProps.chatroom.id){
+      this.props.fetchChannels(newProps.chatroom.id)
+    }
+  }
+
 }
 
 
 
 function mapStateToProps(state, ownProps){
   let chatroom = {title: '', id: ''};
+  let channels = [];
   if(ownProps.match && state.entities.chatrooms[ownProps.match.params.chatroom_id]){
     chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id];
   }
+  if( chatroom.channels ){
+    chatroom.channels.forEach( (channelId) =>{
+      channels.push( state.entities.channels[channelId] );
+    });
+  };
+
   let currentUser =  undefined ;
   if( state.session.currentUserId ){
     // logged in, pass on currentUser
@@ -69,12 +78,14 @@ function mapStateToProps(state, ownProps){
   }
 
   return { chatroom,
-        currentUser };
+        currentUser,
+        channels };
 }
 
 function mapDispatchToProps(dispatch, ownProps){
   return {
     logout: () => dispatch( logout() ),
+    fetchChannels: (chatroomId) => dispatch( getChannels(chatroomId) ),
   };
 }
 

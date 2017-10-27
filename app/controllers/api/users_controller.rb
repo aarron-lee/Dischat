@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     if( @user.save )
       # success! login the new user
       login(@user)
-      @chatroom_memberships = @user.chatroom_memberships
+      @chatroom_memberships = User.includes(:chatroom_memberships).find(@user.id).chatroom_memberships #@user.chatroom_memberships
       render :show
     else
       render json: @user.errors.full_messages, status: 422
@@ -14,7 +14,8 @@ class Api::UsersController < ApplicationController
 
   def chatrooms
     if (current_user)
-      @chatrooms = current_user.chatroom_memberships
+      @chatrooms = User.includes(:chatroom_memberships, :members).find(current_user.id).chatroom_memberships
+      #current_user.chatroom_memberships
       render "/api/chatrooms/index"
     else
       render json: "Must be logged in", status: 401

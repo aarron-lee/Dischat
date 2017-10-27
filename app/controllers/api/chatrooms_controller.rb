@@ -109,7 +109,7 @@ class Api::ChatroomsController < ApplicationController
     end
 
     if @chatroom
-      @channels = @chatroom.channels
+      @channels = Chatroom.includes(:channels).find(@chatroom.id).channels #@chatroom.channels
       render "/api/channels/index"
     else
       render json: "Chatroom does not exist", status: 400

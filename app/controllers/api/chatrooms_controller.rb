@@ -17,6 +17,8 @@ class Api::ChatroomsController < ApplicationController
         @chatroom.save!
         @member = Member.new( user_id: current_user.id, chatroom_id: @chatroom.id )
         @member.save!
+        @channel = Channel.new( name: "general", chatroom_id: @chatroom.id, description: "")
+        @channel.save!
       end
       render :show, status: 200
     rescue ActiveRecord::RecordInvalid => _invalid

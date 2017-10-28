@@ -31,6 +31,7 @@
   li{
     padding: 10px;
     padding-left: 20px;
+    border-radius: 5px;
   }
   li:hover{
     background-color: #1e2124;
@@ -40,9 +41,8 @@
     }
   }
   li.active-channel{
-    background-color: lighten(#1e2124, 40%);
+    background-color: lighten(#1e2124, 30%);
     color: white;
-    border-radius: 5px;
   }
 }
 

@@ -7,7 +7,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import AddChannelForm from './add_channel_form';
 import EditChannelForm from './edit_channel_form';
-
+import ChannelListItem from './channel_list_item';
 
 class ChannelList extends React.Component{
 
@@ -59,14 +59,26 @@ class ChannelList extends React.Component{
   render(){
     let channelComponents = [];
 
+    // openModal
+    // channel
+    // chatroom
+
     if (this.props.channels){
+      // channelComponents = this.props.channels.map( (channel) =>{
+      //   return <li key={channel.id} className="channel-list-item">
+      //       <Link to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
+      //           # {channel.name}
+      //       </Link>
+      //       <button className="edit-channel-button" onClick={(event) =>{ this.handleEditChannel(event, channel)} }>edit</button>
+      //     </li>
+      // });
       channelComponents = this.props.channels.map( (channel) =>{
-        return <li key={channel.id} className="channel-list-item">
-            <Link to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
-                # {channel.name}
-            </Link>
-            <button className="edit-channel-button" onClick={(event) =>{ this.handleEditChannel(event, channel)} }>edit</button>
-          </li>
+        return <ChannelListItem
+          key={channel.id}
+          channel={channel}
+          chatroom={this.props.chatroom}
+          openModal={this.props.openModal}
+          />
       });
     }
 
@@ -155,10 +167,18 @@ function mapStateToProps(state, ownProps){
   }
   let modal = state.ui.modal;
 
+  let activeChannel = null;
+
+  if( state.ui.activeChannel ){
+    activeChannel = state.ui.activeChannel;
+  }
+
   return { chatroom,
         currentUser,
         channels,
-        modal };
+        modal,
+        activeChannel
+      };
 }
 
 function mapDispatchToProps(dispatch, ownProps){
@@ -169,6 +189,7 @@ function mapDispatchToProps(dispatch, ownProps){
     updateChannel: (channel) => dispatch( updateChannel(channel)),
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
+    changeActiveChannel: (channel) => dispatch( { type: "RECEIEVE_ACTIVE_CHANNEL", channel }),
   };
 }
 

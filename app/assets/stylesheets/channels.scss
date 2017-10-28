@@ -39,6 +39,11 @@
       display: block;
     }
   }
+  li.active-channel{
+    background-color: lighten(#1e2124, 40%);
+    color: white;
+    border-radius: 5px;
+  }
 }
 
 

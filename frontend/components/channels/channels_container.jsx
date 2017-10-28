@@ -59,10 +59,6 @@ class ChannelList extends React.Component{
   render(){
     let channelComponents = [];
 
-    // openModal
-    // channel
-    // chatroom
-
     if (this.props.channels){
       // channelComponents = this.props.channels.map( (channel) =>{
       //   return <li key={channel.id} className="channel-list-item">
@@ -78,6 +74,8 @@ class ChannelList extends React.Component{
           channel={channel}
           chatroom={this.props.chatroom}
           openModal={this.props.openModal}
+          activeChannelId={this.props.activeChannel}
+          changeActiveChannel={this.props.changeActiveChannel}
           />
       });
     }

@@ -13,7 +13,8 @@ const activeChatroomReducer = ( state = null, action) =>{
       return action.chatroom.id;
     case RECEIVE_CHATROOMS:
       if(action.chatrooms[0]){
-        return action.chatrooms[0].id;
+        let ids = Object.values(action.chatrooms).map( (chatroom) => chatroom.id);
+        return ids.sort()[0];
       }
       return null;
     case "RECEIEVE_ACTIVE_CHATROOM":

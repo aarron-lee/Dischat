@@ -1,0 +1,17 @@
+
+.messages-container{
+  background-color: #36393e;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-header{
+  width: 100%;
+  height: 60px;
+  background-color: #2C2F33;
+  padding: 20px;
+  box-sizing: border-box;
+  border-bottom: black 1px solid;
+}

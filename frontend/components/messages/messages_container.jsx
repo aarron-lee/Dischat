@@ -32,9 +32,17 @@ class MessagesList extends React.Component{
   render(){
 
     return (
-      <div>
-        Messages!
-      </div>
+      <section className="messages-container">
+        <div className="messages-header"></div>
+        <div>
+          <div className="messages-list">
+            Messages!
+          </div>
+          <div className="members-list">
+
+          </div>
+        </div>
+      </section>
     );
   }// end render
 

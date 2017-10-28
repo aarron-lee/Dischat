@@ -37,10 +37,14 @@ class ChatroomList extends React.Component{
           }
         });
       });
+      let activeChannelId = '';
+      if(nextProps.activeChannelId){
+        activeChannelId = nextProps.activeChannelId;
+      }
       if( nextChatroom.id !== undefined ){
-        this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels");
+        this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels/"+activeChannelId);
       }else{
-        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id+"/channels");
+        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id+"/channels/"+activeChannelId);
       }
     }
   }
@@ -76,7 +80,8 @@ function mapStateToProps(state, ownProps){
     chatrooms: Object.values(state.entities.chatrooms),
     modal: state.ui.modal,
     errors: state.errors,
-    activeChatroomId: state.ui.activeChatroom
+    activeChatroomId: state.ui.activeChatroom,
+    activeChannelId: state.ui.activeChannel,
   };
 }
 

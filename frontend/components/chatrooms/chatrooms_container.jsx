@@ -26,9 +26,7 @@ class ChatroomList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // debugger
     if( this.props.chatrooms.length < nextProps.chatrooms.length ){
-      // new or join
       let nextChatroom = {};
       nextProps.chatrooms.forEach( (chatroom) =>{
         this.props.chatrooms.forEach( (c2)=>{
@@ -37,6 +35,8 @@ class ChatroomList extends React.Component{
           }
         });
       });
+
+      // if active channel exists for chatroom upon changing chatroom
       let activeChannelId = '';
       if(nextProps.activeChannelId){
         activeChannelId = nextProps.activeChannelId;

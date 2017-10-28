@@ -120,22 +120,40 @@ class ChannelList extends React.Component{
     if(this.props.chatroom.id != newProps.chatroom.id){
       this.props.fetchChannels(newProps.chatroom.id)
     }else{
-      let nextChannel = undefined;
-      if( this.props.chatroom.channels && this.props.chatroom.channels.length < newProps.chatroom.channels.length){
-        newProps.channels.forEach( (channel) =>{
-          this.props.channels.forEach( (c2)=>{
-            if( c2.id !== channel.id){
-              nextChannel = channel;
-            }
-          });
-        });
+      let prefixPath = this.props.match.url;
+      if( prefixPath.charAt(prefixPath.length-1) !== "/" ){
+        prefixPath+="/";
       }
-      if(nextChannel){
-        let newPath = this.props.match.url + "/" + nextChannel.id
+
+      if (newProps.activeChannel && this.props.activeChannel !== newProps.activeChannel){
+        let newPath = prefixPath + newProps.activeChannel
         this.props.history.push(newPath)
       }
+      // else{
+      //   this.loadPathUponLogin(prefixPath, newProps);
+      // }
     }
   }// end componentWillReceiveProps
+
+  // loadPathUponLogin(prefixPath, newProps){
+  //   let nextChannel = undefined;
+  //   if( this.props.chatroom.channels && this.props.chatroom.channels.length < newProps.chatroom.channels.length){
+  //     newProps.channels.forEach( (channel) =>{
+  //       this.props.channels.forEach( (c2)=>{
+  //         if( c2.id !== channel.id){
+  //           nextChannel = channel;
+  //         }
+  //       });
+  //     });
+  //   }
+  //
+  //   if(nextChannel){
+  //     let newPath = prefixPath + nextChannel.id
+  //     debugger
+  //     this.props.history.push(newPath)
+  //   }
+  // }
+
 
   componentDidMount(){
     this.props.fetchChannels(this.props.match.params.chatroom_id)

@@ -121,7 +121,8 @@ class ChannelList extends React.Component{
         });
       }
       if(nextChannel){
-        let newPath = this.props.history.location.pathname + nextChannel.id
+        debugger
+        let newPath = this.props.match.url + "/" + nextChannel.id
         this.props.history.push(newPath)
       }
     }

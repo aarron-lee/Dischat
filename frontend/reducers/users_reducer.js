@@ -32,6 +32,7 @@ function usersReducer(state = {}, action){
          user.chatrooms.push(action.chatroom.id) :
          user.chatrooms = [action.chatroom.id];
       }
+      user.chatrooms = user.chatrooms.sort()
       return newState;
     case RECEIVE_CHATROOMS:
       newState = merge({}, state);
@@ -41,6 +42,7 @@ function usersReducer(state = {}, action){
           return chatroom.id;
         });
       }
+      user.chatrooms = user.chatrooms.sort()
       return newState;
     default:
       return state;

@@ -6,12 +6,28 @@ import { Link, Redirect } from 'react-router-dom';
 
 
 class ChatroomListItem extends React.Component{
+  constructor(props){
+    super(props);
+    this.activeChatroom = this.activeChatroom.bind(this);
+  }
+
+  activeChatroom(event){
+    this.props.changeActiveChatroom(this.props.chatroom);
+  }
 
 
   render(){
+    let activeChatroom = false;
+    if( this.props.chatroom && this.props.chatroom.id ){
+      if( this.props.activeChatroomId === this.props.chatroom.id ){
+        activeChatroom = true;
+      }
+    }
+
     return (
-      <div className="chatroom-list-item-container">
-        <Link className="chatroom-list-item" to={`/chatrooms/${this.props.chatroom.id}/channels/`}>
+      <div className={`chatroom-list-item-container`}>
+        <Link onClick={this.activeChatroom}
+          className={`chatroom-list-item ${ activeChatroom ? 'active-chatroom' : '' }`} to={`/chatrooms/${this.props.chatroom.id}/channels/`}>
           <span >
             {this.props.chatroom.title[0].toUpperCase()}
           </span>

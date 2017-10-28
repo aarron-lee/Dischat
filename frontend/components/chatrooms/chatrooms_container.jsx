@@ -47,7 +47,9 @@ class ChatroomList extends React.Component{
 
   render(){
     const chatroomEls = this.props.chatrooms.map( (chatroom) =>{
-      return <ChatroomListItem chatroom={chatroom} key={chatroom.id}/>
+      return <ChatroomListItem chatroom={chatroom} key={chatroom.id}
+        activeChatroomId={this.props.activeChatroomId}
+        changeActiveChatroom={this.props.changeActiveChatroom}/>
     });
     return (
       <section className="chatroom-container">
@@ -74,6 +76,7 @@ function mapStateToProps(state, ownProps){
     chatrooms: Object.values(state.entities.chatrooms),
     modal: state.ui.modal,
     errors: state.errors,
+    activeChatroomId: state.ui.activeChatroom
   };
 }
 
@@ -84,6 +87,7 @@ function mapDispatchToProps(dispatch, ownProps){
     createChatroom: (chatroom) => dispatch( createChatroom(chatroom) ),
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
+    changeActiveChatroom: (chatroom) => dispatch({type: "RECEIEVE_ACTIVE_CHATROOM", chatroom}),
   };
 }
 

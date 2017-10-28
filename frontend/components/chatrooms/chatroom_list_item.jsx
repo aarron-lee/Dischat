@@ -11,7 +11,10 @@ class ChatroomListItem extends React.Component{
     this.activeChatroom = this.activeChatroom.bind(this);
   }
 
-  activeChatroom(event){
+  activeChatroom(event, activeChatroom){
+    if(activeChatroom){
+      event.preventDefault();
+    }
     this.props.changeActiveChatroom(this.props.chatroom);
   }
 
@@ -26,7 +29,7 @@ class ChatroomListItem extends React.Component{
 
     return (
       <div className={`chatroom-list-item-container`}>
-        <Link onClick={this.activeChatroom}
+        <Link onClick={(event) => this.activeChatroom(event, activeChatroom)}
           className={`chatroom-list-item ${ activeChatroom ? 'active-chatroom' : '' }`} to={`/chatrooms/${this.props.chatroom.id}/channels/`}>
           <span >
             {this.props.chatroom.title[0].toUpperCase()}

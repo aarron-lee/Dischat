@@ -15,3 +15,31 @@
   box-sizing: border-box;
   border-bottom: black 1px solid;
 }
+
+.messages-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.messages-list{
+  width: 80%;
+  box-sizing: border-box;
+}
+
+.members-list{
+  width: 20%;
+}
+
+.messages-channel-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.message-channel-description{
+  margin-left: 5px;
+  padding-left: 5px;
+  border-left: 1px solid lightgray;
+  color: lightgray;
+  font-size: 15px;
+}

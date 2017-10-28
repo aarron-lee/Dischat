@@ -30,17 +30,30 @@ class MessagesList extends React.Component{
 
 
   render(){
+    let channelName = '';
+    let channelDescription = '';
+    if(this.props.channel){
+      channelName = this.props.channel.name;
+      channelDescription = this.props.channel.description;
+    }
 
     return (
       <section className="messages-container">
-        <div className="messages-header"></div>
-        <div>
-          <div className="messages-list">
+        <div className="messages-header">
+          <div className="messages-channel-container">
+            # {channelName}
+            <span className={channelDescription.length ? "message-channel-description" : ''}>
+              {channelDescription}
+            </span>
+          </div>
+        </div>
+        <div className="messages-body">
+          <section className="messages-list">
             Messages!
-          </div>
-          <div className="members-list">
-
-          </div>
+          </section>
+          <section className="members-list">
+            membersList goes here
+          </section>
         </div>
       </section>
     );
@@ -58,10 +71,20 @@ class MessagesList extends React.Component{
 
 
 function mapStateToProps(state, ownProps){
+  // debugger
+  let channel=null;
+  let chatroom=null;
+  if( ownProps.match && ownProps.match.params ){
+    channel = state.entities.channels[ownProps.match.params.channel_id]
+    chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id]
+  }
 
   return {
     modal: state.ui.modal,
-    errors: state.errors,};
+    errors: state.errors,
+    channel,
+    chatroom,
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps){

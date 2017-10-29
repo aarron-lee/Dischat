@@ -16,6 +16,10 @@ class User < ApplicationRecord
   through: :members,
   source: :chatroom
 
+  has_many :messages,
+  foreign_key: :author_id,
+  class_name: :Message
+
 
 #--------------
 

@@ -16,6 +16,8 @@ const activeChannelReducer = ( state = null, action) =>{
         return action.channels[0].id;
       }
       return null;
+    case RECEIVE_JOIN_CHATROOM:
+      return action.chatroom.channels[0];
     default:
       return state;
   }

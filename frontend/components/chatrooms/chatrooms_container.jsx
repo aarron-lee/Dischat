@@ -41,6 +41,7 @@ class ChatroomList extends React.Component{
       if(nextProps.activeChannelId){
         activeChannelId = nextProps.activeChannelId;
       }
+      debugger
       if( nextChatroom.id !== undefined ){
         this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels/"+activeChannelId);
       }else{

@@ -86,7 +86,7 @@ class Api::ChatroomsController < ApplicationController
 
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
-        @chatroom = Chatroom.includes(:members).find(params[:id])
+        @chatroom = Chatroom.includes(:members, :channels).find(params[:id])
         render "/api/chatrooms/join"
       else
         render json: @member.errors.full_messages, status: 400

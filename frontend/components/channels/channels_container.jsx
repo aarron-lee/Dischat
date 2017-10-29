@@ -69,14 +69,18 @@ class ChannelList extends React.Component{
       //     </li>
       // });
       channelComponents = this.props.channels.map( (channel) =>{
-        return <ChannelListItem
-          key={channel.id}
-          channel={channel}
-          chatroom={this.props.chatroom}
-          openModal={this.props.openModal}
-          activeChannelId={this.props.activeChannel}
-          changeActiveChannel={this.props.changeActiveChannel}
-          />
+        if(channel){
+          return <ChannelListItem
+            key={channel.id}
+            channel={channel}
+            chatroom={this.props.chatroom}
+            openModal={this.props.openModal}
+            activeChannelId={this.props.activeChannel}
+            changeActiveChannel={this.props.changeActiveChannel}
+            />
+        }else{
+          return '';
+        }
       });
     }
 
@@ -129,30 +133,30 @@ class ChannelList extends React.Component{
         let newPath = prefixPath + newProps.activeChannel
         this.props.history.push(newPath)
       }
-      // else{
-      //   this.loadPathUponLogin(prefixPath, newProps);
-      // }
+      else{
+        this.loadPathUponLogin(prefixPath, newProps);
+      }
     }
   }// end componentWillReceiveProps
 
-  // loadPathUponLogin(prefixPath, newProps){
-  //   let nextChannel = undefined;
-  //   if( this.props.chatroom.channels && this.props.chatroom.channels.length < newProps.chatroom.channels.length){
-  //     newProps.channels.forEach( (channel) =>{
-  //       this.props.channels.forEach( (c2)=>{
-  //         if( c2.id !== channel.id){
-  //           nextChannel = channel;
-  //         }
-  //       });
-  //     });
-  //   }
-  //
-  //   if(nextChannel){
-  //     let newPath = prefixPath + nextChannel.id
-  //     debugger
-  //     this.props.history.push(newPath)
-  //   }
-  // }
+  loadPathUponLogin(prefixPath, newProps){
+    let nextChannel = undefined;
+    if( this.props.chatroom.channels && this.props.chatroom.channels.length < newProps.chatroom.channels.length){
+      newProps.channels.forEach( (channel) =>{
+        this.props.channels.forEach( (c2)=>{
+          if( c2.id !== channel.id){
+            nextChannel = channel;
+          }
+        });
+      });
+    }
+
+    if(nextChannel){
+      let newPath = prefixPath + nextChannel.id
+      debugger
+      this.props.history.push(newPath)
+    }
+  }
 
 
   componentDidMount(){

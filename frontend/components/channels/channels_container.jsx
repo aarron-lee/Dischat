@@ -153,7 +153,6 @@ class ChannelList extends React.Component{
 
     if(nextChannel){
       let newPath = prefixPath + nextChannel.id
-      debugger
       this.props.history.push(newPath)
     }
   }

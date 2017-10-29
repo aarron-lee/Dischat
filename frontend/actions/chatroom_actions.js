@@ -9,10 +9,10 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const RECEIVE_JOIN_CHATROOM = "RECEIVE_JOIN_CHATROOM";
 
 // members for chatroom
-export const receiveChatroomMembers = (members) =>{
+export const receiveChatroomMembers = ({users}) =>{
   return {
     type: RECEIVE_CHATROOM_MEMBERS,
-    members
+    members: users
   };
 };
 

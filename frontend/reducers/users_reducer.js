@@ -3,7 +3,8 @@ import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 import merge from 'lodash/merge';
 import {RECEIVE_CREATE_CHATROOM,
         RECEIVE_JOIN_CHATROOM,
-        RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
+        RECEIVE_CHATROOMS,
+        RECEIVE_CHATROOM_MEMBERS} from '../actions/chatroom_actions';
 
 
 
@@ -44,6 +45,8 @@ function usersReducer(state = {}, action){
       }
       user.chatrooms = user.chatrooms.sort()
       return newState;
+    case RECEIVE_CHATROOM_MEMBERS:
+      return merge({}, state, action.members);
     default:
       return state;
   }// end switch

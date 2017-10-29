@@ -25,23 +25,32 @@ class ChatroomList extends React.Component{
     ;
   }
 
+  getNextChatroom(oldChatrooms, newChatrooms){
+    let nextChatroom = {};
+
+    let currentChatroomIds = oldChatrooms.map( (chatroom) => chatroom.id );
+    let nextChatroomIds = newChatrooms.map( (chatroom) => chatroom.id );
+
+    let nextChatroomId = nextChatroomIds.filter(e => !currentChatroomIds.includes(e))[0];
+
+    for( let i = 0; i < newChatrooms.length; i++ ){
+      if (newChatrooms[i].id === nextChatroomId){
+        nextChatroom = newChatrooms[i];
+        i = newChatrooms.length+1;
+      }
+    }
+    return nextChatroom;
+  }
+
   componentWillReceiveProps(nextProps){
     if( this.props.chatrooms.length < nextProps.chatrooms.length ){
-      let nextChatroom = {};
-      nextProps.chatrooms.forEach( (chatroom) =>{
-        this.props.chatrooms.forEach( (c2)=>{
-          if( c2.id !== chatroom.id){
-            nextChatroom = chatroom;
-          }
-        });
-      });
+      let nextChatroom = this.getNextChatroom( this.props.chatrooms, nextProps.chatrooms);
 
       // if active channel exists for chatroom upon changing chatroom
       let activeChannelId = '';
       if(nextProps.activeChannelId){
         activeChannelId = nextProps.activeChannelId;
       }
-      debugger
       if( nextChatroom.id !== undefined ){
         this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels/"+activeChannelId);
       }else{

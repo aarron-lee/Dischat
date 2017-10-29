@@ -21,6 +21,11 @@ function channelsReducer(state = {}, action){
     case RECEIVE_JOIN_CHATROOM:
       let channels = action.channels
       return merge(newState, channels )
+    case RECEIVE_CURRENT_USER:
+        if (! action.user ){
+          return {};
+        }
+        return state;
     default:
       return state;
   }// end switch

@@ -4,6 +4,7 @@ RECEIVE_CHANNEL} from '../actions/channel_actions';
 import {RECEIVE_CREATE_CHATROOM,
         RECEIVE_JOIN_CHATROOM,
         RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
+  import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 
 const activeChatroomReducer = ( state = null, action) =>{
   switch(action.type){
@@ -19,7 +20,11 @@ const activeChatroomReducer = ( state = null, action) =>{
       return null;
     case "RECEIEVE_ACTIVE_CHATROOM":
       return action.chatroom.id
-
+    case RECEIVE_CURRENT_USER:
+      if (! action.user ){
+        return null;
+      }
+      return state;
     default:
       return state;
   }

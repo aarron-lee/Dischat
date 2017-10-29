@@ -86,6 +86,12 @@ class Api::ChatroomsController < ApplicationController
 
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
+
+        Pusher.trigger('member_' + @chatroom.id.to_s, 'member_joined', {
+          username: current_user.username,
+          id: current_user.id
+        })
+
         @chatroom = Chatroom.includes(:members, :channels).find(params[:id])
         render "/api/chatrooms/join"
       else

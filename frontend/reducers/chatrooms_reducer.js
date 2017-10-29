@@ -1,7 +1,8 @@
 
 import {RECEIVE_CREATE_CHATROOM,
         RECEIVE_JOIN_CHATROOM,
-        RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
+        RECEIVE_CHATROOMS,
+      } from '../actions/chatroom_actions';
 import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 import {RECEIVE_CHANNELS,
 RECEIVE_CHANNEL} from '../actions/channel_actions';
@@ -65,6 +66,10 @@ function chatroomsReducer(state = {}, action){
           newState[chatroomId].channels = [action.channel.id]
         }
       }
+      return newState;
+    case "RECEIVE_NEW_MEMBER":
+      newState = merge({}, state);
+      newState[action.chatroomId].members.push(action.member.id);
       return newState;
 
     default:

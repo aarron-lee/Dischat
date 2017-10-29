@@ -47,6 +47,8 @@ function usersReducer(state = {}, action){
       return newState;
     case RECEIVE_CHATROOM_MEMBERS:
       return merge({}, state, action.members);
+    case "RECEIVE_NEW_MEMBER":
+      return merge({}, state, { [action.member.id] : action.member });
     default:
       return state;
   }// end switch

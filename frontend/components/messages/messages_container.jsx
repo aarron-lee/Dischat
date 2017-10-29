@@ -1,4 +1,4 @@
-
+/* globals Pusher */
 import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
@@ -74,6 +74,27 @@ class MessagesList extends React.Component{
     // grab members based on memberlist
     if( this.props.chatroom){
       this.props.getMembers(this.props.chatroom.id);
+
+      this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        cluster: 'us2',
+        encrypted: true
+      });
+
+      let updateMemberAction = this.props.updateMember;
+      let cID = this.props.chatroom.id;
+
+      var channel = this.pusher.subscribe('member_' + this.props.chatroom.id);
+      channel.bind('member_joined', function(data) {
+        updateMemberAction(data, cID)
+      });
+
+    }// end this.props.chatroom
+
+  }
+
+  componentWillUnmount(){
+    if(this.pusher){
+      this.pusher.unsubscribe('member_' + this.props.chatroom.id);
     }
   }
 
@@ -111,7 +132,8 @@ function mapDispatchToProps(dispatch, ownProps){
   return {
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
-    getMembers: (chatroomId) => dispatch( getMembers(chatroomId) )
+    getMembers: (chatroomId) => dispatch( getMembers(chatroomId) ),
+    updateMember: (member, chatroomId) => dispatch({type: "RECEIVE_NEW_MEMBER", member: member, chatroomId: chatroomId}),
   };
 }
 

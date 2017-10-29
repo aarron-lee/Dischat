@@ -5,6 +5,7 @@ import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import { getMembers } from '../../actions/chatroom_actions';
+import UserList from "../users/user_list";
 
 class MessagesList extends React.Component{
 
@@ -58,8 +59,10 @@ class MessagesList extends React.Component{
             Messages!
           </section>
           <section className="members-list">
-            Members: {this.props.members.length}
-            <ul>{membersList}</ul>
+            <div className="members-list-title">
+              MEMBERS - {this.props.members.length}
+            </div>
+            <UserList users={this.props.members} />
           </section>
         </div>
       </section>

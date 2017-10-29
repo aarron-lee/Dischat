@@ -1,0 +1,23 @@
+// Place all the styles related to the api/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.users-list li{
+  margin: 2px;
+  padding: 3px;
+}
+
+.members-list{
+  width: 20%;
+  height: 100%;
+  padding: 20px;
+  background-color: #2e3135;
+}
+
+
+.members-list-title{
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: lightgray;
+}

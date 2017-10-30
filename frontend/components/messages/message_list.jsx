@@ -1,4 +1,3 @@
-/* globals Pusher */
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -73,6 +72,7 @@ class MessageList extends React.Component{
       </div>
     );
   }// end render
+
 
   componentDidUpdate(){
     let overflowMessages = document.getElementById('message-overflow');

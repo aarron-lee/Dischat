@@ -12,6 +12,15 @@ class Api::MessagesController < ApplicationController
 
     if(@message.save)
       # TODO: websockets
+      Pusher.trigger('channel_messages_' + @message.channel_id.to_s,
+        'message_published', {
+          id: @message.id,
+          author_id: @message.author_id,
+          channel_id: @message.channel_id,
+          body: @message.body,
+          created_at: @message.created_at
+        })
+
       render :show
     else
       render json: @message.errors.full_messages , status: 422

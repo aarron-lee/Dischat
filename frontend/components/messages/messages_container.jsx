@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router-dom';
-import { getMessages, createMessage } from '../../actions/message_actions';
+import { getMessages, createMessage, receiveMessage } from '../../actions/message_actions';
 import MembersList from "./members_container";
 import MessageList from "./message_list";
 
@@ -78,6 +78,19 @@ class MessagesList extends React.Component{
     if(this.props.channel === undefined && nextProps.channel ){
       // after refresh page
       this.props.getMessages(nextProps.channel.id);
+
+      // subscribe to websocket
+      this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        cluster: 'us2',
+        encrypted: true
+      });
+      var channel = this.pusher.subscribe('channel_messages_' + nextProps.channel.id);
+      channel.bind('message_published', function(data) {
+        if(nextProps.currentUserId !== data.author_id){
+          nextProps.receiveMessage(data);
+        }
+      });
+
     }
     else if(
       this.props.channel.chatroom_id === nextProps.channel.chatroom_id &&
@@ -85,6 +98,24 @@ class MessagesList extends React.Component{
     ){
       // change between channels
       this.props.getMessages(nextProps.channel.id);
+
+      // unsubscribe to previous websocket
+      if(this.pusher){
+        this.pusher.unsubscribe('channel_messages_' + this.props.channel.id);
+      }
+
+      // subscribe to next websocket
+      this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        cluster: 'us2',
+        encrypted: true
+      });
+      var channel = this.pusher.subscribe('channel_messages_' + nextProps.channel.id);
+      channel.bind('message_published', function(data) {
+        if(nextProps.currentUserId !== data.author_id){
+          nextProps.receiveMessage(data);
+        }
+      });
+
     }
 
   }// end componentWillReceiveProps
@@ -117,6 +148,7 @@ function mapStateToProps(state, ownProps){
       messages.push(state.entities.messages[messageId]);
     });
   }
+  let currentUserId = state.session.currentUserId;
 
   return {
     modal: state.ui.modal,
@@ -125,6 +157,7 @@ function mapStateToProps(state, ownProps){
     chatroom,
     messages,
     users: state.entities.users,
+    currentUserId
   };
 }
 
@@ -133,6 +166,7 @@ function mapDispatchToProps(dispatch, ownProps){
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
     getMessages: (channelId) => dispatch( getMessages(channelId) ),
+    receiveMessage: (message) => dispatch( receiveMessage(message) ),
     createMessage: (message) => dispatch( createMessage(message) ),
   };
 }

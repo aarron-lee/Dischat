@@ -66,6 +66,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  button{
+    position: relative;
+  }
 }
 
 .channel-list-item{
@@ -77,4 +80,56 @@
     height: 100%;
     display: flex;
   }
+}
+
+.channel-user-info button:hover{
+  .logout-info-bubble{
+    display: block;
+  }
+}
+
+
+/* ------------------------------------------
+PURE CSS SPEECH BUBBLES
+by Nicolas Gallagher
+- http://nicolasgallagher.com/pure-css-speech-bubbles/
+http://nicolasgallagher.com
+http://twitter.com/necolas
+Created: 02 March 2010
+Version: 1.2 (03 March 2011)
+Dual licensed under MIT and GNU GPLv2 Nicolas Gallagher
+------------------------------------------ */
+
+
+.logout-info-bubble {
+  position: absolute;
+  display: none;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  color:black;
+  background:#fff;
+  padding: 10px;
+  border-radius:10px;
+  top: -43px;
+  right: -59px;
+  width: 120px;
+  z-index: 1;
+  -webkit-animation: bubble-fadein .3s;
+  animation: bubble-fadein .3s;
+}
+
+.logout-info-bubble:before {
+  content:"";
+  position:absolute;
+  top:35px;
+  right:60px;
+  bottom:auto;
+  left:auto;
+  border-width: 7px 7px 0px 7px;
+  border-style:solid;
+  border-color:#fff transparent;
+  display:block;
+  width:0;
+  z-index: 1;
 }

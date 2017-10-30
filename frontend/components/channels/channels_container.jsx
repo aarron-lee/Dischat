@@ -109,9 +109,9 @@ class ChannelList extends React.Component{
         {this.props.modal === "addChannelModal" ? this.formModal() : ''}
         {editChannelTxt === "editChannelModal" ? this.editChannelModal(editChannelId) : ''}
         <div className="chatroom-title">
-          <div>
+          <span>
             {this.props.chatroom.title}
-          </div>
+          </span>
           <button onClick={this.handleAddChannel}>{this.getTitleArrow()}</button>
         </div>
 

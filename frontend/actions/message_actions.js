@@ -30,16 +30,11 @@ export const receiveDeleteMessage = (message) =>{
 
 // thunks -----------------
 
-// getMessages
-// createMessage
-// updateMessage
-// deleteMessage
-
 export const getMessages = (channelId) =>{
   return (dispatch)=>{
     let success = (payload) => dispatch(receiveMessages(payload.messages));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
-    return MessageAPIUtil.getMessages(channelId).next(
+    return MessageAPIUtil.getMessages(channelId).then(
       success,
       failure
     );
@@ -50,7 +45,7 @@ export const createMessage = (message) =>{
   return (dispatch)=>{
     let success = (message) => dispatch(receiveMessage(message));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
-    return MessageAPIUtil.createMessage(message).next(
+    return MessageAPIUtil.createMessage(message).then(
       success,
       failure
     );
@@ -61,7 +56,7 @@ export const updateMessage = (message) =>{
   return (dispatch)=>{
     let success = (message) => dispatch(receiveMessage(message));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
-    return MessageAPIUtil.updateMessage(message).next(
+    return MessageAPIUtil.updateMessage(message).then(
       success,
       failure
     );
@@ -72,29 +67,9 @@ export const deleteMessage = (messageId) =>{
   return (dispatch)=>{
     let success = (message) => dispatch(receiveDeleteMessage(message));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
-    return MessageAPIUtil.deleteMessage(messageId).next(
+    return MessageAPIUtil.deleteMessage(messageId).then(
       success,
       failure
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//

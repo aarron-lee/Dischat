@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:create, :update, :destroy]
 
-    resources :channels, only: [:create, :update]
+    resources :channels, only: [:create, :update] do
+      get 'messages', on: :member
+    end
 
 
   end

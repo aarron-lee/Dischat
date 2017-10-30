@@ -33,6 +33,27 @@ class Api::ChannelsController < ApplicationController
     end
   end
 
+  def messages
+
+    if( params[:id].nil? )
+      return render json: "Invalid Channel", status: 400
+    end
+
+    @channel
+    begin
+      @channel = Channel.includes(:messages).find(params[:id])
+    rescue ActiveRecord::RecordNotFound => _invalid
+      return render json: "Channel does not exist", status: 400
+    end
+
+    if(@channel)
+      render json: @channel.messages, status: 200
+    else
+      render json: "Chatroom does not exist", status: 400
+    end
+
+  end
+
   private
 
   def channel_params

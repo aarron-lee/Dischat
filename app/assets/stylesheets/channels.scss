@@ -13,7 +13,7 @@
 .chatroom-title{
   padding: 20px;
   width: 100%;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   box-sizing: border-box;
   max-width: 250px;
   display: flex;
@@ -30,18 +30,20 @@
   margin: 10px 10px;
   li{
     padding: 10px;
+    margin: 3px;
     padding-left: 20px;
     border-radius: 5px;
   }
   li:hover{
-    background-color: #1e2124;
+    background-color: rgba(79, 84, 92, 0.2);
     color: white;
     .edit-channel-button{
       display: block;
+      height: 12px;
     }
   }
   li.active-channel{
-    background-color: lighten(#1e2124, 30%);
+    background-color: #43474d;
     color: white;
   }
 }

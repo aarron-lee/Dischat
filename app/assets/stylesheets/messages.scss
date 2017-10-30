@@ -59,6 +59,9 @@
   justify-content: space-between;
   padding: 10px;
   border-radius: 6px;
+  input{
+    width: 90%;
+  }
 }
 
 
@@ -92,8 +95,10 @@
 }
 
 .message-portrait{
-  width: 45px;
-  height: 45px;
+  min-width: 45px;
+  min-height: 45px;
+  max-width: 45px;
+  max-height: 45px;
   background-color: blue;
   border-radius: 50%;
   margin-right: 15px;

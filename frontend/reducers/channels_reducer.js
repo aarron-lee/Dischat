@@ -30,17 +30,23 @@ function channelsReducer(state = {}, action){
 
     case RECEIVE_MESSAGES:
       let messageIds = Object.keys(action.messages);
+      if(messageIds.length === 0){
+        return state;
+      }
       if( action.messages && messageIds.length > 0){
         currentChannel = newState[action.messages[messageIds[0]].channel_id]
       }
       if(currentChannel){
         currentChannel.messages = currentChannel.messages
-        ? currentChannel.messages.concat( messageIds ) :
+        ?  messageIds :
         messageIds;
       }
       return merge(newState, { [currentChannel.id] : currentChannel});
 
     case RECEIVE_MESSAGE:
+      if(!action.message){
+        return state;
+      }
 
       if( action.message && action.message.id ){
         currentChannel = newState[action.message.channel_id]

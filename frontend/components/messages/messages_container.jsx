@@ -3,8 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import { Link, Redirect, withRouter } from 'react-router-dom';
-import { getMembers } from '../../actions/chatroom_actions';
+import { withRouter } from 'react-router-dom';
+import { getMessages, createMessage } from '../../actions/message_actions';
 import MembersList from "./members_container";
 
 class MessagesList extends React.Component{
@@ -12,6 +12,22 @@ class MessagesList extends React.Component{
   constructor(props){
     super(props);
 
+    this.state = {
+      body: ''
+    }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBody = this.handleBody.bind(this);
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    this.props.createMessage({ body: this.state.body, channel_id: this.props.channel.id });
+    this.setState({body: ''});
+  }
+
+  handleBody(event){
+    this.setState({body: event.target.value});
   }
 
 
@@ -44,6 +60,9 @@ class MessagesList extends React.Component{
       channelName = this.props.channel.name;
       channelDescription = this.props.channel.description;
     }
+    let messageEls = this.props.messages.map((message) =>{
+      return <li key={message.id}>{message.body}</li>
+    });
 
     return (
       <section className="messages-container">
@@ -59,7 +78,15 @@ class MessagesList extends React.Component{
         </div>
         <div className="messages-body">
           <section className="messages-list">
-            Messages!
+            <ul>
+              {messageEls}
+            </ul>
+
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleBody} value={this.state.body}/>
+              <button>Post</button>
+            </form>
+
           </section>
           <MembersList />
         </div>
@@ -67,17 +94,28 @@ class MessagesList extends React.Component{
     );
   }// end render
 
-  componentWillReceiveProps(newProps){
+  componentWillReceiveProps(nextProps){
+
+
+    if(this.props.channel === undefined && nextProps.channel ){
+      this.props.getMessages(nextProps.channel.id);
+    }
+    else if(
+      this.props.channel.chatroom_id === nextProps.channel.chatroom_id &&
+      this.props.channel.id !== nextProps.channel.id
+    ){
+      this.props.getMessages(nextProps.channel.id);
+    }
 
   }// end componentWillReceiveProps
 
   componentDidMount(){
-
-
+    if(this.props.channel){
+      this.props.getMessages(this.props.channel.id);
+    }
   }
 
   componentWillUnmount(){
-
   }
 
 }
@@ -91,12 +129,21 @@ function mapStateToProps(state, ownProps){
     channel = state.entities.channels[ownProps.match.params.channel_id]
     chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id]
   }
+  let messages = [];
+
+  if( channel && channel.messages ){
+    channel.messages.forEach((messageId) =>{
+      messages.push(state.entities.messages[messageId]);
+    });
+  }
 
   return {
     modal: state.ui.modal,
     errors: state.errors,
     channel,
     chatroom,
+    messages,
+    users: state.entities.users,
   };
 }
 
@@ -104,6 +151,8 @@ function mapDispatchToProps(dispatch, ownProps){
   return {
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
+    getMessages: (channelId) => dispatch( getMessages(channelId) ),
+    createMessage: (message) => dispatch( createMessage(message) ),
   };
 }
 

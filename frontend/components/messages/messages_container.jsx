@@ -6,30 +6,14 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router-dom';
 import { getMessages, createMessage } from '../../actions/message_actions';
 import MembersList from "./members_container";
+import MessageList from "./message_list";
 
 class MessagesList extends React.Component{
 
   constructor(props){
     super(props);
 
-    this.state = {
-      body: ''
-    }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleBody = this.handleBody.bind(this);
   }
-
-  handleSubmit(event){
-    event.preventDefault();
-    this.props.createMessage({ body: this.state.body, channel_id: this.props.channel.id });
-    this.setState({body: ''});
-  }
-
-  handleBody(event){
-    this.setState({body: event.target.value});
-  }
-
 
   formModal(){
     // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
@@ -60,9 +44,7 @@ class MessagesList extends React.Component{
       channelName = this.props.channel.name;
       channelDescription = this.props.channel.description;
     }
-    let messageEls = this.props.messages.map((message) =>{
-      return <li key={message.id}>{message.body}</li>
-    });
+
 
     return (
       <section className="messages-container">
@@ -77,15 +59,11 @@ class MessagesList extends React.Component{
           </div>
         </div>
         <div className="messages-body">
-          <section className="messages-list">
-            <ul>
-              {messageEls}
-            </ul>
-
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" onChange={this.handleBody} value={this.state.body}/>
-              <button>Post</button>
-            </form>
+          <section className="messages-list-section">
+            <MessageList messages={this.props.messages}
+              users={this.props.users}
+              createMessage={this.props.createMessage}
+              channel={this.props.channel}/>
 
           </section>
           <MembersList />

@@ -27,10 +27,7 @@
   height: 100%;
 }
 
-.messages-list{
-  width: 80%;
-  box-sizing: border-box;
-}
+
 
 
 
@@ -45,4 +42,77 @@
   border-left: 0.5px solid darken(lightgray, 25%);
   color: darken(lightgray, 25%);
   font-size: 15px;
+}
+
+.messages-list-section{
+  width: 100%;
+}
+
+// messages form
+
+.message-create-form{
+  position: absolute;
+  background-color: #494c52;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+
+
+// messages body--------------------------
+
+.messages-list{
+  margin-top: 5px;
+  margin-left: 25px;
+  margin-bottom: -5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 25px;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 90px;
+  position: relative;
+  box-sizing: border-box;
+
+}
+
+
+.message-item{
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+.message-portrait{
+  width: 45px;
+  height: 45px;
+  background-color: blue;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.message-content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message-date{
+  font-size: 10px;
+  color: lightgray;
+  display: inline;
+  margin-left: 10px;
+}
+
+.message-body{
+  padding-top: 2px;
+  word-wrap: break-word;
 }

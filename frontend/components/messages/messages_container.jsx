@@ -98,12 +98,14 @@ class MessagesList extends React.Component{
 
 
     if(this.props.channel === undefined && nextProps.channel ){
+      // after refresh page
       this.props.getMessages(nextProps.channel.id);
     }
     else if(
       this.props.channel.chatroom_id === nextProps.channel.chatroom_id &&
       this.props.channel.id !== nextProps.channel.id
     ){
+      // change between channels
       this.props.getMessages(nextProps.channel.id);
     }
 
@@ -111,6 +113,7 @@ class MessagesList extends React.Component{
 
   componentDidMount(){
     if(this.props.channel){
+      // loaded for first time
       this.props.getMessages(this.props.channel.id);
     }
   }

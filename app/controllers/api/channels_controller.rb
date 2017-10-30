@@ -47,7 +47,7 @@ class Api::ChannelsController < ApplicationController
     end
 
     if(@channel)
-      render json: @channel.messages, status: 200
+      render :messages, status: 200
     else
       render json: "Chatroom does not exist", status: 400
     end

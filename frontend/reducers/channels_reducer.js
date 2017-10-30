@@ -50,7 +50,6 @@ function channelsReducer(state = {}, action){
         ? currentChannel.messages.concat( action.message.id.toString() ) :
         [action.message.id.toString()];
       }
-      debugger
       return merge(newState, { [currentChannel.id] : currentChannel});
 
 

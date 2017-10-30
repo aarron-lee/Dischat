@@ -57,9 +57,9 @@ class ChannelList extends React.Component{
   getTitleArrow(){
     return (
       <svg width="18" height="9">
-        <g fill="none" fill-rule="evenodd">
-      <path stroke="#FFF" d="M4.5 4.5l9 9" stroke-linecap="round"></path>
-      <path stroke="#FFF" d="M13.5 4.5l-9 9" stroke-linecap="round"></path>
+        <g>
+      <path stroke="#FFF" d="M4.5 4.5l9 9" ></path>
+      <path stroke="#FFF" d="M13.5 4.5l-9 9" ></path>
       </g>
       </svg>);
   }

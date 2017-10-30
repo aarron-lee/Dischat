@@ -20,7 +20,7 @@ export const receiveMessage = (message)=>{
   }
 }
 
-export const deleteMessage = (message) =>{
+export const receiveDeleteMessage = (message) =>{
   return {
     type: DELETE_MESSAGE,
     messageId: message.id
@@ -37,7 +37,7 @@ export const deleteMessage = (message) =>{
 
 export const getMessages = (channelId) =>{
   return (dispatch)=>{
-    let success = (messages) => dispatch(receiveMessages(messages));
+    let success = (payload) => dispatch(receiveMessages(payload.messages));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
     return MessageAPIUtil.getMessages(channelId).next(
       success,
@@ -70,7 +70,7 @@ export const updateMessage = (message) =>{
 
 export const deleteMessage = (messageId) =>{
   return (dispatch)=>{
-    let success = (message) => dispatch(deleteMessage(message));
+    let success = (message) => dispatch(receiveDeleteMessage(message));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
     return MessageAPIUtil.deleteMessage(messageId).next(
       success,

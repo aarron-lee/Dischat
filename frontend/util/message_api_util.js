@@ -13,7 +13,7 @@ export const createMessage = (message) =>{
   return $.ajax({
     method: 'post',
     url: '/api/messages',
-    data: { message: }
+    data: { message }
   });
 } // returns { id: 6...etc }, actual message obj
 

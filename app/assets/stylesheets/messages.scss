@@ -14,7 +14,7 @@
   padding-left: 12px;
   padding-right: 8px;
   box-sizing: border-box;
-  border-bottom: black 1px solid;
+  border-bottom: lighten(black, 15%) 1px solid;
   display: flex;
   align-items: center;
 }

@@ -54,20 +54,22 @@ class ChannelList extends React.Component{
     this.props.openModal("editChannelModal_" + channel.id);
   }
 
+  getTitleArrow(){
+    return (
+      <svg width="18" height="9">
+        <g fill="none" fill-rule="evenodd">
+      <path stroke="#FFF" d="M4.5 4.5l9 9" stroke-linecap="round"></path>
+      <path stroke="#FFF" d="M13.5 4.5l-9 9" stroke-linecap="round"></path>
+      </g>
+      </svg>);
+  }
+
 
 
   render(){
     let channelComponents = [];
 
     if (this.props.channels){
-      // channelComponents = this.props.channels.map( (channel) =>{
-      //   return <li key={channel.id} className="channel-list-item">
-      //       <Link to={`/chatrooms/${this.props.chatroom.id}/channels/${channel.id}`}>
-      //           # {channel.name}
-      //       </Link>
-      //       <button className="edit-channel-button" onClick={(event) =>{ this.handleEditChannel(event, channel)} }>edit</button>
-      //     </li>
-      // });
       channelComponents = this.props.channels.map( (channel) =>{
         if(channel){
           return <ChannelListItem
@@ -103,7 +105,7 @@ class ChannelList extends React.Component{
           <div>
             {this.props.chatroom.title}
           </div>
-          <button onClick={this.handleAddChannel}>+</button>
+          <button onClick={this.handleAddChannel}>{this.getTitleArrow()}</button>
         </div>
 
         <ul className="channel-list-items">

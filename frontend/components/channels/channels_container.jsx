@@ -150,11 +150,13 @@ class ChannelList extends React.Component{
     let receiveSingleChannel = this.props.receiveChannel;
     let currentUserId = this.props.currentUser.id;
     let props = this.props;
+    let pus = this.pusher;
 
     let channel = this.pusher.subscribe('channels_for_' + newChatroomId);
     channel.bind('channel_created', function(data) {
       receiveSingleChannel(data);
       if(data.currentUserId == currentUserId){
+        pus.unsubscribe('member_' + props.chatroom.id);
         props.history.push("/chatrooms/"+data.chatroom_id+"/channels/"+data.id+"/messages");
       }
     });

@@ -74,21 +74,50 @@ class MessagesList extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
-    // debugger
     if(this.props.match && (this.props.match.params.channel_id !== nextProps.match.params.channel_id)){
       this.props.getMessages(nextProps.match.params.channel_id);
+      if(this.pusher){
+        this.pusher.unsubscribe('channel_messages_' + this.props.match.params.channel_id);
+      }
+      let receiveSingleMessage = this.props.receiveMessage;
+      let current_user_id = this.props.currentUserId;
+
+      let channel = this.pusher.subscribe('channel_messages_' + nextProps.match.params.channel_id);
+      channel.bind('message_published', function(data) {
+        if(data.author_id !== current_user_id){
+          receiveSingleMessage(data);
+        }
+      });
     }
 
   }// end componentWillReceiveProps
 
   componentDidMount(){
-    // debugger
     if(this.props.match && this.props.match.params.channel_id){
       this.props.getMessages(this.props.match.params.channel_id);
+
+      if(!this.pusher){
+        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+          cluster: 'us2',
+          encrypted: true
+        });
+      }
+      let receiveSingleMessage = this.props.receiveMessage;
+      let current_user_id = this.props.currentUserId;
+      let channel = this.pusher.subscribe('channel_messages_' + this.props.match.params.channel_id);
+      channel.bind('message_published', function(data) {
+          if(data.author_id !== current_user_id){
+            receiveSingleMessage(data);
+          }
+      });
+
     }
   }
 
   componentWillUnmount(){
+    if(this.pusher){
+      this.pusher.unsubscribe('channel_messages_' + this.props.channel.id);
+    }
   }
 
 }

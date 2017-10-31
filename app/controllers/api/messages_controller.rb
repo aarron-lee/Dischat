@@ -11,7 +11,6 @@ class Api::MessagesController < ApplicationController
     @message.author_id = current_user.id
 
     if(@message.save)
-      # TODO: websockets
       Pusher.trigger('channel_messages_' + @message.channel_id.to_s,
         'message_published', {
           id: @message.id,

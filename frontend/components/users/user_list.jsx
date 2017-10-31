@@ -11,7 +11,9 @@ render(){
   let userElements = users.map( user =>{
     if(user && user.id){
       return <li key={`member-${user.id}`}>
-        {user.username}
+        <div className="userlist-item">
+          <div className='members-portrait default-portrait'></div><span>{user.username}</span>
+        </div>
       </li>
     }
   });

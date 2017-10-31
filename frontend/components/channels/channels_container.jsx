@@ -146,6 +146,11 @@ class ChannelList extends React.Component{
       let newChannelId = newProps.channels[0].id;
       newProps.history.push("/chatrooms/"+newProps.chatroom.id+"/channels/"+newChannelId+"/messages");
     }
+    if (oldChannelId !== "@channels" && (newProps.channels.length-this.props.channels.length) === 1){
+      // new channel has been added
+      let newChannel = newProps.channels[newProps.channels.length-1];
+      newProps.history.push("/chatrooms/"+newProps.chatroom.id+"/channels/"+newChannel.id+"/messages");
+    }
   }// end componentWillReceiveProps
 
   componentDidMount(){

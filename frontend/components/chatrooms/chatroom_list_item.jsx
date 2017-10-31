@@ -9,9 +9,11 @@ class ChatroomListItem extends React.Component{
 
 
   render(){
+    let activeChatroom = this.props.activeChatroomId == this.props.chatroom.id;
+
     return (
       <div className="chatroom-list-item-container">
-        <Link className="chatroom-list-item" to={`/chatrooms/${this.props.chatroom.id}/channels/`}>
+        <Link className={`chatroom-list-item ${activeChatroom ? 'active' : '' }`} to={`/chatrooms/${this.props.chatroom.id}/channels/`}>
           <span >
             {this.props.chatroom.title[0].toUpperCase()}
           </span>

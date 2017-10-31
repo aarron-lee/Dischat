@@ -34,6 +34,11 @@
   -webkit-transition: border-radius 0.5s ease;
 }
 
+.chatroom-list-item.active{
+  border-radius: 30%;
+  background-color: #2e3195;
+}
+
 
 
 .chatroom-title-label{

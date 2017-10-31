@@ -11,6 +11,12 @@ import difference from 'lodash/difference';
 
 class ChatroomList extends React.Component{
 
+  constructor(props){
+    super(props);
+    this.state = {
+      activeChatroomId: 0
+    }
+  }
 
   formModal(){
     // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
@@ -26,28 +32,14 @@ class ChatroomList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // debugger
-    if( this.props.chatrooms.length < nextProps.chatrooms.length ){
-      // new or join
-      let nextChatroom = {};
-      nextProps.chatrooms.forEach( (chatroom) =>{
-        this.props.chatrooms.forEach( (c2)=>{
-          if( c2.id !== chatroom.id){
-            nextChatroom = chatroom;
-          }
-        });
-      });
-      if( nextChatroom.id !== undefined ){
-        this.props.history.push("/chatrooms/"+nextChatroom.id+"/channels");
-      }else{
-        this.props.history.push("/chatrooms/"+nextProps.chatrooms[0].id+"/channels");
-      }
+    if( this.props.match.params.chatroom_id !== nextProps.match.params.chatroom_id || !(this.state.activeChatroomId == nextProps.match.chatroom_id)){
+      this.setState( { activeChatroomId: nextProps.match.params.chatroom_id } );
     }
   }
 
   render(){
     const chatroomEls = this.props.chatrooms.map( (chatroom) =>{
-      return <ChatroomListItem chatroom={chatroom} key={chatroom.id}/>
+      return <ChatroomListItem activeChatroomId={this.state.activeChatroomId} chatroom={chatroom} key={chatroom.id}/>
     });
     return (
       <section className="chatroom-container">

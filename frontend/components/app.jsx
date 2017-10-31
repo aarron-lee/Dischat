@@ -13,7 +13,7 @@ const App = () =>{
   return (
     <div className="app-container">
       <Route exact path="/" component={GreetingContainer} />
-      <ProtectedRoute path="/chatrooms/" component={ChatroomsContainer} />
+      <ProtectedRoute path="/chatrooms/:chatroom_id" component={ChatroomsContainer} />
       <ProtectedRoute path="/chatrooms/:chatroom_id/channels" component={ChannelsContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />

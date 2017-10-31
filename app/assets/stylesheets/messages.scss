@@ -27,7 +27,11 @@
   height: 100%;
 }
 
-
+.default-portrait{
+  background-image: image-url('default-avatar.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 
 

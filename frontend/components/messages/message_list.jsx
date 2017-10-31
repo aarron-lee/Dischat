@@ -90,9 +90,11 @@ class MessageList extends React.Component{
 
     return dateStr;
   }
-  
+
 
   render(){
+
+    let defaultPortrait = true;
 
 
     let messageEls = this.props.messages.map((message) =>{
@@ -101,7 +103,7 @@ class MessageList extends React.Component{
 
       return (
         <div className="message-item" key={`message-${message.id}`}>
-          <span className="message-portrait"></span>
+          <span className={`message-portrait ${defaultPortrait ? "default-portrait" : '' }`}></span>
 
           <div className="message-content">
             <div>

@@ -8,6 +8,15 @@ class Api::ChannelsController < ApplicationController
     @channel = Channel.new(channel_params)
 
     if(@channel.save)
+
+      Pusher.trigger('channels_for_' + @channel.chatroom_id.to_s,
+        'channel_created', {
+          id: @channel.id,
+          name: @channel.name,
+          chatroom_id: @channel.chatroom_id,
+          description: @channel.description,
+          currentUserId: current_user.id
+        })
       render :show, status: 200
     else
       render json: @channel.errors.full_messages, status: 400

@@ -51,7 +51,7 @@ class MembersList extends React.Component{
 
   componentWillUnmount(){
     if(this.pusher){
-      if(this.props.chatroom){
+      if(this.props.chatroom && this.props.chatroom.id !== '@channels'){
         this.pusher.unsubscribe('member_' + this.props.chatroom.id);
       }
     }

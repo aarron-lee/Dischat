@@ -1,7 +1,7 @@
-
+/* globals Pusher */
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChannels, createChannel, updateChannel } from '../../actions/channel_actions';
+import { getChannels, createChannel, updateChannel, receiveChannel } from '../../actions/channel_actions';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
@@ -16,8 +16,9 @@ class ChannelList extends React.Component{
 
     this.state={ activeChannelId: 0 };
 
-    this.handleAddChannel =  this.handleAddChannel.bind(this)
-    this.handleEditChannel = this.handleEditChannel.bind(this)
+    this.handleAddChannel =  this.handleAddChannel.bind(this);
+    this.handleEditChannel = this.handleEditChannel.bind(this);
+    this.handlePusher = this.handlePusher.bind(this);
   }
 
 
@@ -133,24 +134,50 @@ class ChannelList extends React.Component{
     );
   }// end render
 
+  handlePusher(oldChatroomId, newChatroomId){
+    // pusher listener
+    if(!this.pusher){
+      this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        cluster: 'us2',
+        encrypted: true
+      });
+    }
+    if(oldChatroomId){
+      // unsubscribe to old chatroom channels
+      this.pusher.unsubscribe('channels_for_' + oldChatroomId);
+    }
+
+    let receiveSingleChannel = this.props.receiveChannel;
+    let currentUserId = this.props.currentUser.id;
+    let props = this.props;
+
+    let channel = this.pusher.subscribe('channels_for_' + newChatroomId);
+    channel.bind('channel_created', function(data) {
+      receiveSingleChannel(data);
+      if(data.currentUserId == currentUserId){
+        props.history.push("/chatrooms/"+data.chatroom_id+"/channels/"+data.id+"/messages");
+      }
+    });
+    // end pusher
 
 
-  componentWillReceiveProps(newProps){
-    if(this.props.chatroom.id != newProps.chatroom.id){
-      this.props.fetchChannels(newProps.chatroom.id)
-    } else if(this.props.match.params.channel_id !== newProps.match.params.channel_id){
-        this.setState({activeChannelId: newProps.match.params.channel_id});
+  }
+
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.chatroom.id != nextProps.chatroom.id){
+      this.props.fetchChannels(nextProps.chatroom.id)
+      this.handlePusher(this.props.chatroom.id, nextProps.chatroom.id);
+    } else if(this.props.match.params.channel_id !== nextProps.match.params.channel_id){
+        this.setState({activeChannelId: nextProps.match.params.channel_id});
     }
     let oldChannelId = this.props.match.params.channel_id;
-    if( oldChannelId === "@channels" && newProps.channels && newProps.channels.length > 0 ){
-      let newChannelId = newProps.channels[0].id;
-      newProps.history.push("/chatrooms/"+newProps.chatroom.id+"/channels/"+newChannelId+"/messages");
+    if( oldChannelId === "@channels" && nextProps.channels && nextProps.channels.length > 0 ){
+      // load first channel upon entering chatroom
+      let newChannelId = nextProps.channels[0].id;
+      nextProps.history.push("/chatrooms/"+nextProps.chatroom.id+"/channels/"+newChannelId+"/messages");
     }
-    if (oldChannelId !== "@channels" && (newProps.channels.length-this.props.channels.length) === 1){
-      // new channel has been added
-      let newChannel = newProps.channels[newProps.channels.length-1];
-      newProps.history.push("/chatrooms/"+newProps.chatroom.id+"/channels/"+newChannel.id+"/messages");
-    }
+
   }// end componentWillReceiveProps
 
   componentDidMount(){
@@ -158,9 +185,28 @@ class ChannelList extends React.Component{
     if(this.props.match.params.channel_id){
       this.setState({activeChannelId: this.props.match.params.channel_id})
     }
+    if(this.props.match && this.props.match.params.chatroom_id){
+      // pusher listener
+      if(!this.pusher){
+        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+          cluster: 'us2',
+          encrypted: true
+        });
+      }
+
+      let receiveSingleChannel = this.props.receiveChannel;
+      let generateInnerHTML = this.generateInnerHTML;
+      let channel = this.pusher.subscribe('channels_for_' + this.props.match.params.chatroom_id);
+      channel.bind('channel_created', function(data) {
+        receiveSingleChannel(data);
+      });
+      // end pusher
+    }
   }
 
-}
+
+
+}// end channelsList class
 
 
 
@@ -179,7 +225,7 @@ function mapStateToProps(state, ownProps){
   let currentUser =  undefined ;
   if( state.session.currentUserId ){
     // logged in, pass on currentUser
-      currentUser= state.entities.users[state.session.currentUserId];
+    currentUser= state.entities.users[state.session.currentUserId];
   }
   let modal = state.ui.modal;
 
@@ -197,6 +243,7 @@ function mapDispatchToProps(dispatch, ownProps){
     updateChannel: (channel) => dispatch( updateChannel(channel)),
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
+    receiveChannel: (channel) => dispatch( receiveChannel(channel) ),
   };
 }
 

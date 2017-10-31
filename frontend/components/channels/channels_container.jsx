@@ -134,28 +134,17 @@ class ChannelList extends React.Component{
   }// end render
 
 
-  getNextChannel(oldChannels, newChannels){
-    let nextChannel = {};
-
-    let oldChannelIds = oldChannels.map( (chatroom) => chatroom.id );
-    let newChannelIds = newChannels.map( (chatroom) => chatroom.id );
-
-    let nextChannelId = newChannelIds.filter(e => !oldChannelIds.includes(e))[0];
-
-    for( let i = 0; i < newChannels.length; i++ ){
-      if (newChannels[i].id === nextChannelId){
-        nextChannel = newChannels[i];
-        i = newChannels.length+1;
-      }
-    }
-    return nextChannel;
-  }
 
   componentWillReceiveProps(newProps){
     if(this.props.chatroom.id != newProps.chatroom.id){
       this.props.fetchChannels(newProps.chatroom.id)
     } else if(this.props.match.params.channel_id !== newProps.match.params.channel_id){
-      this.setState({activeChannelId: newProps.match.params.channel_id});
+        this.setState({activeChannelId: newProps.match.params.channel_id});
+    }
+    let oldChannelId = this.props.match.params.channel_id;
+    if( oldChannelId === "@channels" && newProps.channels && newProps.channels.length > 0 ){
+      let newChannelId = newProps.channels[0].id;
+      newProps.history.push("/chatrooms/"+newProps.chatroom.id+"/channels/"+newChannelId+"/messages");
     }
   }// end componentWillReceiveProps
 

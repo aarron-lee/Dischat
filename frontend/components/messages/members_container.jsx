@@ -50,7 +50,9 @@ class MembersList extends React.Component{
 
   componentWillUnmount(){
     if(this.pusher){
-      this.pusher.unsubscribe('member_' + this.props.chatroom.id);
+      if(this.props.chatroom){
+        this.pusher.unsubscribe('member_' + this.props.chatroom.id);
+      }
     }
   }
 
@@ -58,7 +60,9 @@ class MembersList extends React.Component{
     if( this.props.chatroom !== nextProps.chatroom ){
       this.props.getMembers(nextProps.chatroom.id);
 
-      this.pusher.unsubscribe('member_' + this.props.chatroom.id);
+      if(this.props.chatroom && this.props.chatroom.id){
+        this.pusher.unsubscribe('member_' + this.props.chatroom.id);
+      }
 
 
       let updateMemberAction = this.props.updateMember;

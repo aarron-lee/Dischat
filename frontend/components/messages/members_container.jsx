@@ -38,11 +38,12 @@ class MembersList extends React.Component{
 
       let updateMemberAction = this.props.updateMember;
       let cID = this.props.chatroom.id;
-
-      var channel = this.pusher.subscribe('member_' + this.props.chatroom.id);
-      channel.bind('member_joined', function(data) {
-        updateMemberAction(data, cID)
-      });
+      if(cID){
+        let channel = this.pusher.subscribe('member_' + this.props.chatroom.id);
+        channel.bind('member_joined', function(data) {
+          updateMemberAction(data, cID)
+        });
+      }
 
     }// end this.props.chatroom
 
@@ -67,11 +68,12 @@ class MembersList extends React.Component{
 
       let updateMemberAction = this.props.updateMember;
       let cID = nextProps.chatroom.id;
-
-      var channel = this.pusher.subscribe('member_' + nextProps.chatroom.id);
-      channel.bind('member_joined', function(data) {
-        updateMemberAction(data, cID)
-      });
+      if(cID){
+        let channel = this.pusher.subscribe('member_' + nextProps.chatroom.id);
+        channel.bind('member_joined', function(data) {
+          updateMemberAction(data, cID)
+        });
+      }
     }
   }
 

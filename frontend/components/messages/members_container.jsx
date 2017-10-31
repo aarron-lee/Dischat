@@ -65,11 +65,17 @@ class MembersList extends React.Component{
         this.pusher.unsubscribe('member_' + this.props.chatroom.id);
       }
 
+      if(!this.pusher){
+        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+          cluster: 'us2',
+          encrypted: true
+        });
+      }
 
       let updateMemberAction = this.props.updateMember;
       let cID = nextProps.chatroom.id;
-      if(cID){
-        let channel = this.pusher.subscribe('member_' + nextProps.chatroom.id);
+      if(cID !== undefined){
+        let channel = this.pusher.subscribe('member_' + cID);
         channel.bind('member_joined', function(data) {
           updateMemberAction(data, cID)
         });

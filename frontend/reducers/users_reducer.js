@@ -3,7 +3,8 @@ import {RECEIVE_CURRENT_USER} from '../actions/session_actions';
 import merge from 'lodash/merge';
 import {RECEIVE_CREATE_CHATROOM,
         RECEIVE_JOIN_CHATROOM,
-        RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
+        RECEIVE_CHATROOMS,
+        RECEIVE_CHATROOM_MEMBERS} from '../actions/chatroom_actions';
 import {
   RECEIVE_MESSAGES,
   RECEIVE_MESSAGE,
@@ -46,6 +47,12 @@ function usersReducer(state = {}, action){
         });
       }
       return newState
+    case RECEIVE_CHATROOM_MEMBERS:
+      let newMembers ={};
+      action.members.forEach((member) =>{
+        newMembers[member.id] = member
+      });
+      return merge({}, state, newMembers);
     case RECEIVE_MESSAGES:
       newState = merge({}, state);
       let newMessages = {};
@@ -59,6 +66,9 @@ function usersReducer(state = {}, action){
       });
 
       return merge(newState, newMessages);
+
+    case "RECEIVE_NEW_MEMBER":
+      return merge({}, state, { [action.member.id] : action.member });
 
 
     case RECEIVE_MESSAGE:

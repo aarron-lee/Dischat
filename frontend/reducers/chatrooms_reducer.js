@@ -33,6 +33,10 @@ function chatroomsReducer(state = {}, action){
         newState[chatroom.id] = chatroom ;
       });
       return newState;
+    case "RECEIVE_NEW_MEMBER":
+      newState = merge({}, state);
+      newState[action.chatroomId].members.push(action.member.id);
+      return newState;
 
 
     case RECEIVE_CHANNELS:

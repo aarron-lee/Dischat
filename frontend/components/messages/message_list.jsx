@@ -38,7 +38,7 @@ class MessageList extends React.Component{
       let date = new Date(message.created_at).toString();
 
       return (
-        <div class="message-item">
+        <div className="message-item">
           <span className="message-portrait"></span>
 
           <div className="message-content">
@@ -62,7 +62,7 @@ class MessageList extends React.Component{
 
     return (
       <div className="messages-list">
-        <div id="message-overflow" style={{"overflow-y": 'scroll'}}>
+        <div id="message-overflow" style={{overflowY: 'scroll'}}>
           {messageEls}
         </div>
         <form className="message-create-form" onSubmit={this.handleSubmit}>

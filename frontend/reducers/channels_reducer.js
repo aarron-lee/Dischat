@@ -12,6 +12,7 @@ import merge from 'lodash/merge';
 
 function channelsReducer(state = {}, action){
   let newState = merge({}, state);
+  let currentChannel;
   switch(action.type){
     case RECEIVE_CHANNELS:
       let newChannels = {}

@@ -74,49 +74,6 @@ class MessagesList extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
-    // 
-    // if(this.props.channel === undefined && nextProps.channel ){
-    //   // after refresh page
-    //   this.props.getMessages(nextProps.channel.id);
-    //
-    //   // subscribe to websocket
-    //   this.pusher = new Pusher('4bea1f61f6acc7db5343', {
-    //     cluster: 'us2',
-    //     encrypted: true
-    //   });
-    //   var channel = this.pusher.subscribe('channel_messages_' + nextProps.channel.id);
-    //   channel.bind('message_published', function(data) {
-    //     if(nextProps.currentUserId !== data.author_id){
-    //       nextProps.receiveMessage(data);
-    //     }
-    //   });
-    //
-    // }
-    // else if(
-    //   this.props.channel.chatroom_id === nextProps.channel.chatroom_id &&
-    //   this.props.channel.id !== nextProps.channel.id
-    // ){
-    //   // change between channels
-    //   this.props.getMessages(nextProps.channel.id);
-    //
-    //   // unsubscribe to previous websocket
-    //   if(this.pusher){
-    //     this.pusher.unsubscribe('channel_messages_' + this.props.channel.id);
-    //   }
-    //
-    //   // subscribe to next websocket
-    //   this.pusher = new Pusher('4bea1f61f6acc7db5343', {
-    //     cluster: 'us2',
-    //     encrypted: true
-    //   });
-    //   var channel = this.pusher.subscribe('channel_messages_' + nextProps.channel.id);
-    //   channel.bind('message_published', function(data) {
-    //     if(nextProps.currentUserId !== data.author_id){
-    //       nextProps.receiveMessage(data);
-    //     }
-    //   });
-    //
-    // }
 
   }// end componentWillReceiveProps
 

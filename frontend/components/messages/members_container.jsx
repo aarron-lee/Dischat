@@ -53,8 +53,7 @@ class MembersList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    // debugger
-    if(nextProps.chatroom && (this.props.members.length < nextProps.members.length) ){
+    if( this.props.chatroom !== nextProps.chatroom ){
       this.props.getMembers(nextProps.chatroom.id);
     }
   }

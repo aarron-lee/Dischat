@@ -11,7 +11,7 @@ const Auth = ( {path, component: Component, loggedIn} ) => {
     return (
       <Route path={path} render={
         (props) =>
-          <Redirect to="/chatrooms"/>
+          <Redirect to="/chatrooms/@me"/>
         }
         />
     );

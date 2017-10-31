@@ -14,7 +14,7 @@ const App = () =>{
     <div className="app-container">
       <Route exact path="/" component={GreetingContainer} />
       <ProtectedRoute path="/chatrooms/:chatroom_id" component={ChatroomsContainer} />
-      <ProtectedRoute path="/chatrooms/:chatroom_id/channels" component={ChannelsContainer} />
+      <ProtectedRoute path="/chatrooms/:chatroom_id/channels/:channel_id/" component={ChannelsContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
     </div>

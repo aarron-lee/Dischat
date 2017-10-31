@@ -11,14 +11,22 @@
 
 
 .chatroom-title{
-  padding: 20px;
+  padding-left: 16px;
+  padding-right: 12px;
+  min-height: 48px;
+  max-height: 48px;
   width: 100%;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   box-sizing: border-box;
   max-width: 250px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  div{
+    display: flex;
+    align-items: center;
+  }
 }
 
 .edit-channel-button{
@@ -29,18 +37,26 @@
   color: rgb(150,150,150);
   margin: 10px 10px;
   li{
-    padding: 10px;
-    padding-left: 20px;
+    padding: 7px;
+    margin: 3px;
+    padding-left: 5px;
+    border-radius: 5px;
+    font-size: 14px;
   }
   li:hover{
-    background-color: #1e2124;
+    background-color: rgba(79, 84, 92, 0.2);
     color: white;
     .edit-channel-button{
       display: block;
+      height: 12px;
     }
   }
 }
 
+.channel-list-item.active-channel{
+  background-color: #43474d;
+  color: white;
+}
 
 .channel-user-info{
   position: absolute;
@@ -52,6 +68,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  button{
+    position: relative;
+  }
 }
 
 .channel-list-item{
@@ -61,5 +80,58 @@
   a{
     width: 75%;
     height: 100%;
+    display: flex;
   }
+}
+
+.channel-user-info button:hover{
+  .logout-info-bubble{
+    display: block;
+  }
+}
+
+
+/* ------------------------------------------
+PURE CSS SPEECH BUBBLES
+by Nicolas Gallagher
+- http://nicolasgallagher.com/pure-css-speech-bubbles/
+http://nicolasgallagher.com
+http://twitter.com/necolas
+Created: 02 March 2010
+Version: 1.2 (03 March 2011)
+Dual licensed under MIT and GNU GPLv2 Nicolas Gallagher
+------------------------------------------ */
+
+
+.logout-info-bubble {
+  position: absolute;
+  display: none;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  color:black;
+  background:#fff;
+  padding: 10px;
+  border-radius:10px;
+  top: -43px;
+  right: -59px;
+  width: 120px;
+  z-index: 1;
+  -webkit-animation: bubble-fadein .3s;
+  animation: bubble-fadein .3s;
+}
+
+.logout-info-bubble:before {
+  content:"";
+  position:absolute;
+  top:35px;
+  right:60px;
+  bottom:auto;
+  left:auto;
+  border-width: 7px 7px 0px 7px;
+  border-style:solid;
+  border-color:#fff transparent;
+  display:block;
+  width:0;
+  z-index: 1;
 }

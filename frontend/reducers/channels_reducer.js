@@ -16,6 +16,11 @@ function channelsReducer(state = {}, action){
       return merge(newState, newChannels);
     case RECEIVE_CHANNEL:
       return merge(newState, { [action.channel.id]: action.channel } )
+    case RECEIVE_CURRENT_USER:
+        if (! action.user ){
+            return {};
+        }
+        return state;
     default:
       return state;
   }// end switch

@@ -31,6 +31,23 @@ class ChatroomList extends React.Component{
     ;
   }
 
+  getNextChatroom(oldChatrooms, newChatrooms){
+    let nextChatroom = {};
+
+    let currentChatroomIds = oldChatrooms.map( (chatroom) => chatroom.id );
+    let nextChatroomIds = newChatrooms.map( (chatroom) => chatroom.id );
+
+    let nextChatroomId = nextChatroomIds.filter(e => !currentChatroomIds.includes(e))[0];
+
+    for( let i = 0; i < newChatrooms.length; i++ ){
+      if (newChatrooms[i].id === nextChatroomId){
+        nextChatroom = newChatrooms[i];
+        i = newChatrooms.length+1;
+      }
+    }
+    return nextChatroom;
+  }
+
   componentWillReceiveProps(nextProps){
     if( this.props.match.params.chatroom_id !== nextProps.match.params.chatroom_id || !(this.state.activeChatroomId == nextProps.match.chatroom_id)){
       this.setState( { activeChatroomId: nextProps.match.params.chatroom_id } );

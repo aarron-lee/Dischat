@@ -1,0 +1,32 @@
+.gear-icon{
+  fill: rgba(123, 125, 130, 0.79);
+  opacity: 0.8;
+}
+
+.gear-icon:hover{
+  fill: lighten(rgba(123, 125, 130, 0.79), 50%);
+}
+
+
+
+/* ------------------------------------------
+PURE CSS SPEECH BUBBLES
+by Nicolas Gallagher
+- http://nicolasgallagher.com/pure-css-speech-bubbles/
+http://nicolasgallagher.com
+http://twitter.com/necolas
+Created: 02 March 2010
+Version: 1.2 (03 March 2011)
+Dual licensed under MIT and GNU GPLv2 Nicolas Gallagher
+------------------------------------------ */
+@-webkit-keyframes bubble-fadein {
+  0% { opacity: 0; }
+  70% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bubble-fadein {
+  0% { opacity: 0; }
+  70% { opacity: 0; }
+  100% { opacity: 1; }
+}

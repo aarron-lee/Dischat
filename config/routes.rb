@@ -15,7 +15,11 @@ Rails.application.routes.draw do
       get 'channels', on: :member
     end
 
-    resources :channels, only: [:create, :update]
+    resources :channels, only: [:create, :update] do
+      get 'messages', on: :member
+    end
+    
+    resources :messages, only: [:create, :update, :destroy]
 
 
   end

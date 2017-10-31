@@ -1,0 +1,123 @@
+
+.messages-container{
+  background-color: #36393e;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-header{
+  width: 100%;
+  min-height: 48px;
+  max-height: 48px;
+  background-color: #36393e;
+  padding-left: 12px;
+  padding-right: 8px;
+  box-sizing: border-box;
+  border-bottom: lighten(black, 15%) 1px solid;
+  display: flex;
+  align-items: center;
+}
+
+.messages-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
+
+
+
+.messages-channel-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.message-channel-description{
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 0.5px solid darken(lightgray, 25%);
+  color: darken(lightgray, 25%);
+  font-size: 15px;
+}
+
+.messages-list-section{
+  width: 100%;
+}
+
+// messages form
+
+.message-create-form{
+  position: absolute;
+  background-color: #494c52;
+  bottom: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 6px;
+  input{
+    width: 90%;
+  }
+}
+
+
+
+// messages body--------------------------
+
+.messages-list{
+  margin-top: 5px;
+  margin-left: 25px;
+  margin-bottom: -5px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-right: 25px;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 90px;
+  position: relative;
+  box-sizing: border-box;
+
+}
+
+
+.message-item{
+  display: flex;
+  flex-direction: row;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  width: 100%;
+  border-bottom: 1px solid #3f4246;
+}
+
+.message-portrait{
+  min-width: 45px;
+  min-height: 45px;
+  max-width: 45px;
+  max-height: 45px;
+  background-color: blue;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.message-content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message-date{
+  font-size: 10px;
+  color: lightgray;
+  display: inline;
+  margin-left: 10px;
+}
+
+.message-body{
+  padding-top: 2px;
+  word-wrap: break-word;
+}

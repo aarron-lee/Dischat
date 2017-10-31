@@ -17,6 +17,8 @@ class Api::ChatroomsController < ApplicationController
         @chatroom.save!
         @member = Member.new( user_id: current_user.id, chatroom_id: @chatroom.id )
         @member.save!
+        @channel = Channel.new( name: "general", chatroom_id: @chatroom.id, description: "")
+        @channel.save!
       end
       render :show, status: 200
     rescue ActiveRecord::RecordInvalid => _invalid
@@ -84,6 +86,11 @@ class Api::ChatroomsController < ApplicationController
 
       @member = Member.new( chatroom_id: @chatroom.id, user_id: current_user.id )
       if(@member.save)
+
+        Pusher.trigger('member_' + @chatroom.id.to_s, 'member_joined', {
+          username: current_user.username,
+          id: current_user.id
+        })
         @chatroom = Chatroom.includes(:members).find(params[:id])
         render "/api/chatrooms/join"
       else

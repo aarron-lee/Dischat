@@ -10,7 +10,7 @@ class Greeting extends React.Component{
   render(){
     if( this.props.currentUser ){
       return (
-        <Redirect to="/chatrooms/"/>
+        <Redirect to="/chatrooms/@me/"/>
       )
     }
 

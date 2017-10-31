@@ -7,14 +7,16 @@ import AuthRoute from '../util/auth_route';
 import ProtectedRoute from '../util/protected_route';
 import ChatroomsContainer from './chatrooms/chatrooms_container';
 import ChannelsContainer from './channels/channels_container';
+import MessagesContainer from './messages/messages_container';
 
 const App = () =>{
 
   return (
     <div className="app-container">
       <Route exact path="/" component={GreetingContainer} />
-      <ProtectedRoute path="/chatrooms/" component={ChatroomsContainer} />
-      <ProtectedRoute path="/chatrooms/:chatroom_id/channels" component={ChannelsContainer} />
+      <ProtectedRoute path="/chatrooms/:chatroom_id" component={ChatroomsContainer} />
+      <ProtectedRoute path="/chatrooms/:chatroom_id/channels/:channel_id/" component={ChannelsContainer} />
+      <Route path="/chatrooms/:chatroom_id/channels/:channel_id/messages" component={MessagesContainer} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
     </div>

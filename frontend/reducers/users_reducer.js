@@ -4,7 +4,11 @@ import merge from 'lodash/merge';
 import {RECEIVE_CREATE_CHATROOM,
         RECEIVE_JOIN_CHATROOM,
         RECEIVE_CHATROOMS} from '../actions/chatroom_actions';
-
+import {
+  RECEIVE_MESSAGES,
+  RECEIVE_MESSAGE,
+  DELETE_MESSAGE,
+} from '../actions/message_actions';
 
 
 function usersReducer(state = {}, action){

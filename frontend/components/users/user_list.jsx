@@ -19,9 +19,11 @@ render(){
   });
 
   return(
-    <ul className="users-list">
-      {userElements}
-    </ul>
+    <div className="overflow-y-scroll">
+      <ul className="users-list">
+        {userElements}
+      </ul>
+    </div>
   );
 }
 

@@ -126,7 +126,7 @@ class MessageList extends React.Component{
 
     return (
       <div className="messages-list">
-        <div id="message-overflow" style={{overflowY: 'scroll'}}>
+        <div id='message-overflow' className="overflow-y-scroll">
           {messageEls}
         </div>
         <form className="message-create-form" onSubmit={this.handleSubmit}>

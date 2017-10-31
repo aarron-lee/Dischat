@@ -30,15 +30,77 @@ class MessageList extends React.Component{
     this.setState({body: ''});
   }
 
+
+  getNumericDate(date){
+    let yr = date.getFullYear();
+    let month = date.getMonth()+1;
+    let day = date.getDate();
+
+    return `${month}/${day}/${yr}`;
+  }
+
+  dateToTime(date){
+
+    let hr = date.getHours();
+    let partOfDay= 'AM';
+    if(hr > 12){
+      hr -= 12;
+      partOfDay = 'PM';
+    }else if( hr === 12){
+      partOfDay = 'PM';
+    }else if( hr === 0 ){
+      hr = 12;
+      partOfDay = 'AM';
+    }
+    let mins = date.getMinutes();
+    if (mins < 10){
+      mins = "0"+mins;
+    }
+
+    return `${hr}:${mins} ${partOfDay}`;
+  }
+
+  getTodayOrYesterdayStr(date, todayBool=true){
+    let dateStr = '';
+
+    dateStr = `${todayBool ? 'Today' : 'Yesterday'} at ${this.dateToTime(date)}`;
+    return dateStr
+  }
+
+  isCertainNumOfDaysBefore(date, currentDate, numOfDays=0){
+    if (date.getDate() === (currentDate.getDate() - numOfDays)
+        && (date.getMonth() === currentDate.getMonth())
+        && (date.getFullYear() === currentDate.getFullYear() ) ){
+          return true;
+        }
+    return false
+  }
+
+  getDateString(date){
+    let dateStr = '';
+    let currentDate = new Date();
+
+    if( this.isCertainNumOfDaysBefore(date, currentDate) ){
+      dateStr = this.getTodayOrYesterdayStr(date);
+    }else if(this.isCertainNumOfDaysBefore(date, currentDate, 1)){
+      dateStr = this.getTodayOrYesterdayStr(date, false);
+    }else{
+      dateStr = `${this.getNumericDate(date)} at ${this.dateToTime(date)}`
+    }
+
+    return dateStr;
+  }
+  
+
   render(){
 
 
     let messageEls = this.props.messages.map((message) =>{
 
-      let date = new Date(message.created_at).toString();
+      let date = this.getDateString(new Date(message.created_at));
 
       return (
-        <div className="message-item">
+        <div className="message-item" key={`message-${message.id}`}>
           <span className="message-portrait"></span>
 
           <div className="message-content">

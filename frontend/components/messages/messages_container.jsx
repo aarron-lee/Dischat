@@ -40,7 +40,7 @@ class MessagesList extends React.Component{
   render(){
     let channelName = '';
     let channelDescription = '';
-    if(this.props.channel){
+    if(this.props.channel && this.props.channel.name){
       channelName = this.props.channel.name;
       channelDescription = this.props.channel.description;
     }
@@ -74,13 +74,17 @@ class MessagesList extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
+    // debugger
+    if(this.props.match && (this.props.match.params.channel_id !== nextProps.match.params.channel_id)){
+      this.props.getMessages(nextProps.match.params.channel_id);
+    }
 
   }// end componentWillReceiveProps
 
   componentDidMount(){
-    if(this.props.channel){
-      // loaded for first time
-      this.props.getMessages(this.props.channel.id);
+    // debugger
+    if(this.props.match && this.props.match.params.channel_id){
+      this.props.getMessages(this.props.match.params.channel_id);
     }
   }
 
@@ -94,10 +98,8 @@ class MessagesList extends React.Component{
 function mapStateToProps(state, ownProps){
   let channel=null;
   let chatroom=null;
-  if( ownProps.match && ownProps.match.params ){
-    channel = state.entities.channels[ownProps.match.params.channel_id]
-    chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id]
-  }
+  channel = state.entities.channels[ownProps.match.params.channel_id]
+  chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id]
   let messages = [];
 
   if( channel && channel.messages ){

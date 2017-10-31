@@ -8,6 +8,10 @@ class Channel < ApplicationRecord
   foreign_key: :chatroom_id,
   class_name: :Chatroom
 
+  has_many :messages,
+  foreign_key: :channel_id,
+  class_name: :Message
+
   private
 
   def ensure_description

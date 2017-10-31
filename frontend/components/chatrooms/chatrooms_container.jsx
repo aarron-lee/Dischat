@@ -52,6 +52,10 @@ class ChatroomList extends React.Component{
     if( this.props.match.params.chatroom_id !== nextProps.match.params.chatroom_id || !(this.state.activeChatroomId == nextProps.match.chatroom_id)){
       this.setState( { activeChatroomId: nextProps.match.params.chatroom_id } );
     }
+    if(this.props.chatrooms && ((nextProps.chatrooms.length - this.props.chatrooms.length)  === 1) ){
+      let nextChatroom = this.getNextChatroom(this.props.chatrooms, nextProps.chatrooms);
+      nextProps.history.push("/chatrooms/"+nextChatroom.id+"/channels/@channels/");
+    }
   }
 
   render(){

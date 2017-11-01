@@ -161,7 +161,7 @@ class MessageList extends React.Component{
           {messageEls}
         </div>
         <form className="message-create-form" onSubmit={this.handleSubmit}>
-          <button onClick={this.handleAddImageModal}>+</button>
+          <div onClick={this.handleAddImageModal}>+</div>
           <input type="text" onChange={this.handleBody} value={this.state.body} placeholder={`Message #${ this.props.channel ? this.props.channel.name : '' }`}/>
           <button>Post</button>
         </form>

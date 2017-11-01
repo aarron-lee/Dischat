@@ -77,7 +77,7 @@ class ImageMessageForm extends React.Component{
               <input type="file" onChange={this.handleFile} />
             </label>
 
-            <button ref="btn-disable">Update</button>
+            <button ref="btn-disable">Post</button>
           </form>
       </div>
     );

@@ -101,6 +101,18 @@
   align-items: center;
   justify-content: center;
   -webkit-animation: fadeIn 1.0s;
+  position: relative;
+}
+
+.close-modal-button{
+  color: black;
+  top: 5px;
+  right: 10px;
+  position: absolute;
+}
+
+.close-modal-button:hover{
+  color: red;
 }
 
 .chatroom-forms-container{

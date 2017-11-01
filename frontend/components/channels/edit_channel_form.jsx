@@ -15,6 +15,7 @@ class EditChannelModal extends React.Component{
     this.handleChange = this.handleChange.bind(this);
     this.handlePropagation = this.handlePropagation.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
   handleChange(type){
@@ -43,6 +44,14 @@ class EditChannelModal extends React.Component{
   }
 
 
+  handleModalClose(event){
+    event.preventDefault();
+    this.props.closeModal();
+  }
+
+
+
+
   render(){
     // joinChatroom chatroomId
     // createChatroom chatroom
@@ -54,6 +63,7 @@ class EditChannelModal extends React.Component{
           {this.props.errors}
         </div>
         <div className="chatroom-forms-container">
+          <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
           <div className="chat-form" >
             <h2 style={ {color: 'black' }}>Edit a Channel</h2>
             <form className="chat-form" onSubmit={this.handleEdit}>

@@ -15,6 +15,7 @@ class AddChannelForm extends React.Component{
     this.handleChange = this.handleChange.bind(this);
     this.handlePropagation = this.handlePropagation.bind(this);
     this.handleCreate = this.handleCreate.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
   handleChange(type){
@@ -27,6 +28,13 @@ class AddChannelForm extends React.Component{
   handlePropagation(event){
     event.stopPropagation()
   }
+
+
+  handleModalClose(event){
+    event.preventDefault();
+    this.props.closeModal();
+  }
+
 
 
   handleCreate(event){
@@ -50,6 +58,7 @@ class AddChannelForm extends React.Component{
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
+        <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
         <div className="chat-form-errors">
           {this.props.errors}
         </div>

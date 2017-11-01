@@ -34,7 +34,8 @@ class ChannelList extends React.Component{
           <AddChannelForm
             chatroom={this.props.chatroom}
             addChannel={this.props.addChannel}
-            errors={this.props.errors} />
+            errors={this.props.errors}
+            closeModal={this.props.closeModal} />
         </div>);
 
   }
@@ -47,7 +48,8 @@ class ChannelList extends React.Component{
             channel={channel}
             chatroom={this.props.chatroom}
             updateChannel={this.props.updateChannel}
-            errors={this.props.errors} />
+            errors={this.props.errors}
+            closeModal={this.props.closeModal} />
         </div>);
 
   }

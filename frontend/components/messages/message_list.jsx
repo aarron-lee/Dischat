@@ -18,6 +18,14 @@ class MessageList extends React.Component{
     this.handleAddImageModal = this.handleAddImageModal.bind(this);
   }
 
+  addImagePostModal(){
+    return(
+        <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
+          <h2>ADD IMAGE MODAL!</h2>
+        </div>);
+
+  }
+
   handleAddImageModal(event){
     event.preventDefault();
     this.props.openModal("addImagePostModal");
@@ -98,38 +106,39 @@ class MessageList extends React.Component{
 
   render(){
 
-    let defaultPortrait = true;
-
-
     let messageEls = this.props.messages.map((message) =>{
 
       let date = this.getDateString(new Date(message.created_at));
+        return (
+          <div className="message-item" key={`message-${message.id}`}>
+            <img className={`message-portrait`} src={this.props.users[message.author_id].avatar_url_thumb} />
 
-      return (
-        <div className="message-item" key={`message-${message.id}`}>
-          <img className={`message-portrait`} src={this.props.users[message.author_id].avatar_url_thumb} />
-
-          <div className="message-content">
-            <div>
-              <span>
-                { this.props.users[message.author_id].username }
-              </span>
-              <div className="message-date">
-                { date }
+            <div className="message-content">
+              <div>
+                <span>
+                  { this.props.users[message.author_id].username }
+                </span>
+                <div className="message-date">
+                  { date }
+                </div>
+              </div>
+              <div className="message-body">
+                {message.body}
               </div>
             </div>
-            <div className="message-body">
-              {message.body}
-            </div>
-          </div>
-
-        </div>
-    );// end return inside map
-
+          </div>);// end return inside map
     });// end map
 
+    //end messageEls map()----------------
+
+    let addImageModal = false;
+
+    if(this.props.modal == "addImagePostModal"){
+      addImageModal = true;
+    }
     return (
       <div className="messages-list">
+        {addImageModal ? this.addImagePostModal() : ''}
         <div id='message-overflow' className="overflow-y-scroll">
           {messageEls}
         </div>

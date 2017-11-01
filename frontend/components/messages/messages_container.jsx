@@ -15,13 +15,6 @@ class MessagesList extends React.Component{
 
   }
 
-  addImagePostModal(){
-    return(
-        <div className="modal-backdrop add-image-message" onClick={() => this.props.closeModal()} >
-          <h2>ADD IMAGE MODAL!</h2>
-        </div>);
-
-  }
 
   getHashSymbol(){
     return (<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
@@ -41,17 +34,10 @@ class MessagesList extends React.Component{
       channelDescription = this.props.channel.description;
     }
 
-    let addImageModal = false;
-
-    if(this.props.modal == "addImagePostModal"){
-      addImageModal = true;
-    }
-
 
     return (
       <section className="messages-container">
         <div className="messages-header">
-          {addImageModal ? this.addImagePostModal() : ''}
           <div className="messages-channel-container">
             <span style={{'display': 'flex'}}>
               {this.getHashSymbol()} {channelName}
@@ -68,6 +54,7 @@ class MessagesList extends React.Component{
               createMessage={this.props.createMessage}
               channel={this.props.channel}
               createImageMessage={this.props.createImageMessage}
+              modal={this.props.modal}
               openModal={this.props.openModal}
               closeModal={this.props.closeModal}
               />

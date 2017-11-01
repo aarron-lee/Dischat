@@ -26,6 +26,7 @@ class ChatroomList extends React.Component{
             joinChatroom={this.props.joinChatroom}
             createChatroom={this.props.createChatroom}
             errors={this.props.errors}
+            closeModal={this.props.closeModal}
             />
         </div>)
     ;

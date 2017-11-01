@@ -18,6 +18,7 @@ class AddChatroomForm extends React.Component{
     this.handleCreate = this.handleCreate.bind(this);
     this.handleJoin = this.handleJoin.bind(this);
     this.handlePropagation = this.handlePropagation.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
   handleChange(type){
@@ -45,6 +46,12 @@ class AddChatroomForm extends React.Component{
   }
 
 
+  handleModalClose(event){
+    event.preventDefault();
+    this.props.closeModal();
+  }
+
+
 
   render(){
     // joinChatroom chatroomId
@@ -53,6 +60,7 @@ class AddChatroomForm extends React.Component{
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
+        <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
         <div className="chat-form-errors">
           {this.props.errors}
         </div>

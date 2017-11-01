@@ -34,3 +34,15 @@ export const deleteMessage = (messageId) =>{
     url: '/api/messages/' + messageId,
   })
 }// returns { id: 6...etc }, actual message obj
+
+
+export const createImageMessage = (message) =>{
+  return $.ajax({
+    method: 'post',
+    url: '/api/messages',
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: message 
+  });
+}

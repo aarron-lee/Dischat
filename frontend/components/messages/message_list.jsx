@@ -15,9 +15,13 @@ class MessageList extends React.Component{
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleBody = this.handleBody.bind(this);
-
+    this.handleAddImageModal = this.handleAddImageModal.bind(this);
   }
 
+  handleAddImageModal(event){
+    event.preventDefault();
+    this.props.openModal("addImagePostModal");
+  }
 
   handleBody(event){
     this.setState({body: event.target.value});
@@ -129,6 +133,7 @@ class MessageList extends React.Component{
         <div id='message-overflow' className="overflow-y-scroll">
           {messageEls}
         </div>
+        <button onClick={this.handleAddImageModal}>+</button>
         <form className="message-create-form" onSubmit={this.handleSubmit}>
           <input type="text" onChange={this.handleBody} value={this.state.body} placeholder={`Message #${ this.props.channel ? this.props.channel.name : '' }`}/>
           <button>Post</button>

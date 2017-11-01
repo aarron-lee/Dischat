@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router-dom';
-import { getMessages, createMessage, receiveMessage } from '../../actions/message_actions';
+import { getMessages, createMessage, receiveMessage, createImageMessage } from '../../actions/message_actions';
 import MembersList from "./members_container";
 import MessageList from "./message_list";
 
@@ -15,14 +15,10 @@ class MessagesList extends React.Component{
 
   }
 
-  formModal(){
-    // <MyModal component={myForm}  closeModal={this.props.closeModal}/>
+  addImagePostModal(){
     return(
-        <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
-          <AddChannelForm
-            chatroom={this.props.chatroom}
-            addChannel={this.props.addChannel}
-            errors={this.props.errors} />
+        <div className="modal-backdrop add-image-message" onClick={() => this.props.closeModal()} >
+          <h2>ADD IMAGE MODAL!</h2>
         </div>);
 
   }
@@ -45,10 +41,17 @@ class MessagesList extends React.Component{
       channelDescription = this.props.channel.description;
     }
 
+    let addImageModal = false;
+
+    if(this.props.modal == "addImagePostModal"){
+      addImageModal = true;
+    }
+
 
     return (
       <section className="messages-container">
         <div className="messages-header">
+          {addImageModal ? this.addImagePostModal() : ''}
           <div className="messages-channel-container">
             <span style={{'display': 'flex'}}>
               {this.getHashSymbol()} {channelName}
@@ -63,7 +66,11 @@ class MessagesList extends React.Component{
             <MessageList messages={this.props.messages}
               users={this.props.users}
               createMessage={this.props.createMessage}
-              channel={this.props.channel}/>
+              channel={this.props.channel}
+              createImageMessage={this.props.createImageMessage}
+              openModal={this.props.openModal}
+              closeModal={this.props.closeModal}
+              />
 
           </section>
           <MembersList />
@@ -156,6 +163,7 @@ function mapDispatchToProps(dispatch, ownProps){
     getMessages: (channelId) => dispatch( getMessages(channelId) ),
     receiveMessage: (message) => dispatch( receiveMessage(message) ),
     createMessage: (message) => dispatch( createMessage(message) ),
+    createImageMessage: (message) => dispatch( createImageMessage(message) ),
   };
 }
 

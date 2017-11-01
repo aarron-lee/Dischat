@@ -73,3 +73,15 @@ export const deleteMessage = (messageId) =>{
     );
   }
 }
+
+
+export const createImageMessage = (message) =>{
+  return (dispatch)=>{
+    let success = (message) => dispatch(receiveMessage(message));
+    let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
+    return MessageAPIUtil.createImageMessage(message).then(
+      success,
+      failure
+    );
+  }
+}

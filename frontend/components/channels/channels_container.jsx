@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getChannels, createChannel, updateChannel, receiveChannel } from '../../actions/channel_actions';
-import { logout } from '../../actions/session_actions';
+import { logout, updateCurrentUser } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import AddChannelForm from './add_channel_form';
@@ -55,7 +55,12 @@ class ChannelList extends React.Component{
   editUserModal(){
     return(
         <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
-          <EditUserForm logout={this.props.logout}/>
+          <EditUserForm
+            logout={this.props.logout}
+            updateUser={this.props.updateUser}
+            currentUser={this.props.currentUser}
+            closeModal={this.props.closeModal}
+            />
         </div>);
   }
 
@@ -262,6 +267,7 @@ function mapDispatchToProps(dispatch, ownProps){
     fetchChannels: (chatroomId) => dispatch( getChannels(chatroomId) ),
     addChannel: (channel) => dispatch( createChannel(channel) ),
     updateChannel: (channel) => dispatch( updateChannel(channel)),
+    updateUser: (user) => dispatch( updateCurrentUser(user)),
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
     receiveChannel: (channel) => dispatch( receiveChannel(channel) ),

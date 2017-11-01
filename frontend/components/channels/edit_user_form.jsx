@@ -7,10 +7,11 @@ class EditUserForm extends React.Component{
   constructor(props){
     super(props);
 
-    // this.state={
-    //   name: this.props.channel.name,
-    //   description: this.props.channel.description,
-    // }
+    this.state={
+      email_address: this.props.currentUser.email_address,
+      username: this.props.currentUser.username,
+      password: '',
+    }
 
     this.handleChange = this.handleChange.bind(this);
     this.handlePropagation = this.handlePropagation.bind(this);
@@ -32,52 +33,53 @@ class EditUserForm extends React.Component{
 
   handleEdit(event){
     event.preventDefault();
-    // this.refs['btn-disable'].setAttribute("disabled", "disabled");
-    // let newChannel = { id: this.props.channel.id,
-    //   name: this.state.name,
-    //   description: this.state.description }
-    // this.props.updateChannel(newChannel);
-    // this.setState({
-    //   name: '',
-    //   description: '',
-    // });
+    this.refs['btn-disable-update-user'].setAttribute("disabled", "disabled");
+
+    let updatedUser = {};
+
+    if( this.state.email_address.length > 0 ){
+      updatedUser['email_address'] = this.state.email_address;
+    }
+    if( this.state.username.length > 0 ){
+      updatedUser['username'] = this.state.username;
+    }
+    if( this.state.password.length > 0 ){
+      updatedUser['password'] = this.state.password;
+    }
+
+    this.props.updateUser(updatedUser);
+    this.props.closeModal();
+
   }
 
   handleLogout(event){
     event.preventDefault();
+    this.refs['btn-disable-logout'].setAttribute("disabled", "disabled");
     this.props.logout();
   }
 
 
   render(){
-    // joinChatroom chatroomId
-    // createChatroom chatroom
-
-//     <div className="chat-form-errors">
-//       {this.props.errors}
-//     </div>
-//     <div className="chatroom-forms-container">
-//       <div className="chat-form" >
-//         <h2 style={ {color: 'black' }}>Edit a Channel</h2>
-//         <form className="chat-form" onSubmit={this.handleEdit}>
-//           <label className="auth-form-label">Name: <br/>
-//           <input type="text" onChange={this.handleChange('name')} value={this.state.name}/>
-//         </label>
-//         <label className="auth-form-label">Description: <br/>
-//         <input type="text" onChange={this.handleChange('description')} value={this.state.description}/>
-//       </label>
-//       <button ref="btn-disable">Edit</button>
-//     </form>
-//   </div>
-// </div>
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
         <h2 style={ {color: 'black' }}>Settings</h2>
+          <form className="chat-form" onSubmit={this.handleEdit}>
+            <label className="auth-form-label">Email: <br/>
+              <input type="text" onChange={this.handleChange('email_address')} value={this.state.email_address}/>
+            </label>
+            <label className="auth-form-label">Username: <br/>
+              <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
+            </label>
+            <label className="auth-form-label">Password: <br/>
+              <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
+            </label>
 
-
+            <button ref="btn-disable-update-user">Update</button>
+          </form>
+        <hr/>
         <form className="chat-form" onSubmit={this.handleLogout}>
-          <button ref="btn-disable">Logout</button>
+          <button ref="btn-disable-logout" style={ {width: '155px' }}>Logout</button>
         </form>
 
       </div>

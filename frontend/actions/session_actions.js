@@ -64,3 +64,16 @@ export const signup = (user) => {
     );
   }
 }; // end signup thunk
+
+
+export const updateCurrentUser = (user) => {
+  return function(dispatch){
+    let success = (user) => dispatch(receiveCurrentUser(user));
+    let failure = (errors) => dispatch(receiveSessionErrors(errors));
+
+    return APIUtil.update(user).then(
+      success,
+      failure
+    );
+  }
+}; // end signup thunk

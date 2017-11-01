@@ -1,5 +1,4 @@
 
-
 // POST api/users #create user
 export const signup = (user) =>{
   return $.ajax(
@@ -43,4 +42,12 @@ export const logout = () =>{
       url: '/api/sessions',
     }
   );
+}
+
+export const update = (user) =>{
+  return $.ajax({
+      method: 'patch',
+      url: '/api/users/current',
+      data: { user }
+  });
 }

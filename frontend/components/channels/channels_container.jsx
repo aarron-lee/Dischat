@@ -7,6 +7,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import AddChannelForm from './add_channel_form';
 import EditChannelForm from './edit_channel_form';
+import EditUserForm from './edit_user_form';
 import ChannelListItem from './channel_list_item';
 import User from '../users/user';
 
@@ -19,7 +20,10 @@ class ChannelList extends React.Component{
 
     this.handleAddChannel =  this.handleAddChannel.bind(this);
     this.handleEditChannel = this.handleEditChannel.bind(this);
+    this.handleUserSettings = this.handleUserSettings.bind(this);
+
     this.handlePusher = this.handlePusher.bind(this);
+    this.editUserModal = this.editUserModal.bind(this);
   }
 
 
@@ -46,6 +50,18 @@ class ChannelList extends React.Component{
             errors={this.props.errors} />
         </div>);
 
+  }
+
+  editUserModal(){
+    return(
+        <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
+          <EditUserForm logout={this.props.logout}/>
+        </div>);
+  }
+
+  handleUserSettings(event){
+    event.preventDefault();
+    this.props.openModal("editUserModal");
   }
 
   handleAddChannel(event){
@@ -112,6 +128,7 @@ class ChannelList extends React.Component{
       <div className="channels-container">
         {this.props.modal === "addChannelModal" ? this.formModal() : ''}
         {editChannelTxt === "editChannelModal" ? this.editChannelModal(editChannelId) : ''}
+        { this.props.modal === "editUserModal" ? this.editUserModal() : '' }
         <div className="chatroom-title">
           <div>
             {this.props.chatroom.title}
@@ -126,10 +143,7 @@ class ChannelList extends React.Component{
         <div className="channel-user-info">
           {userComponent}
 
-          <button onClick={() => this.props.logout()}>
-            <div className="logout-info-bubble">
-              Logout
-            </div>
+          <button onClick={this.handleUserSettings}>
             {this.getGear()}
 
             </button>

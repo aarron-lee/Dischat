@@ -11,6 +11,7 @@ class AddChatroomForm extends React.Component{
     this.state={
       title: '',
       id: '',
+      disabled: false,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,13 +28,15 @@ class AddChatroomForm extends React.Component{
 
   handleCreate(event){
     event.preventDefault();
-    this.refs['btn-disable'].setAttribute("disabled", "disabled");
+    this.setState({disabled: true});
+    this.refs['btn-disable-create'].setAttribute("disabled", "disabled");
     this.props.createChatroom({title: this.state.title});
   }
 
   handleJoin(event){
     event.preventDefault();
-    this.refs['btn-disable'].setAttribute("disabled", "disabled");
+    this.setState({disabled: true});
+    this.refs['btn-disable-join'].setAttribute("disabled", "disabled");
     this.props.joinChatroom(this.state.id);
   }
 
@@ -60,7 +63,7 @@ class AddChatroomForm extends React.Component{
               <label className="auth-form-label">Title: <br/>
               <input type="text" onChange={this.handleChange('title')} value={this.state.title}/>
             </label>
-            <button ref="btn-disable">Create</button>
+            <button ref='btn-disable-create'>Create</button>
           </form>
         </div>
         <div className="chat-form">
@@ -69,12 +72,13 @@ class AddChatroomForm extends React.Component{
             <label className="auth-form-label">Chatroom ID: <br/>
             <input type="number" onChange={this.handleChange('id')} value={this.state.id}/>
           </label>
-          <button ref="btn-disable">Join</button>
+          <button ref="btn-disable-join">Join</button>
         </form>
       </div>
         </div>
       </div>
     );
+
     return forms;
   }
 

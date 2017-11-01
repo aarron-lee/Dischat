@@ -1,6 +1,9 @@
 class Channel < ApplicationRecord
   validates :name, :chatroom_id, presence: true
 
+  validates :name, length: {maximum: 20}
+  validates :description, length: {maximum: 150}
+
   after_initialize :ensure_description
 
 

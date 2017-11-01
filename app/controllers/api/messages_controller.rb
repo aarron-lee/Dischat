@@ -17,7 +17,9 @@ class Api::MessagesController < ApplicationController
           author_id: @message.author_id,
           channel_id: @message.channel_id,
           body: @message.body,
-          created_at: @message.created_at
+          created_at: @message.created_at,
+          image_exists: @message.image.exists?,
+          image_url: @message.image.url(:medium)
         })
 
       render :show
@@ -72,7 +74,7 @@ class Api::MessagesController < ApplicationController
 
   private
   def message_params
-    params.require(:message).permit(:channel_id, :body)
+    params.require(:message).permit(:channel_id, :body, :image)
   end
 
 end

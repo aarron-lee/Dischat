@@ -9,6 +9,8 @@ messages.each do |message|
     body: message.body,
     author_id: message.author_id,
     created_at: message.created_at,
+    image_exists: message.image.exists?,
+    image_url: message.image.url(:medium)
   }
 end
 

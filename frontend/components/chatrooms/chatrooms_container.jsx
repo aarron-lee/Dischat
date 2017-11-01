@@ -54,7 +54,8 @@ class ChatroomList extends React.Component{
     }
     if(this.props.chatrooms && ((nextProps.chatrooms.length - this.props.chatrooms.length)  === 1) ){
       let nextChatroom = this.getNextChatroom(this.props.chatrooms, nextProps.chatrooms);
-      nextProps.history.push("/chatrooms/"+nextChatroom.id+"/channels/@channels/");
+      // nextProps.history.push("/chatrooms/"+nextChatroom.id+"/channels/@channels/");
+      <Redirect to={`/chatrooms/${nextChatroom.id}/channels/@channels/`}/>
     }
   }
 

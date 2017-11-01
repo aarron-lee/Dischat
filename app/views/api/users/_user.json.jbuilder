@@ -3,3 +3,4 @@ json.id user.id
 json.email_address user.email_address
 json.username user.username
 json.avatar_url asset_path(user.avatar.url)
+json.avatar_url_thumb asset_path(user.avatar.url(:thumb))

@@ -103,7 +103,7 @@ class MessageList extends React.Component{
 
       return (
         <div className="message-item" key={`message-${message.id}`}>
-          <img className={`message-portrait`} src={this.props.users[message.author_id].avatar_url} />
+          <img className={`message-portrait`} src={this.props.users[message.author_id].avatar_url_thumb} />
 
           <div className="message-content">
             <div>

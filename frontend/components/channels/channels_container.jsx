@@ -8,6 +8,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import AddChannelForm from './add_channel_form';
 import EditChannelForm from './edit_channel_form';
 import ChannelListItem from './channel_list_item';
+import User from '../users/user';
 
 class ChannelList extends React.Component{
 
@@ -75,6 +76,11 @@ class ChannelList extends React.Component{
 
 
   render(){
+    let userComponent = ''
+    if(this.props.currentUser){
+      userComponent = <User user={this.props.currentUser}/>;
+    }
+
     let channelComponents = [];
 
     let activeChannelId = this.state.activeChannelId;
@@ -118,8 +124,7 @@ class ChannelList extends React.Component{
         </ul>
 
         <div className="channel-user-info">
-          <div>{this.props.currentUser ?
-            this.props.currentUser.username : ''}</div>
+          {userComponent}
 
           <button onClick={() => this.props.logout()}>
             <div className="logout-info-bubble">

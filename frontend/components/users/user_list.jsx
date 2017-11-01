@@ -1,6 +1,6 @@
 
 import React from 'react';
-
+import User from './user';
 
 class UserList extends React.Component{
 
@@ -11,9 +11,7 @@ render(){
   let userElements = users.map( user =>{
     if(user && user.id){
       return <li key={`member-${user.id}`}>
-        <div className="userlist-item">
-          <img className='members-portrait' src={user.avatar_url}/><span>{user.username}</span>
-        </div>
+        <User user={user}/>
       </li>
     }
   });

@@ -12,7 +12,7 @@ render(){
     if(user && user.id){
       return <li key={`member-${user.id}`}>
         <div className="userlist-item">
-          <div className='members-portrait default-portrait'></div><span>{user.username}</span>
+          <img className='members-portrait' src={user.avatar_url}/><span>{user.username}</span>
         </div>
       </li>
     }

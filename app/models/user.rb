@@ -3,6 +3,9 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_attached_file :avatar, styles: { thumb: "50x50>" }, default_url: "default-avatar.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
 #--------------
   has_many :chatrooms_owned,
   foreign_key: :owner_id,

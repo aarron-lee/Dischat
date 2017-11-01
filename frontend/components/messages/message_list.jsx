@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getMembers } from '../../actions/chatroom_actions';
 import UserList from "../users/user_list";
+import ImageMessageForm from "./image_message_form";
 
 class MessageList extends React.Component{
 
@@ -21,13 +22,18 @@ class MessageList extends React.Component{
   addImagePostModal(){
     return(
         <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
-          <h2>ADD IMAGE MODAL!</h2>
+          <ImageMessageForm
+            createImageMessage={this.props.createImageMessage}
+            closeModal={this.props.closeModal}
+            channelId={this.props.channel.id}
+            />
         </div>);
 
   }
 
   handleAddImageModal(event){
     event.preventDefault();
+    event.stopPropagation();
     this.props.openModal("addImagePostModal");
   }
 
@@ -103,10 +109,21 @@ class MessageList extends React.Component{
     return dateStr;
   }
 
+  getImageComponent(message){
+    if( message.image_exists ){
+      return <div style={{ "max-width": "300px" }}>
+        <br/>
+        <img src={message.image_url}/>
+      </div>
+    }
+    return '';
+  }
 
   render(){
 
     let messageEls = this.props.messages.map((message) =>{
+
+      let imgComponent = this.getImageComponent(message);
 
       let date = this.getDateString(new Date(message.created_at));
         return (
@@ -124,6 +141,7 @@ class MessageList extends React.Component{
               </div>
               <div className="message-body">
                 {message.body}
+                {imgComponent}
               </div>
             </div>
           </div>);// end return inside map
@@ -142,8 +160,8 @@ class MessageList extends React.Component{
         <div id='message-overflow' className="overflow-y-scroll">
           {messageEls}
         </div>
-        <button onClick={this.handleAddImageModal}>+</button>
         <form className="message-create-form" onSubmit={this.handleSubmit}>
+          <button onClick={this.handleAddImageModal}>+</button>
           <input type="text" onChange={this.handleBody} value={this.state.body} placeholder={`Message #${ this.props.channel ? this.props.channel.name : '' }`}/>
           <button>Post</button>
         </form>

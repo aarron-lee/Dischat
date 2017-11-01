@@ -10,7 +10,7 @@ messages.each do |message|
     author_id: message.author_id,
     created_at: message.created_at,
     image_exists: message.image.exists?,
-    image_url: message.image.url(:medium)
+    image_url: asset_path(message.image.url(:medium))
   }
 end
 

@@ -35,6 +35,7 @@ gem 'figaro'
 gem 'pusher'
 
 gem 'paperclip'
+gem 'paperclip-meta'
 
 gem 'aws-sdk', '< 3.0'
 

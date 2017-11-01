@@ -111,10 +111,9 @@ class MessageList extends React.Component{
 
   getImageComponent(message){
     if( message.image_exists ){
-      return <div style={{ "max-width": "300px" }}>
-        <br/>
-        <img src={message.image_url}/>
-      </div>
+      return <span style={{"maxWidth": "400px"}} >
+        <img src={message.image_url} style={{"maxWidth": message.image_width}} />
+      </span>
     }
     return '';
   }
@@ -141,8 +140,8 @@ class MessageList extends React.Component{
               </div>
               <div className="message-body">
                 {message.body}
-                {imgComponent}
               </div>
+              {imgComponent}
             </div>
           </div>);// end return inside map
     });// end map
@@ -172,8 +171,10 @@ class MessageList extends React.Component{
 
   componentDidUpdate(){
     let overflowMessages = document.getElementById('message-overflow');
-    overflowMessages.scrollTop = overflowMessages.scrollHeight;
+    overflowMessages.scrollTop = overflowMessages.scrollHeight*2;
   }
+
+
 
 }
 

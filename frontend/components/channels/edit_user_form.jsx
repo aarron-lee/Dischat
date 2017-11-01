@@ -30,7 +30,6 @@ class EditUserForm extends React.Component{
 
   handleFile(event){
     this.setState( { imageFile :  event.currentTarget.files[0] } );
-    debugger
   }
 
   handlePropagation(event){

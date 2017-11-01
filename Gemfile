@@ -34,6 +34,10 @@ gem 'figaro'
 
 gem 'pusher'
 
+gem 'paperclip'
+
+gem 'aws-sdk', '< 3.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

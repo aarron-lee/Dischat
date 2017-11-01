@@ -30,6 +30,7 @@ class SessionForm extends React.Component{
 
   handleGuest(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     const tmpUsername = "Guest".concat(Math.round(10000* Math.random(0,1)) )
     this.props.loginGuest( { username: tmpUsername,
                             email_address: tmpUsername,
@@ -39,6 +40,7 @@ class SessionForm extends React.Component{
 
   handleSubmit(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     this.props.formAction({ username: this.state.username,
       email_address: this.state.email_address,
       password: this.state.password,
@@ -57,14 +59,14 @@ class SessionForm extends React.Component{
                 <label className="auth-form-label-sm">Already have an account? </label>
                 <Link className="session-other-form" to="/login">Login</Link>
                 <label className="auth-form-label-sm"> or login as a guest </label>
-                <button className="session-other-form" onClick={this.handleGuest}>Here</button>
+                <button ref="btn-disable" className="session-other-form" onClick={this.handleGuest}>Here</button>
               </div>
     } else {
       return <div>
                 <label className="auth-form-label-sm">Need an account? </label>
                 <Link className="session-other-form" to="/signup">Register</Link>
                 <label className="auth-form-label-sm"> or login as a guest </label>
-                <button className="session-other-form" onClick={this.handleGuest}>Here</button>
+                <button ref="btn-disable" className="session-other-form" onClick={this.handleGuest}>Here</button>
               </div>
     }
   }
@@ -102,7 +104,7 @@ class SessionForm extends React.Component{
                 { signupPage ? this.userInputLabel(): ''}
                 { signupPage ? this.userInput(): ''}
                 <label className="auth-form-label">Password</label> <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
-              <button>{ signupPage ? "Sign Up" : "Login"}</button>
+              <button ref="btn-disable">{ signupPage ? "Sign Up" : "Login"}</button>
             </form>
             {this.navLink()}
           </section>

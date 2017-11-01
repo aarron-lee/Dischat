@@ -31,6 +31,7 @@ class EditChannelModal extends React.Component{
 
   handleEdit(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     let newChannel = { id: this.props.channel.id,
       name: this.state.name,
       description: this.state.description }
@@ -62,7 +63,7 @@ class EditChannelModal extends React.Component{
               <label className="auth-form-label">Description: <br/>
               <input type="text" onChange={this.handleChange('description')} value={this.state.description}/>
             </label>
-            <button>Edit</button>
+            <button ref="btn-disable">Edit</button>
           </form>
         </div>
       </div>

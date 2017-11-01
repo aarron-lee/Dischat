@@ -27,11 +27,13 @@ class AddChatroomForm extends React.Component{
 
   handleCreate(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     this.props.createChatroom({title: this.state.title});
   }
 
   handleJoin(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     this.props.joinChatroom(this.state.id);
   }
 
@@ -58,7 +60,7 @@ class AddChatroomForm extends React.Component{
               <label className="auth-form-label">Title: <br/>
               <input type="text" onChange={this.handleChange('title')} value={this.state.title}/>
             </label>
-            <button>Create</button>
+            <button ref="btn-disable">Create</button>
           </form>
         </div>
         <div className="chat-form">
@@ -67,7 +69,7 @@ class AddChatroomForm extends React.Component{
             <label className="auth-form-label">Chatroom ID: <br/>
             <input type="number" onChange={this.handleChange('id')} value={this.state.id}/>
           </label>
-          <button>Join</button>
+          <button ref="btn-disable">Join</button>
         </form>
       </div>
         </div>

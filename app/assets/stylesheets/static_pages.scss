@@ -12,6 +12,10 @@
   height: 100%;
 }
 
+button:disabled{
+  filter: brightness(150%);
+}
+
 html, body{
   margin: 0;
   height: 100%;

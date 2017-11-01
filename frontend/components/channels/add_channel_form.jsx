@@ -31,6 +31,7 @@ class AddChannelForm extends React.Component{
 
   handleCreate(event){
     event.preventDefault();
+    this.refs['btn-disable'].setAttribute("disabled", "disabled");
     let newChannel = { chatroom_id: this.props.chatroom.id,
       name: this.state.name,
       description: this.state.description }
@@ -62,7 +63,7 @@ class AddChannelForm extends React.Component{
               <label className="auth-form-label">Description: <br/>
               <input type="text" onChange={this.handleChange('description')} value={this.state.description}/>
             </label>
-            <button>Create</button>
+            <button ref="btn-disable">Create</button>
           </form>
         </div>
       </div>

@@ -48,6 +48,9 @@ export const update = (user) =>{
   return $.ajax({
       method: 'patch',
       url: '/api/users/current',
-      data: { user }
+      contentType: false,
+      processData: false,
+      dataType: 'json',
+      data: user
   });
 }

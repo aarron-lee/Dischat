@@ -19,6 +19,7 @@ class EditUserForm extends React.Component{
     this.handleEdit = this.handleEdit.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleFile = this.handleFile.bind(this);
   }
 
   handleChange(type){
@@ -27,6 +28,10 @@ class EditUserForm extends React.Component{
     );
   }
 
+  handleFile(event){
+    this.setState( { imageFile :  event.currentTarget.files[0] } );
+    debugger
+  }
 
   handlePropagation(event){
     event.stopPropagation()
@@ -37,19 +42,27 @@ class EditUserForm extends React.Component{
     event.preventDefault();
     this.refs['btn-disable-update-user'].setAttribute("disabled", "disabled");
 
-    let updatedUser = {};
+    let formData = new FormData();
+
+    // let updatedUser = {};
 
     if( this.state.email_address.length > 0 ){
-      updatedUser['email_address'] = this.state.email_address;
+      // updatedUser['email_address'] = this.state.email_address;
+      formData.append("user[email_address]", this.state.email_address );
     }
     if( this.state.username.length > 0 ){
-      updatedUser['username'] = this.state.username;
+      // updatedUser['username'] = this.state.username;
+      formData.append("user[username]", this.state.username );
     }
     if( this.state.password.length > 0 ){
-      updatedUser['password'] = this.state.password;
+      // updatedUser['password'] = this.state.password;
+      formData.append("user[password]", this.state.password );
+    }
+    if( this.state.imageFile ){
+      formData.append("user[avatar]", this.state.imageFile );
     }
 
-    this.props.updateUser(updatedUser);
+    this.props.updateUser(formData);
     this.props.closeModal();
 
   }
@@ -84,7 +97,7 @@ class EditUserForm extends React.Component{
               <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
             </label>
             <label className="update-current-user-form-label">Profile Picture: <br/>
-              <input type="file" onChange={this.handleChange('imageFile')} value={this.state.imageFile}/>
+              <input type="file" onChange={this.handleFile} />
             </label>
 
             <button ref="btn-disable-update-user">Update</button>

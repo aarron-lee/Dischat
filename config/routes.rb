@@ -22,6 +22,14 @@ Rails.application.routes.draw do
 
     resources :messages, only: [:create, :update, :destroy]
 
+    resources :friends, only: [:index]
+
+    resources :friend_requests, only: [:create] do
+      # get 'requested', on: :collection
+      # get 'pending', on: :collection
+      get 'requests_status', on: :collection
+      post 'approve', on: :member
+    end
 
   end
 

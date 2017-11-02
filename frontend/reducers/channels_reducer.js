@@ -7,6 +7,9 @@ import {
   RECEIVE_MESSAGE,
   DELETE_MESSAGE,
 } from '../actions/message_actions';
+import {RECEIVE_FRIENDS,
+RECEIVE_FRIEND} from '../actions/friend_actions';
+
 
 import merge from 'lodash/merge';
 
@@ -56,6 +59,11 @@ function channelsReducer(state = {}, action){
         [action.message.id.toString()];
       }
       return merge(newState, { [currentChannel.id] : currentChannel});
+
+    case RECEIVE_FRIENDS:
+      return merge(newState, action.channels);
+    case RECEIVE_FRIEND:
+      return merge(newState, {[action.channel.id] : action.channel} );
 
       case RECEIVE_CURRENT_USER:
       if (! action.user ){

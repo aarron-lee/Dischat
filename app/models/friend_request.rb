@@ -1,7 +1,8 @@
 class FriendRequest < ApplicationRecord
-  validates :user_from_id, :user_to_id, :approved, presence: true
+  validates :user_from_id, :user_to_id, presence: true
 
-  belongs to :user_from,
+
+  belongs_to :user_from,
   foreign_key: :user_from_id,
   class_name: :User
 
@@ -17,5 +18,5 @@ class FriendRequest < ApplicationRecord
   def ensure_approved_status
     self.approved ||= false
   end
-  
+
 end

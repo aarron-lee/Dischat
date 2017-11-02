@@ -1,7 +1,7 @@
 class Friend < ApplicationRecord
   validates :user_id, :friend_id, :channel_id, presence: true
 
-  belongs to :user,
+  belongs_to :user,
   foreign_key: :user_id,
   class_name: :User
 

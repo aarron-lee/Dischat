@@ -20,9 +20,9 @@ class Api::FriendsController < ApplicationController
       @f2 = Friend.new
 
       @f1.user_id = @user1.id
-      @f1.friend_id = @f2.id
+      @f1.friend_id = @user2.id
 
-      @f2.user_id = @f2.id
+      @f2.user_id = @user2.id
       @f2.friend_id = @user1.id
 
       @channel = Channel.new
@@ -38,8 +38,8 @@ class Api::FriendsController < ApplicationController
         end
         # success! return channel and other user info
         render :create, status: 200
-      rescue ActiveRecord::RecordInvalid => _invalid
-        render json: "Error, try again", status: 400
+      rescue ActiveRecord::RecordInvalid => invalid
+        render json: invalid , status: 400
       end
 
     else

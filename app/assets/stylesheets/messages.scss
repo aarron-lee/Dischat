@@ -20,6 +20,18 @@
   align-items: center;
 }
 
+.add-message-image-button{
+  color: #36393e;
+  background-color: darken(white, 20%);
+  border-radius: 50%;
+  width: 20px;
+  text-align: center;
+}
+.add-message-image-button:hover{
+  background-color: white;
+  cursor: pointer;
+}
+
 .messages-body{
   display: flex;
   flex-direction: row;

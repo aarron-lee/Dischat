@@ -4,4 +4,9 @@ class Api::FriendsController < ApplicationController
 
   end
 
+  def create
+
+
+  end
+
 end

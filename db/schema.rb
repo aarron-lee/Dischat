@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102144658) do
+ActiveRecord::Schema.define(version: 20171102155657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 20171102144658) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_chatrooms_on_owner_id"
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "user_from_id", null: false
+    t.integer "user_to_id", null: false
+    t.boolean "approved", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_from_id"], name: "index_friend_requests_on_user_from_id"
+    t.index ["user_to_id"], name: "index_friend_requests_on_user_to_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.integer "channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_friends_on_channel_id"
+    t.index ["friend_id"], name: "index_friends_on_friend_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "members", force: :cascade do |t|

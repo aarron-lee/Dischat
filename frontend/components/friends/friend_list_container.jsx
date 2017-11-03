@@ -8,6 +8,7 @@ import { logout, updateCurrentUser } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import EditUserForm from '../channels/edit_user_form';
+import AddFriendForm from './add_friend_form';
 import User from '../users/user';
 import {getFriends,
   createFriend} from '../../actions/friend_actions';
@@ -17,9 +18,14 @@ class FriendList extends React.Component{
   constructor(props){
     super(props);
 
-    this.handleUserSettings = this.handleUserSettings.bind(this);
+    this.state = {
+      activeChat:""
+    }
 
+    this.handleUserSettings = this.handleUserSettings.bind(this);
+    this.setActiveFriend = this.setActiveFriend.bind(this);
     this.editUserModal = this.editUserModal.bind(this);
+    this.handleAddFriend = this.handleAddFriend.bind(this);
   }
 
 
@@ -35,11 +41,33 @@ class FriendList extends React.Component{
           />
       </div>);
     }
+
+  addFriendModal(){
+    return(
+      <div className="modal-backdrop" onClick={() => this.props.closeModal()} >
+        <AddFriendForm
+          logout={this.props.logout}
+          createFriend={this.props.createFriend}
+          closeModal={this.props.closeModal}
+          />
+      </div>);
+    }
+
   handleUserSettings(event){
     event.preventDefault();
     this.props.openModal("editUserModal");
   }
 
+  handleAddFriend(event){
+    event.preventDefault();
+    this.props.openModal("addFriendModal");
+  }
+
+
+  setActiveFriend(event){
+    // debugger
+
+  }
 
 
 
@@ -57,23 +85,19 @@ class FriendList extends React.Component{
       userComponent = <User user={this.props.currentUser}/>;
     }
 
-    let editChannelTxt = '';
-    let editChannelId = undefined;
-
-    if(this.props.modal){
-      let tmp = this.props.modal.split("_");
-      if(tmp.length ==2 && tmp[0] === "editChannelModal"){
-        editChannelTxt = tmp[0];
-        editChannelId = tmp[1];
-      }
-    }
+    let activeChat = this.state.activeChat;
 
     let friendComponents = '';
     let linkPath = this.props.match.path;
     if( this.props.friends.length > 0 ){
       friendComponents = this.props.friends.map( (friend) =>{
+        if(!friend){
+          return '';
+        }
         return (
-          <Link key={friend.id} to={`${linkPath}/${friend.channel_id}`}>
+          <Link key={friend.id}
+            to={`${linkPath}/${friend.channel_id}`}
+            onClick={this.setActiveFriend} >
             <User user={friend}/>
           </Link>
         )
@@ -84,11 +108,14 @@ class FriendList extends React.Component{
     return (
       <div className="channels-container">
         { this.props.modal === "editUserModal" ? this.editUserModal() : '' }
+        { this.props.modal === "addFriendModal" ? this.addFriendModal() : '' }
         <div className="chatroom-title">
           <div>
             Direct Messages
           </div>
         </div>
+
+        <button className="add-friend-button" onClick={this.handleAddFriend}>test button</button>
 
         <ul className="channel-list-items">
           {this.props.friends.length ? '' : "Sorry, no friends yet... :(" }
@@ -140,7 +167,6 @@ class FriendList extends React.Component{
 
   componentWillReceiveProps(nextProps){
 
-
   }// end componentWillReceiveProps
 
   componentDidMount(){
@@ -184,6 +210,7 @@ function mapDispatchToProps(dispatch, ownProps){
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
     fetchFriends: () => dispatch( getFriends() ),
+    createFriend: (friendId) => dispatch( createFriend(friendId) )
   };
 }
 

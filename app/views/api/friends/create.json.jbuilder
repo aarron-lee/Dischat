@@ -9,5 +9,6 @@ end
 json.friend do
   json.set! @user2.id do
     json.partial!('api/users/user', user: @user2)
+    json.channel_id @channel.id
   end
 end

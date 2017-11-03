@@ -11,7 +11,8 @@ function friendsReducer(state = [], action){
     case RECEIVE_FRIENDS:
       return Object.keys(action.friends);
     case RECEIVE_FRIEND:
-      return merge(newState, action.friend.id);
+      newState.push(Object.keys(action.friend)[0]);
+      return newState;
     case RECEIVE_CURRENT_USER:
         if (! action.user ){
           return [];

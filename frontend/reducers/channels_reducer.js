@@ -63,7 +63,8 @@ function channelsReducer(state = {}, action){
     case RECEIVE_FRIENDS:
       return merge(newState, action.channels);
     case RECEIVE_FRIEND:
-      return merge(newState, {[action.channel.id] : action.channel} );
+      let channelId = Object.keys(action.channel)[0];
+      return merge({}, state, { [channelId] : action.channel[channelId] } );
 
       case RECEIVE_CURRENT_USER:
       if (! action.user ){

@@ -8,10 +8,16 @@ class Api::FriendsController < ApplicationController
 
   def create
     @user1 = current_user
-    @user2 = User.find(params[:id])
+    @user2
+
+    begin
+      @user2 = User.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => _invalid
+      return render json: "User does not exist", status: 400
+    end
 
     if params[:id].nil?
-      render json: "no id provided", status: 422
+      return render json: "no id provided", status: 422
     end
 
     if @user2

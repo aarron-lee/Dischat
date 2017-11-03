@@ -74,7 +74,8 @@ function usersReducer(state = {}, action){
     case RECEIVE_FRIENDS:
       return merge({}, state, action.friends)
     case RECEIVE_FRIEND:
-      return merge({}, state, { [action.friend.id] : action.friend} );
+      let friendId = Object.keys(action.friend)[0];
+      return merge({}, state, { [friendId] : action.friend[friendId] } );
 
     case RECEIVE_MESSAGE:
       newState = merge({}, state);

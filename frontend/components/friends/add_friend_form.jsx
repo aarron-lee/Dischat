@@ -55,11 +55,13 @@ class AddFriendForm extends React.Component{
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
         <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
+          <h2 style={ {color: 'black' }}>Add a Friend</h2>
+
           <form className="chat-form" onSubmit={this.handleAddFriend}>
               <label className="update-current-user-form-label">Username: <br/>
                 <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
               </label>
-              <label className="update-current-user-form-label"> User ID: <br/>
+              <label className="update-current-user-form-label"> User ID: (optional) <br/>
               <input type="number" onChange={this.handleChange('userId')} value={this.state.userId}/>
             </label>
             <button ref="btn-disable-add-friend">Add Friend</button>

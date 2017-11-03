@@ -27,11 +27,11 @@ export const receiveFriend = ({friend, channel}) =>{
 //api util
 
 // create friend
-const createFriendDB = (userId) =>{
+const createFriendDB = ({username, id}) =>{
   return $.ajax({
     method: 'post',
     url: '/api/friends',
-    data: { id: userId } } );
+    data: { id, username } } );
 }
 	//  returns obj w/ 2 keys, friend, channel
 	//  {
@@ -64,11 +64,11 @@ export const getFriends = () =>{
   }
 }
 
-export const createFriend = (userId) =>{
+export const createFriend = (user) =>{
   return (dispatch)=>{
     let success = (payload) => dispatch(receiveFriend(payload));
     let failure = (errors) => dispatch({type: "RECEIVE_ERRORS", errors});
-    return createFriendDB(userId).then(
+    return createFriendDB(user).then(
       success,
       failure
     );

@@ -7,7 +7,8 @@ class AddFriendForm extends React.Component{
     super(props);
 
     this.state={
-      userId: -1
+      userId: 0,
+      username: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,8 +32,11 @@ class AddFriendForm extends React.Component{
     event.preventDefault();
     this.refs['btn-disable-add-friend'].setAttribute("disabled", "disabled");
 
-    if(parseInt(this.state.userId) > 0 ){
-      this.props.createFriend(this.state.userId);
+    if(this.state.username.length > 0){
+      this.props.createFriend( {username: this.state.username} );
+    }
+    else if(parseInt(this.state.userId) > 0 ){
+      this.props.createFriend( {id: this.state.userId} );
     }
 
     this.setState({userId: -1});
@@ -47,25 +51,17 @@ class AddFriendForm extends React.Component{
 
 
   render(){
-//     <h2 style={ {color: 'black' }}>Update User Settings</h2>
-//       <label className="update-current-user-form-label">Email: <br/>
-//       <input type="text" onChange={this.handleChange('email_address')} value={this.state.email_address}/>
-//     </label>
-
-//   <label className="update-current-user-form-label">Password: <br/>
-//   <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
-// </label>
-// <label className="update-current-user-form-label">Profile Picture: <br/>
-// <input type="file" onChange={this.handleFile} />
-// </label>
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
         <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
           <form className="chat-form" onSubmit={this.handleAddFriend}>
-              <label className="update-current-user-form-label">User ID: <br/>
-                <input type="number" onChange={this.handleChange('userId')} value={this.state.userId}/>
+              <label className="update-current-user-form-label">Username: <br/>
+                <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
               </label>
+              <label className="update-current-user-form-label"> User ID: <br/>
+              <input type="number" onChange={this.handleChange('userId')} value={this.state.userId}/>
+            </label>
             <button ref="btn-disable-add-friend">Add Friend</button>
           </form>
       </div>

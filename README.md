@@ -15,32 +15,49 @@ The  frontend is housed in the ```/frontend``` directory, which hooks into the s
 
 #### Live Chat
 
-![live chat](https://github.com/aclee91/Dischat/blob/master/documentation/features/live_chat.gif?raw=true)
+![live chat](documentation/features/live_chat.gif?raw=true)
+
+Messages are stored at the database level, and are associated with a `user_id` and `channel_id`.
+
+Images can be attached to messages, which are hosted on AWS S3 instances. Image processing is handled by rails.
+
+Realtime updating is handled by Pusher, where a pusher instance is constructed on a per-channel basis. Pusher events provide message data in it's payload, which gets loaded into the redux state in real-time.
 
 #### Attach Images to Messages
-![upload images](https://github.com/aclee91/Dischat/blob/master/documentation/features/live_chat_images.gif?raw=true)
+![upload images](documentation/features/live_chat_images.gif)
 
 
 
 #### Create Chatrooms
-![create chatroom](https://github.com/aclee91/Dischat/blob/master/documentation/features/create_chatroom.gif?raw=true)
+![create chatroom](documentation/features/create_chatroom.gif)
 
+Users can freely create chatrooms. Each chatroom can have many channels, it starts with a default `#general` channel
 
+#### Join Chatrooms
+![join chatroom](documentation/features/join_chatroom.gif)
+
+Users can freely join chatrooms via chatroom ID.
 
 
 #### Create + Edit Channels
 
-![create channels](https://github.com/aclee91/Dischat/blob/master/documentation/features/create%20channel.gif?raw=true)
+![create channels](documentation/features/create%20channel.gif)
+
+Channels are where messaging takes place, a chatroom can have many channels.
 
 
 
 #### Direct Messaging
-![direct messaging](https://github.com/aclee91/Dischat/blob/master/documentation/features/direct_message.gif?raw=true)
+![direct messaging](documentation/features/direct_message.gif)
+
+DMs are private channels used to talk privately with others.
 
 
 
 #### Update Profile Picture
-![update profile picture](https://github.com/aclee91/Dischat/blob/master/documentation/features/update_profile_picture.gif?raw=true)
+![update profile picture](documentation/features/update_profile_picture.gif)
+
+Images are hosted on AWS
 
 
 

@@ -23,6 +23,38 @@ class User < ApplicationRecord
   foreign_key: :author_id,
   class_name: :Message
 
+  has_many :friend_ids,
+  foreign_key: :user_id,
+  class_name: :Friend
+
+  has_many :friends,
+  through: :friend_ids,
+  source: :friend
+
+  has_many :friend_channels,
+  through: :friend_ids,
+  source: :channel
+
+
+
+  has_many :requested_friends_ids,
+  foreign_key: :user_from_id,
+  class_name: :FriendRequest
+
+  has_many :pending_friends_ids,
+  foreign_key: :user_to_id,
+  class_name: :FriendRequest
+
+  has_many :requested_friends,
+  through: :requested_friends_ids,
+  source: :user_to
+
+  has_many :pending_friends,
+  through: :pending_friends_ids,
+  source: :user_from
+
+
+
 
 #--------------
 

@@ -25,15 +25,18 @@ class ChatroomListItem extends React.Component{
   render(){
     let activeChatroom = this.props.activeChatroomId == this.props.chatroom.id;
 
+    // <label className="chatroom-title-label">
+    //   {this.props.chatroom.title}
+    // </label>
     return (
       <div className="chatroom-list-item-container">
         <Link onClick={this.handleClick} className={`chatroom-list-item ${activeChatroom ? 'active' : '' }`} to={`/chatrooms/${this.props.chatroom.id}/channels/@channels`}>
           <span >
             {this.props.chatroom.title[0].toUpperCase()}
           </span>
-          <label className="chatroom-title-label">
-            {this.props.chatroom.title}
-          </label>
+          <div className="chatroom-bubble-container">
+            <div className="info-bubble">{this.props.chatroom.title}</div>
+          </div>
         </Link>
       </div>
     )

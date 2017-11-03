@@ -1,5 +1,7 @@
 class Channel < ApplicationRecord
-  validates :name, :chatroom_id, presence: true
+  validates :name, presence: true
+
+  validates :chatroom, presence: true, allow_nil: true
 
   validates :name, length: {maximum: 20}
   validates :description, length: {maximum: 150}
@@ -9,7 +11,8 @@ class Channel < ApplicationRecord
 
   belongs_to :chatroom,
   foreign_key: :chatroom_id,
-  class_name: :Chatroom
+  class_name: :Chatroom,
+  optional: true
 
   has_many :messages,
   foreign_key: :channel_id,

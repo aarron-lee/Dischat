@@ -22,7 +22,7 @@ class AddChatroomButton extends React.Component{
   render(){
 
     return (
-      <button className="add-chatroom-button" onClick={this.handleClick}>+</button>
+      <button style={{minWidth: "60px", minHeight: "60px"}} className="add-chatroom-button" onClick={this.handleClick}>+</button>
     );
 
   }

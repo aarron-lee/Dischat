@@ -10,7 +10,8 @@ import {
   RECEIVE_MESSAGE,
   DELETE_MESSAGE,
 } from '../actions/message_actions';
-
+import {RECEIVE_FRIENDS,
+RECEIVE_FRIEND} from '../actions/friend_actions';
 
 function usersReducer(state = {}, action){
   let newState;
@@ -70,6 +71,11 @@ function usersReducer(state = {}, action){
     case "RECEIVE_NEW_MEMBER":
       return merge({}, state, { [action.member.id] : action.member });
 
+    case RECEIVE_FRIENDS:
+      return merge({}, state, action.friends)
+    case RECEIVE_FRIEND:
+      let friendId = Object.keys(action.friend)[0];
+      return merge({}, state, { [friendId] : action.friend[friendId] } );
 
     case RECEIVE_MESSAGE:
       newState = merge({}, state);

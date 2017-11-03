@@ -15,27 +15,33 @@ The  frontend is housed in the ```/frontend``` directory, which hooks into the s
 
 #### Live Chat
 
+![live chat](https://github.com/aclee91/Dischat/blob/master/documentation/features/live_chat.gif?raw=true)
 
 #### Attach Images to Messages
+![upload images](https://github.com/aclee91/Dischat/blob/master/documentation/features/live_chat_images.gif?raw=true)
+
 
 
 #### Create Chatrooms
+![create chatroom](https://github.com/aclee91/Dischat/blob/master/documentation/features/create_chatroom.gif?raw=true)
 
 
 
 
 #### Create + Edit Channels
 
+![create channels](https://github.com/aclee91/Dischat/blob/master/documentation/features/create%20channel.gif?raw=true)
 
 
 
 #### Direct Messaging
+![direct messaging](https://github.com/aclee91/Dischat/blob/master/documentation/features/direct_message.gif?raw=true)
 
 
 
 #### Update Profile Picture
+![update profile picture](https://github.com/aclee91/Dischat/blob/master/documentation/features/update_profile_picture.gif?raw=true)
 
-####
 
 
 

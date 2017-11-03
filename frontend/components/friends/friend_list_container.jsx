@@ -139,18 +139,7 @@ class FriendList extends React.Component{
 
 
   componentWillReceiveProps(nextProps){
-    // if(this.props.chatroom.id != nextProps.chatroom.id){
-    //   this.props.fetchChannels(nextProps.chatroom.id)
-    //   this.handlePusher(this.props.chatroom.id, nextProps.chatroom.id);
-    // } else if(this.props.match.params.channel_id !== nextProps.match.params.channel_id){
-    //     this.setState({activeChannelId: nextProps.match.params.channel_id});
-    // }
-    // let oldChannelId = this.props.match.params.channel_id;
-    // if( oldChannelId === "@channels" && nextProps.channels && nextProps.channels.length > 0 ){
-    //   // load first channel upon entering chatroom
-    //   let newChannelId = nextProps.channels[0].id;
-    //   nextProps.history.push("/chatrooms/"+nextProps.chatroom.id+"/channels/"+newChannelId+"/messages");
-    // }
+
 
   }// end componentWillReceiveProps
 
@@ -158,27 +147,6 @@ class FriendList extends React.Component{
 
     this.props.fetchFriends();
 
-    // this.props.fetchChannels(this.props.match.params.chatroom_id)
-    // if(this.props.match.params.channel_id){
-    //   this.setState({activeChannelId: this.props.match.params.channel_id})
-    // }
-    // if(this.props.match && this.props.match.params.chatroom_id){
-    //   // pusher listener
-    //   if(!this.pusher){
-    //     this.pusher = new Pusher('4bea1f61f6acc7db5343', {
-    //       cluster: 'us2',
-    //       encrypted: true
-    //     });
-    //   }
-    //
-    //   let receiveSingleChannel = this.props.receiveChannel;
-    //   let generateInnerHTML = this.generateInnerHTML;
-    //   let channel = this.pusher.subscribe('channels_for_' + this.props.match.params.chatroom_id);
-    //   channel.bind('channel_created', function(data) {
-    //     receiveSingleChannel(data);
-    //   });
-    //   // end pusher
-    // }
   }
 
 

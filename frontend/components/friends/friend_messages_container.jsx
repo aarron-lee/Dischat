@@ -27,12 +27,8 @@ class FriendMessages extends React.Component{
 
 
   render(){
-    let channelName = '';
+    let channelName = 'Direct Message';
     let channelDescription = '';
-    if(this.props.channel && this.props.channel.name){
-      channelName = this.props.channel.name;
-      channelDescription = this.props.channel.description;
-    }
 
 
     return (

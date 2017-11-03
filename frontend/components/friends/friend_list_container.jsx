@@ -66,7 +66,6 @@ class FriendList extends React.Component{
 
 
   setActiveFriend(event){
-    // debugger
 
   }
 

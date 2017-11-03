@@ -18,12 +18,21 @@ class FriendListItem extends React.Component{
 
 
   render(){
-    let activeChatroom = true;
+    let activeChatroom = false;
+
+    if(this.props.activeChatroomId === "@me"){
+      activeChatroom = true;
+    }
 
     return (
-      <div className="chatroom-list-item-container">
-        <Link className={`chatroom-list-item ${activeChatroom ? 'active' : '' }`} to={`/chatrooms/@me`}>
+      <div className="chatroom-list-item-container direct-message-chatroom-item">
+        <Link className={`chatroom-list-item ${activeChatroom ? 'active' : '' } `} to={`/chatrooms/@me`}>
+          <span >
+            DM
+          </span>
+
           <label className="chatroom-title-label">
+            Direct Message
           </label>
         </Link>
       </div>

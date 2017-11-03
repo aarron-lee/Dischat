@@ -30,6 +30,13 @@ class FriendMessages extends React.Component{
     let channelName = 'Direct Message';
     let channelDescription = '';
 
+    let channel = {}
+
+    if(this.props.channel){
+      channel = Object.assign(this.props.channel);
+      channel.name = "Direct";
+    }
+
 
     return (
       <section className="messages-container">
@@ -48,7 +55,7 @@ class FriendMessages extends React.Component{
             <MessageList messages={this.props.messages}
               users={this.props.users}
               createMessage={this.props.createMessage}
-              channel={this.props.channel}
+              channel={channel}
               createImageMessage={this.props.createImageMessage}
               modal={this.props.modal}
               openModal={this.props.openModal}

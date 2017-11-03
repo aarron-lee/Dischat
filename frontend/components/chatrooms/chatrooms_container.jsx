@@ -15,7 +15,7 @@ class ChatroomList extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      activeChatroomId: 0
+      activeChatroomId: "@me"
     }
   }
 
@@ -62,10 +62,14 @@ class ChatroomList extends React.Component{
 
   render(){
     const chatroomEls = this.props.chatrooms.map( (chatroom) =>{
-      return <ChatroomListItem activeChatroomId={this.state.activeChatroomId} chatroom={chatroom} key={chatroom.id}/>
+      let chatroomId = this.state.activeChatroomId;
+      if(this.state.activeChatroomId === "@me"){
+        chatroomId = 0;
+      }
+      return <ChatroomListItem activeChatroomId={chatroomId} chatroom={chatroom} key={chatroom.id}/>
     });
 
-    chatroomEls.unshift(<FriendListItem key="@me"/>);
+    chatroomEls.unshift(<FriendListItem activeChatroomId={this.state.activeChatroomId} key="@me"/>);
 
     chatroomEls.push(<AddChatroomButton key="add-chatroom-modal-button"
       openModal={this.props.openModal}/>);

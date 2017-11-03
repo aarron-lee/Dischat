@@ -41,7 +41,6 @@ class AddFriendForm extends React.Component{
 
     this.setState({userId: -1});
 
-    this.props.closeModal();
   }
 
   handleModalClose(event){
@@ -52,11 +51,13 @@ class AddFriendForm extends React.Component{
 
   render(){
 
+
+
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
         <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
           <h2 style={ {color: 'black' }}>Add a Friend</h2>
-
+          <div style={{color: 'red'}}>{this.props.errors}</div>
           <form className="chat-form" onSubmit={this.handleAddFriend}>
               <label className="update-current-user-form-label">Username: <br/>
                 <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>

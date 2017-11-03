@@ -49,6 +49,7 @@ class FriendList extends React.Component{
           logout={this.props.logout}
           createFriend={this.props.createFriend}
           closeModal={this.props.closeModal}
+          errors={this.props.errors}
           />
       </div>);
     }
@@ -201,6 +202,7 @@ function mapStateToProps(state, ownProps){
   return {
         currentUser,
         friends,
+        errors: state.errors,
         modal };
 }
 

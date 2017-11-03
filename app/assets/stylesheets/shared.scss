@@ -34,3 +34,26 @@ Dual licensed under MIT and GNU GPLv2 Nicolas Gallagher
   70% { opacity: 0; }
   100% { opacity: 1; }
 }
+
+
+
+.info-bubble {
+  position: absolute;
+  display: none;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  padding: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius:8px;
+  top: -20px;
+  right: -132px;
+  width: 80px;
+  z-index: 1;
+  -webkit-animation: bubble-fadein .3s;
+  animation: bubble-fadein .3s;
+  font-family: Roboto, sans-serif;
+  color: white;
+  background-color: black;
+}

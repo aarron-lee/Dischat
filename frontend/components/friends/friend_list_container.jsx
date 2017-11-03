@@ -115,7 +115,7 @@ class FriendList extends React.Component{
           </div>
         </div>
 
-        <button className="add-friend-button" onClick={this.handleAddFriend}>test button</button>
+        <button className="add-friend-button" onClick={this.handleAddFriend}>Find or start a conversation</button>
 
         <ul className="channel-list-items">
           {this.props.friends.length ? '' : "Sorry, no friends yet... :(" }

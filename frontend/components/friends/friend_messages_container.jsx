@@ -115,9 +115,7 @@ class FriendMessages extends React.Component{
 
 function mapStateToProps(state, ownProps){
   let channel=null;
-  let chatroom=null;
   channel = state.entities.channels[ownProps.match.params.channel_id]
-  chatroom = state.entities.chatrooms[ownProps.match.params.chatroom_id]
   let messages = [];
 
   if( channel && channel.messages ){
@@ -131,7 +129,6 @@ function mapStateToProps(state, ownProps){
     modal: state.ui.modal,
     errors: state.errors,
     channel,
-    chatroom,
     messages,
     users: state.entities.users,
     currentUserId

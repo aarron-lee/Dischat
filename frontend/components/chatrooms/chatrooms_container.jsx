@@ -8,6 +8,7 @@ import ChatroomListItem from './chatroom_list_item';
 import AddChatroomButton from './add_chatroom_button';
 import AddChatroomForm from './add_chatroom_form';
 import difference from 'lodash/difference';
+import FriendListItem from './friend_list_item';
 
 class ChatroomList extends React.Component{
 
@@ -63,14 +64,20 @@ class ChatroomList extends React.Component{
     const chatroomEls = this.props.chatrooms.map( (chatroom) =>{
       return <ChatroomListItem activeChatroomId={this.state.activeChatroomId} chatroom={chatroom} key={chatroom.id}/>
     });
+
+    chatroomEls.unshift(<FriendListItem key="@me"/>);
+
+    chatroomEls.push(<AddChatroomButton key="add-chatroom-modal-button"
+      openModal={this.props.openModal}/>);
+
+
     return (
       <section className="chatroom-container">
         {this.props.modal === "addChatroomButton" ? this.formModal() : ''}
           <div className="chatroom-list">
             {chatroomEls}
           </div>
-          <AddChatroomButton
-            openModal={this.props.openModal}/>
+
       </section>
     );
   }// end render

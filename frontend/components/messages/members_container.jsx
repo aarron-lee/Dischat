@@ -26,7 +26,7 @@ class MembersList extends React.Component{
 
   componentDidMount(){
     // grab members based on memberlist
-    if( this.props.chatroom){
+    if( this.props.chatroom && this.props.chatroom.id){
       this.props.getMembers(this.props.chatroom.id);
 
       if(!this.pusher){
@@ -58,8 +58,10 @@ class MembersList extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    if( this.props.chatroom !== nextProps.chatroom ){
-      this.props.getMembers(nextProps.chatroom.id);
+    if(nextProps.chatroom === undefined || nextProps.chatroom.id === undefined){
+      return;
+    }else if( (this.props.chatroom !== nextProps.chatroom) ){
+        this.props.getMembers(nextProps.chatroom.id);
 
       if(this.props.chatroom && this.props.chatroom.id){
         this.pusher.unsubscribe('member_' + this.props.chatroom.id);

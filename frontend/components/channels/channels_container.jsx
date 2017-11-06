@@ -98,7 +98,24 @@ class ChannelList extends React.Component{
   }
 
 
+
   render(){
+
+    let memberStatus=false;
+    if(this.props.chatroom && this.props.chatroom.members && this.props.currentUser && this.props.currentUser.id){
+      this.props.chatroom.members.forEach( memberId => {
+        if(memberId == this.props.currentUser.id){
+          memberStatus = true;
+        }
+      })
+      if(memberStatus == false){
+        this.props.history.push("/chatrooms/@me");
+      }
+    }
+
+
+
+
     let userComponent = ''
     if(this.props.currentUser){
       userComponent = <User user={this.props.currentUser}/>;

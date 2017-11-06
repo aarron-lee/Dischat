@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { getMessages, createMessage, receiveMessage, createImageMessage } from '../../actions/message_actions';
 import MembersList from "./members_container";
 import MessageList from "./message_list";
@@ -32,6 +32,10 @@ class MessagesList extends React.Component{
     if(this.props.channel && this.props.channel.name){
       channelName = this.props.channel.name;
       channelDescription = this.props.channel.description;
+    }
+
+    if( this.props.channel && !this.props.channel.chatroom_id){
+      return (<Redirect to="/" />);
     }
 
 
@@ -109,7 +113,7 @@ class MessagesList extends React.Component{
   }
 
   componentWillUnmount(){
-    if(this.pusher){
+    if(this.pusher && this.props.channel && this.props.channel.id){
       this.pusher.unsubscribe('channel_messages_' + this.props.channel.id);
     }
   }

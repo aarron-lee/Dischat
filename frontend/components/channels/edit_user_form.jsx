@@ -79,28 +79,43 @@ class EditUserForm extends React.Component{
 
 
   render(){
+    let regularUserForm = (<form className="chat-form" onSubmit={this.handleEdit}>
+
+        <label className="update-current-user-form-label">Email: <br/>
+          <input type="text" onChange={this.handleChange('email_address')} value={this.state.email_address}/>
+        </label>
+        <label className="update-current-user-form-label">Username: <br/>
+          <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
+        </label>
+        <label className="update-current-user-form-label">Password: <br/>
+          <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
+        </label>
+
+        <label className="update-current-user-form-label">Profile Picture: <br/>
+          <input type="file" onChange={this.handleFile} />
+        </label>
+
+        <button ref="btn-disable-update-user">Update</button>
+      </form>);
+
+
+    if(this.props.currentUser.email_address === "GuestUser" || this.props.currentUser.username === "GuestUser"){
+      regularUserForm = (<form className="chat-form" onSubmit={this.handleEdit}>
+
+          <label className="update-current-user-form-label">Profile Picture: <br/>
+            <input type="file" onChange={this.handleFile} />
+          </label>
+
+          <button ref="btn-disable-update-user">Update</button>
+        </form>);
+    }
 
     const forms = (
       <div className="chatroom-modal-form-container" onClick={this.handlePropagation}>
         <button className="close-modal-button" onClick={this.handleModalClose}>x</button>
 
         <h2 style={ {color: 'black' }}>Update User Settings</h2>
-          <form className="chat-form" onSubmit={this.handleEdit}>
-            <label className="update-current-user-form-label">Email: <br/>
-              <input type="text" onChange={this.handleChange('email_address')} value={this.state.email_address}/>
-            </label>
-            <label className="update-current-user-form-label">Username: <br/>
-              <input type="text" onChange={this.handleChange('username')} value={this.state.username}/>
-            </label>
-            <label className="update-current-user-form-label">Password: <br/>
-              <input type="password" onChange={this.handleChange('password')} value={this.state.password}/>
-            </label>
-            <label className="update-current-user-form-label">Profile Picture: <br/>
-              <input type="file" onChange={this.handleFile} />
-            </label>
-
-            <button ref="btn-disable-update-user">Update</button>
-          </form>
+          {regularUserForm}
         <hr/>
         <form className="chat-form" onSubmit={this.handleLogout}>
           <button ref="btn-disable-logout" style={ {width: '295px' }}>Logout</button>

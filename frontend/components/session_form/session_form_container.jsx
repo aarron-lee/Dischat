@@ -32,8 +32,8 @@ class SessionForm extends React.Component{
     event.preventDefault();
     this.refs['btn-disable'].setAttribute("disabled", "disabled");
     const tmpUsername = "Guest".concat(Math.round(10000* Math.random(0,1)) )
-    this.props.loginGuest( { username: tmpUsername,
-                            email_address: tmpUsername,
+    this.props.loginGuest( { username: "GuestUser",
+                            email_address: "GuestUser",
                             password: "password123"} );
   }
 
@@ -151,7 +151,7 @@ function mapDispatchToProps(dispatch, ownProps){
   return {
     formType: formType,
     formAction: formAction,
-    loginGuest: (user) => { dispatch( signup(user) ) },
+    loginGuest: (user) => { dispatch( login(user) ) },
     clearErrors: () => dispatch( clearErrors() )
   };
 }

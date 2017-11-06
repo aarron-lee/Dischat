@@ -30,7 +30,7 @@ class MembersList extends React.Component{
       this.props.getMembers(this.props.chatroom.id);
 
       if(!this.pusher){
-        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        this.pusher = new Pusher(window.pusher_key, {
           cluster: 'us2',
           encrypted: true
         });
@@ -68,7 +68,7 @@ class MembersList extends React.Component{
       }
 
       if(!this.pusher){
-        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        this.pusher = new Pusher(window.pusher_key, {
           cluster: 'us2',
           encrypted: true
         });

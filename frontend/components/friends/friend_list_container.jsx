@@ -138,7 +138,7 @@ class FriendList extends React.Component{
   handlePusher(oldChatroomId, newChatroomId){
     // pusher listener
     if(!this.pusher){
-      this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+      this.pusher = new Pusher(window.pusher_key, {
         cluster: 'us2',
         encrypted: true
       });

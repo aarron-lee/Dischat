@@ -95,7 +95,7 @@ class MessagesList extends React.Component{
       this.props.getMessages(this.props.match.params.channel_id);
 
       if(!this.pusher){
-        this.pusher = new Pusher('4bea1f61f6acc7db5343', {
+        this.pusher = new Pusher(window.pusher_key, {
           cluster: 'us2',
           encrypted: true
         });

@@ -11,6 +11,9 @@
         window.currentUser = <%= render('/api/users/user.json.jbuilder', user: current_user).html_safe %>;
       </script>
     <% end %>
+    <script>
+    window.pusher_key = "<%= ENV["PUSHER_KEY"] %>";
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   </head>
 

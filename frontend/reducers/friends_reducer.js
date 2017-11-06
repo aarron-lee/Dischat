@@ -9,6 +9,9 @@ function friendsReducer(state = [], action){
   let newState = merge([], state);
   switch(action.type){
     case RECEIVE_FRIENDS:
+      if(!action.friends){
+        return [];
+      }
       return Object.keys(action.friends);
     case RECEIVE_FRIEND:
       newState.push(Object.keys(action.friend)[0]);

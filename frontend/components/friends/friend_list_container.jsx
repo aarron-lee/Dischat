@@ -211,6 +211,7 @@ function mapDispatchToProps(dispatch, ownProps){
     openModal: (modal) => dispatch( openModal(modal) ),
     closeModal: () => dispatch( closeModal() ),
     fetchFriends: () => dispatch( getFriends() ),
+    updateUser: (user) => dispatch( updateCurrentUser(user)),
     createFriend: (friendId) => dispatch( createFriend(friendId) )
   };
 }

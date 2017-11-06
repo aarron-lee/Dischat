@@ -33,7 +33,7 @@ Realtime updating is handled by Pusher, where a pusher instance is constructed o
 
 Users can freely create chatrooms. Each chatroom can have many channels, it starts with a default `#general` channel
 
-#### Join Chatrooms
+#### Join Chatrooms in Real Time
 ![join chatroom](documentation/features/join_chatroom.gif)
 
 Users can freely join chatrooms via chatroom ID.

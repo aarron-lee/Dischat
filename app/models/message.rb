@@ -1,6 +1,8 @@
 class Message < ApplicationRecord
   validates :author_id, :channel_id, :body, presence: true
 
+  validates :body, length: {minimum: 1, maximum: 250 }
+
   belongs_to :author,
   foreign_key: :author_id,
   class_name: :User

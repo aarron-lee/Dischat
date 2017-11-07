@@ -24,8 +24,10 @@
   color: #36393e;
   background-color: darken(white, 20%);
   border-radius: 50%;
-  width: 20px;
+  min-width: 20px;
+  max-width: 20px;
   text-align: center;
+  margin-right: 20px;
 }
 .add-message-image-button:hover{
   background-color: white;
@@ -77,6 +79,7 @@
   border-radius: 6px;
   input{
     width: 93%;
+    margin-right: 10px;
   }
 }
 

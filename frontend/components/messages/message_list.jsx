@@ -112,24 +112,41 @@ class MessageList extends React.Component{
   getImageComponent(message){
     if( message.image_exists ){
       return <span style={{"maxWidth": "400px"}} >
+        <br/>
         <img src={message.image_url} style={{"maxWidth": message.image_width}} />
       </span>
     }
     return '';
   }
 
+
   render(){
 
     let messageEls = this.props.messages.map((message) =>{
 
+      const getMinHeight = (message) => {
+        if( message.image_exists ){
+          let newHeight = message.image_height + 65;
+          return '' + newHeight + "px";
+        }
+        return 'auto';
+      };
+
+      let minHeight = getMinHeight(message);
+
       let imgComponent = this.getImageComponent(message);
+
+      let messageBody = message.body;
+      if(messageBody === '_'){
+        messageBody = "  ";
+      }
 
       let date = this.getDateString(new Date(message.created_at));
         return (
-          <div className="message-item" key={`message-${message.id}`}>
+          <div className="message-item" key={`message-${message.id}`} style={{"height": minHeight }}>
             <img className={`message-portrait`} src={this.props.users[message.author_id].avatar_url_thumb} />
 
-            <div className="message-content">
+            <div className="message-content" >
               <div>
                 <span>
                   { this.props.users[message.author_id].username }
@@ -139,9 +156,9 @@ class MessageList extends React.Component{
                 </div>
               </div>
               <div className="message-body">
-                {message.body}
+                {messageBody}
+                {imgComponent}
               </div>
-              {imgComponent}
             </div>
           </div>);// end return inside map
     });// end map

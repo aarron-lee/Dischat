@@ -3,15 +3,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
   /*Image courtesy of unsplash, https://unsplash.com/photos/kqfE9mvv7Xw/info */
   background-image: image-url('kyoto-background.jpg');
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
 }
 
 .auth-form-container{
-  max-width: 50%;
-  min-width: 600px;
+  width: 100%;
   min-height: 400px;
   padding: 0;
   top: 50%;
@@ -22,8 +24,21 @@
   color: white;
   border-radius: 4px;
   -webkit-animation: fadeIn 1.5s ease;
-
 }
+
+
+@media  (min-width : 493px) {
+  .auth-form-container{
+    max-width: 500px;
+  }
+}
+
+@media  (min-width : 1224px) {
+  .auth-form-container{
+    max-width: 600px;
+  }
+}
+
 
 .auth-form-inner-left{
   min-width: 40%;

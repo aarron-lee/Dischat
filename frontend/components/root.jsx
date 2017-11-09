@@ -10,11 +10,9 @@ const Root = ({store}) =>{
 
   return (
     <Provider store={store}>
-      <HttpsRedirect>
         <HashRouter>
           <App />
         </HashRouter>
-      </HttpsRedirect>
     </Provider>
   );
 

@@ -86,6 +86,10 @@
   overflow-x: hidden;
 }
 
+.overflow-chatrooms::-webkit-scrollbar {
+  display: none;
+}
+
 
 .add-chatroom-button{
   color: gray;

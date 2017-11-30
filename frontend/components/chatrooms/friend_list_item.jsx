@@ -9,11 +9,30 @@ class FriendListItem extends React.Component{
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
 
   }
 
   handleClick(event){
 
+  }
+
+
+  handleMouseEnter(e){
+    let dmItem = document.querySelector('.direct-message-chatroom-item');
+    let domRect = dmItem.getBoundingClientRect();
+
+    dmItem.innerHTML+=`<div class="info-bubble dm-tooltip" style="position: fixed; top: ${domRect.y + 10}px; left: ${domRect.width + 3}px;">Direct Message</div>`;
+  }
+
+
+  handleMouseLeave(e){
+    let tooltips = document.querySelectorAll(`.dm-tooltip`);
+
+    for(let i = 0; i < tooltips.length; i++){
+      tooltips[i].outerHTML='';
+    }
   }
 
 
@@ -24,18 +43,13 @@ class FriendListItem extends React.Component{
       activeChatroom = true;
     }
 
-    // <label className="chatroom-title-label">
-    //
-    // </label>
+
     return (
-      <div className="chatroom-list-item-container direct-message-chatroom-item">
+      <div className="chatroom-list-item-container direct-message-chatroom-item" onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}>
         <Link className={`chatroom-list-item ${activeChatroom ? 'active' : '' } `} to={`/chatrooms/@me`}>
           <span >
             DM
           </span>
-          <div className="chatroom-bubble-container">
-            <div className="info-bubble">Direct Message</div>
-          </div>
         </Link>
       </div>
     )

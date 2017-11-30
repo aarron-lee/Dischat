@@ -7,6 +7,7 @@
     border-radius: 30%;
     background-color: #7289da;
   }
+
 }
 
 .chatroom-container{
@@ -61,10 +62,13 @@
 }
 
 .chatroom-list-item-container{
-  position: relative;
+   position: relative;
 }
 
 .chatroom-list-item-container:hover{
+  .info-bubble{
+    display: block;
+  }
   .chatroom-title-label{
     display: block;
     -webkit-animation: fadeIn 0.7s;
@@ -72,8 +76,16 @@
   }
   .info-bubble{
     display: block;
+    z-index: 100;
   }
 }
+
+
+.overflow-chatrooms{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 
 .add-chatroom-button{
   color: gray;

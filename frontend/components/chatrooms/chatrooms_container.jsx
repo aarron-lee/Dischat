@@ -77,6 +77,7 @@ class ChatroomList extends React.Component{
 
     return (
       <section className="chatroom-container">
+        <div id="tooltips"></div>
         {this.props.modal === "addChatroomButton" ? this.formModal() : ''}
           <div className="chatroom-list overflow-chatrooms">
             {chatroomEls}

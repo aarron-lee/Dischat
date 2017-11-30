@@ -23,16 +23,12 @@ class FriendListItem extends React.Component{
     let dmItem = document.querySelector('.direct-message-chatroom-item');
     let domRect = dmItem.getBoundingClientRect();
 
-    dmItem.innerHTML+=`<div class="info-bubble dm-tooltip" style="position: fixed; top: ${domRect.y + 10}px; left: ${domRect.width + 3}px;">Direct Message</div>`;
+    document.getElementById('tooltips').innerHTML+=`<div class="info-bubble dm-tooltip" style="display: block; position: fixed; top: ${domRect.y + 10}px; left: ${domRect.width + 3}px;">Direct Message</div>`;
   }
 
 
   handleMouseLeave(e){
-    let tooltips = document.querySelectorAll(`.dm-tooltip`);
-
-    for(let i = 0; i < tooltips.length; i++){
-      tooltips[i].outerHTML='';
-    }
+    document.getElementById('tooltips').innerHTML = '';
   }
 
 

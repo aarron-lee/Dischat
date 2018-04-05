@@ -37,7 +37,7 @@ gem 'pusher'
 gem 'paperclip'
 gem 'paperclip-meta'
 
-gem 'aws-sdk', '< 3.0'
+gem 'aws-sdk'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

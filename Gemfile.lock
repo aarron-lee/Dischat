@@ -629,9 +629,8 @@ GEM
     httpclient (2.8.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    jbuilder (2.7.0)
+    jbuilder (2.9.1)
       activesupport (>= 4.2.0)
-      multi_json (>= 1.2)
     jmespath (1.4.0)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
@@ -654,7 +653,7 @@ GEM
     mini_mime (0.1.4)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
-    multi_json (1.12.2)
+    multi_json (1.13.1)
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
@@ -768,7 +767,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   figaro
-  jbuilder (~> 2.5)
+  jbuilder (~> 2.9)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
   paperclip

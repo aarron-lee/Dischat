@@ -595,7 +595,7 @@ GEM
       aws-sigv4 (~> 1.0)
     aws-sigv2 (1.0.1)
     aws-sigv4 (1.0.2)
-    bcrypt (3.1.11)
+    bcrypt (3.1.12)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.1.0)
@@ -763,7 +763,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   aws-sdk
-  bcrypt (~> 3.1.7)
+  bcrypt (~> 3.1.12)
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)

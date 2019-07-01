@@ -15,7 +15,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "webpack": "^3.8.1"
+    "webpack": "^4.35.2"
   },
   "description": "This app enables Real-time messaging in online community chatrooms, as well as direct messaging with others.",
   "version": "1.0.0",

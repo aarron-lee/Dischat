@@ -12,7 +12,7 @@
     "react-https-redirect": "^1.0.9",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2",
+    "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "webpack": "^3.8.1"
